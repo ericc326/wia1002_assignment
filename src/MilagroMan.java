@@ -16,9 +16,7 @@ public class MilagroMan /*extends MoodyBlues and/or PearlJam*/{
     public void RemoveFood(){
     }
 
-    public void Menu(String restaurantName){
-    }
-
+    //public void Menu(String restaurantName){
     public void Menu(){
         System.out.println("Restaurant: "+restaurantName+" (Milagro Man Mode)");
         System.out.println("[1] Add A New Food");
