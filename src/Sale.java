@@ -8,6 +8,34 @@ package GroupAssignment;
  *
  * @author firdausazman
  */
-public class Sale {
+class Sale {
+    private int day;
+    private String food;
+    private int quantity;
+    private double totalPrice;
     
+    public Sale(int day, String food, int quantity, double totalPrice) {
+        this.day = day;
+        this.food = food;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+    
+    public int getDay() {
+        return day;
+    }
+    
+    public String getFood() {
+        return food;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 }
+
+
