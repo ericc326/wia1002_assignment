@@ -12,7 +12,7 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
     public MilagroMan(String restaurantName) {
         this.restaurantName = restaurantName;
         this.restaurant = new Restaurant().getResByName(restaurantName);
-        System.out.println(restaurant);
+        //System.out.println(restaurant); <- checking
     }
 
     public void CreateFood(String foodName, Double price) {
@@ -54,7 +54,7 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                         System.out.println("Creating new food");
                         CreateFood(Foodname, FoodPrice);
                         System.out.println("Success: " + restaurant.getFoodByName(Foodname).FoodName +
-                                " " + restaurant.getFoodByName(Foodname).getFoodPrice());
+                                " at $" + String.format("%.2f", restaurant.getFoodByName(Foodname).getFoodPrice()));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -69,7 +69,7 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                     int choice2 = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println(this.restaurant.getMenu().get(choice2 - 1).FoodName
-                            + "\t" + this.restaurant.getMenu().get(choice2 - 1).getFoodPrice());
+                            + " at $" + String.format("%.2f",this.restaurant.getMenu().get(choice2 - 1).getFoodPrice()));
                     System.out.println("Enter the new price:");
                     Double prcChng = scanner.nextDouble();
                     scanner.nextLine();
@@ -77,7 +77,7 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                         ModifyFood(choice2 - 1, prcChng);
                         System.out.println("Successful:");
                         System.out.println(this.restaurant.getMenu().get(choice2 - 1).getFoodName()
-                                + "\t" + this.restaurant.getMenu().get(choice2 - 1).getFoodPrice());
+                                + " at $" + String.format("%.2f",this.restaurant.getMenu().get(choice2 - 1).getFoodPrice()));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
