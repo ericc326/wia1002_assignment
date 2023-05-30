@@ -5,12 +5,16 @@ import java.util.*;
 public class Restaurant {
     String RestaurantName;
     List<Food> Menu;
-
+    Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Liberrio, SavageGarden;
+    static List<Restaurant> resList;
+    
     //Constructor
     public Restaurant(String RestaurantName, List<Food> Menu){
         this.RestaurantName=RestaurantName;
         this.Menu=Menu;
     }
+    //Empty constructor
+    public Restaurant(){}
 
     //Getters
     public String getRestaurantName() {
@@ -28,7 +32,12 @@ public class Restaurant {
         this.Menu = Menu;
     }
 
-    public void InitializeRestaurant(){
+    public static void InitializeRestaurant(){
+        Restaurant resTemp = new Restaurant();
+        resTemp.InitializeRestaurantProcess();
+    }
+
+    public void InitializeRestaurantProcess(){
         //Jade Garden
         /*
         ○ Braised Chicken in Black Bean Sauce ($15.00)
@@ -51,7 +60,7 @@ public class Restaurant {
         foods1.add(PoachedTofuWithDriedShrimp);
         foods1.add(ScrambledEggWhiteWithMilk);
 
-        Restaurant MenuJadeGarden = new Restaurant("Jade Garden", foods1);
+        this.JadeGarden = new Restaurant("Jade Garden", foods1);
 
         //Cafe Deux Magots
         /*
@@ -75,7 +84,7 @@ public class Restaurant {
         foods2.add(TruffleFlavouredPoultrySupreme);
         foods2.add(WhiteAsparagus);
 
-        Restaurant MenuCafeDeuxMagots = new Restaurant("Cafe Deux Magots", foods2);
+        this.CafeDeuxMagots = new Restaurant("Cafe Deux Magots", foods2);
 
         //Trattoria Trussardi
         /*
@@ -97,7 +106,7 @@ public class Restaurant {
         foods3.add(LambChopsWithAppleSauce);
         foods3.add(SpaghettiAllaPuttanesca);
 
-        Restaurant MenuTrattoriaTrussardi = new Restaurant("Trattoria Trussardi", foods3);
+        this.TrattoriaTrussardi = new Restaurant("Trattoria Trussardi", foods3);
 
         //Liberrio
         /*
@@ -125,7 +134,7 @@ public class Restaurant {
         foods4.add(Risotto);
         foods4.add(ZuccheroAndSale);
 
-        Restaurant MenuLiberrio = new Restaurant("Liberrio", foods4);
+        this.Liberrio = new Restaurant("Liberrio", foods4);
 
         //Savage Garden
         /*
@@ -153,6 +162,37 @@ public class Restaurant {
         foods5.add(KakyoinsCherry);
         foods5.add(KakyoinsPorridge);
 
-        Restaurant MenuSavageGarden = new Restaurant("Savage Garden", foods5);
+        this.SavageGarden = new Restaurant("Savage Garden", foods5);
+
+        //Add to list
+        Restaurant.resList = new ArrayList<>();
+        resList.add(JadeGarden);
+        resList.add(CafeDeuxMagots);
+        resList.add(TrattoriaTrussardi);
+        resList.add(Liberrio);
+        resList.add(SavageGarden);
+        System.out.println(resList.toString());
+    }
+
+    public Restaurant getResByName(String RestaurantName){
+        for (int i = 0; i < Restaurant.resList.size(); i++) {
+            if(Restaurant.resList.get(i).RestaurantName.equals(RestaurantName)){
+                return resList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Food getFoodByName(String FoodName){
+        for (int i = 0; i < Menu.size(); i++) {
+            if(Menu.get(i).FoodName.equals(FoodName)){
+                return Menu.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void removeFoodByName(String FoodName){
+        this.Menu.remove(this.getFoodByName(FoodName));
     }
 }

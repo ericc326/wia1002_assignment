@@ -1,9 +1,10 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package defaultmap;
-
+//package defaultmap;
+import PearlJam.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -39,24 +40,24 @@ public class LATESTMAP {
         initializeMaps();
         showMainMenu();
     }
-    
+
     private static void initializeMaps() {
-     defaultMap = new map();
-     parallelMap = new map();
-     alternateMap = new map();
-}
-        private static void showMainMenu() {
+        defaultMap = new map();
+        parallelMap = new map();
+        alternateMap = new map();
+    }
+
+    private static void showMainMenu() {
         System.out.println("Welcome to the fantastical realm of JOJOLands.");
         System.out.println("[1] Start Game");
         System.out.println("[2] Load Game");
         System.out.println("[3] Exit");
         System.out.print("Select: ");
-        
 
         scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
-        
+
         System.out.println("======================================================================");
 
         switch (choice) {
@@ -68,9 +69,9 @@ public class LATESTMAP {
                 // Continue the game from the loaded state
                 break;
             case 3:
-            System.out.println("Exiting the game...");
-            System.exit(0); // Terminate the application
-            break;
+                System.out.println("Exiting the game...");
+                System.exit(0); // Terminate the application
+                break;
             default:
                 System.out.println("Invalid choice. Please try again.");
                 showMainMenu();
@@ -89,9 +90,9 @@ public class LATESTMAP {
         scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
-        
+
         System.out.println("======================================================================");
-        
+
         switch (choice) {
             case 1:
                 startGame(defaultMap);
@@ -110,19 +111,19 @@ public class LATESTMAP {
     }
 
     private static void startGame(map selectedMap) {
-    gameMap = selectedMap;
-    
-    // Set the correct townHall based on the selected map
-    if (selectedMap == defaultMap) {
-        currentLocation = defaultMap.townHall;
-    } else if (selectedMap == parallelMap) {
-        currentLocation = parallelMap.townHall1;
-    } else if (selectedMap == alternateMap) {
-        currentLocation = alternateMap.townHall2;
+        gameMap = selectedMap;
+
+        // Set the correct townHall based on the selected map
+        if (selectedMap == defaultMap) {
+            currentLocation = defaultMap.townHall;
+        } else if (selectedMap == parallelMap) {
+            currentLocation = parallelMap.townHall1;
+        } else if (selectedMap == alternateMap) {
+            currentLocation = alternateMap.townHall2;
+        }
+
+        playGame();
     }
-    
-    playGame();
-}
 
     private static void loadGame() {
         System.out.print("Enter the path of your save file: ");
@@ -134,7 +135,8 @@ public class LATESTMAP {
         boolean exitGame = false;
         currentDay = 1;
         while (!exitGame) {
-            System.out.println("It's Day " + currentDay + " (" + getDayOfWeek(currentDay) + ") of our journey in JOJOLands!");
+            System.out.println(
+                    "It's Day " + currentDay + " (" + getDayOfWeek(currentDay) + ") of our journey in JOJOLands!");
             System.out.println("Current Location: " + currentLocation.getName());
             System.out.println("[1] Move To:");
 
@@ -146,939 +148,963 @@ public class LATESTMAP {
             }
             System.out.println();
             displayLocationOptions();
-        if(exitGame){
-            break;
+            if (exitGame) {
+                break;
             }
         }
-      }    
-          
-    private static void displayLocationOptions(){
-    
-           // Check the current location and display options accordingly
-            switch (currentLocation.getName()) {
-                case "Town Hall":
-                    displayTownHallOptions();
-                    break;
-                case "Cafe Deux Magots":
-                    displayCafeOptions();
-                    break;
-                case "Jade Garden":
-                    displayJadeGardenOptions();
-                    break;
-                case "Morioh Grand Hotel":
-                    displayHotelOptions();
-                    break;
-                case "Trattoria Trussardi":
-                    displayTTOptions();
-                    break;
-                case "Polnareff Land":
-                    displaPLOptions();
-                    break;
-                case "Joestar Mansion":
-                    displayJMOptions();
-                    break;
-                case "Angelo Rock":
-                    displayAROptions();
-                    break;
-                case "San Giorgio Maggiore":
-                    displaySGMOptions();
-                    break;
-                case "Green Dolphin Street Prison":
-                    displayGDSPOptions();
-                    break;
-                case "Libeccio":
-                    displayLibeccioOptions();
-                    break;
-                case "Vineyard":
-                    displayVineyardOptions();
-                    break;
-                case "DIO's Mansion":
-                    displayDIOsMansionOptions();
-                    break;
-                case "SavageGarden":
-                    displaySGOptions();
-                    break;
-                case "Passione Restaurant":
-                    displayPROptions();
-                    break;
-                default:
-                    System.out.println("No options available at this location.");
-                    break;
-            }
     }
-                    
+
+    private static void displayLocationOptions() {
+
+        // Check the current location and display options accordingly
+        switch (currentLocation.getName()) {
+            case "Town Hall":
+                displayTownHallOptions();
+                break;
+            case "Cafe Deux Magots":
+                displayCafeOptions();
+                break;
+            case "Jade Garden":
+                displayJadeGardenOptions();
+                break;
+            case "Morioh Grand Hotel":
+                displayHotelOptions();
+                break;
+            case "Trattoria Trussardi":
+                displayTTOptions();
+                break;
+            case "Polnareff Land":
+                displaPLOptions();
+                break;
+            case "Joestar Mansion":
+                displayJMOptions();
+                break;
+            case "Angelo Rock":
+                displayAROptions();
+                break;
+            case "San Giorgio Maggiore":
+                displaySGMOptions();
+                break;
+            case "Green Dolphin Street Prison":
+                displayGDSPOptions();
+                break;
+            case "Libeccio":
+                displayLibeccioOptions();
+                break;
+            case "Vineyard":
+                displayVineyardOptions();
+                break;
+            case "DIO's Mansion":
+                displayDIOsMansionOptions();
+                break;
+            case "SavageGarden":
+                displaySGOptions();
+                break;
+            case "Passione Restaurant":
+                displayPROptions();
+                break;
+            default:
+                System.out.println("No options available at this location.");
+                break;
+        }
+    }
+
     // Display options for the Town Hall location
     private static void displayTownHallOptions() {
-   
+
         System.out.println("[2] Advance to Next Day");
         System.out.println("[3] Save Game");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[4] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
-            System.out.println("[6] Exit");
-        }else{
-        System.out.println("[5] Exit");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[4] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[6] Exit");
+                } else {
+                    System.out.println("[5] Exit");
+                }
+            }
+        } else {
+            System.out.println("[4] Exit");
         }
-        }} else {
-        System.out.println("[4] Exit");
-        }
-        
+
         System.out.print("\nSelect:");
-        
+
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    handleSaveGame();
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty()) {
-                        handleReturnToPreviousLocation();
-                            } else {                                  
-                                    System.out.println("Exiting the game......");
-                                    System.exit(0); // Terminate the application
-                                     }
-                    break;
-                case "5":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                        handleForwardToNewLocation();
-                         } else {
-                                System.out.println("Exiting the game......");
-                                System.exit(0); // Terminate the application
-                                }
-                    break;
-                case "6":
-                    if(hasMadeBackMove) {
-                                System.out.println("Exiting the game......");
-                                System.exit(0); // Terminate the application
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                handleSaveGame();
+                break;
+            case "4":
+                if (!locationHistory.isEmpty()) {
+                    handleReturnToPreviousLocation();
+                } else {
+                    System.out.println("Exiting the game......");
+                    System.exit(0); // Terminate the application
+                }
+                break;
+            case "5":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    System.out.println("Exiting the game......");
+                    System.exit(0); // Terminate the application
+                }
+                break;
+            case "6":
+                if (hasMadeBackMove) {
+                    System.out.println("Exiting the game......");
+                    System.exit(0); // Terminate the application
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
+
+        System.out.println("======================================================================");
+    }
 
     // Display options for the Cafe Deux Magots location
     private static void displayCafeOptions() {
-    
+
         System.out.println("[2] Advance to Next Day");
         System.out.println("[3] Save Game");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[4] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[6] Back To Town Hall");
-        }}else{
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[4] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[6] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[5] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[4] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-         Scanner scanner = new Scanner(System.in);
-         String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    handleSaveGame();
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty()) {
-                        handleReturnToPreviousLocation();
-                        } else {
-                        handleDirectBackToTownHall();
-                       }
-                       break;
-                case "5":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                        break;
-                case "6":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                        break;
-            }
-            System.out.println("======================================================================");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                handleSaveGame();
+                break;
+            case "4":
+                if (!locationHistory.isEmpty()) {
+                    handleReturnToPreviousLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "6":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
         }
-    
+        System.out.println("======================================================================");
+    }
+
     // Display options for the Jade Garden location
     private static void displayJadeGardenOptions() {
-        
+
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
         System.out.println("[5] Milagro Man");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[6] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[8] Back To Town Hall");
-        }}else{
-        System.out.println("[7] Back To Town Hall");
-        }}else{
-        System.out.println("[6] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[6] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[8] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[7] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[6] Back To Town Hall");
         }
         System.out.print("\nSelect:");
 
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleWaitingList();
-                    break;
-                case "3":
-                    handleViewMenu();
-                    break;
-                case "4":
-                    handleViewSales();
-                    break;
-                case "5":
-                    handleMilagroMan();
-                    break;
-                case "6":
-                    if (!locationHistory.isEmpty()) {
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleWaitingList();
+                break;
+            case "3":
+                handleViewMenu();
+                break;
+            case "4":
+                handleViewSales();
+                break;
+            case "5":
+                handleMilagroMan();
+                break;
+            case "6":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "7":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                        break;
-                case "8":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                        break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "7":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "8":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
+
+        System.out.println("======================================================================");
+    }
 
     // Display options for the Morioh Grand Hotel location
     private static void displayHotelOptions() {
 
-    
         System.out.println("[2] View Resident Information");
         System.out.println("[3] The Hand");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[4] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[6] Back To Town Hall");
-        }}else{
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[4] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[6] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[5] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[4] Back To Town Hall");
         }
         System.out.print("\nSelect:");
 
-        
-         Scanner scanner = new Scanner(System.in);
-         String input = scanner.nextLine().trim();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleViewResidentInformation();
-                    break;
-                case "3":
-                    handleTheHand();
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty()) {
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleViewResidentInformation();
+                break;
+            case "3":
+                handleTheHand();
+                break;
+            case "4":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "6":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "5":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "6":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
-    
+
+        System.out.println("======================================================================");
+    }
+
     private static void displayTTOptions() {
-    
+
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
         System.out.println("[5] Milagro Man");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[6] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[8] Back To Town Hall");
-        }}else{
-        System.out.println("[7] Back To Town Hall");
-        }}else{
-        System.out.println("[6] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[6] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[8] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[7] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[6] Back To Town Hall");
         }
         System.out.print("\nSelect:");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleWaitingList();
-                    break;
-                case "3":
-                    handleViewMenu();
-                    break;
-                case "4":
-                    handleViewSales();
-                    break;
-                case "5":
-                    handleMilagroMan();
-                    break;
-                case "6":
-                    if (!locationHistory.isEmpty()) {
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleWaitingList();
+                break;
+            case "3":
+                handleViewMenu();
+                break;
+            case "4":
+                handleViewSales();
+                break;
+            case "5":
+                handleMilagroMan();
+                break;
+            case "6":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "7":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "8":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "7":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "8":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
+
+        System.out.println("======================================================================");
+    }
 
     private static void displaPLOptions() {
-    
+
         System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
             if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
-        }
-    
-        System.out.print("\nSelect:");
-        
-         Scanner scanner = new Scanner(System.in);
-         String input = scanner.nextLine().trim();
-
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleViewResidentInformation();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
-                    handleReturnToPreviousLocation();
-                    } else {
-                    handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
+                map.Location forwardLocation = ForwardLocationHistory.peek();
+                System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                System.out.println("[5] Back To Town Hall");
+            } else {
+                System.out.println("[4] Back To Town Hall");
             }
-
-            System.out.println("======================================================================");
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
+
+        System.out.print("\nSelect:");
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleViewResidentInformation();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
+                    handleReturnToPreviousLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
+        }
+
+        System.out.println("======================================================================");
+    }
 
     private static void displayJMOptions() {
-    
+
         System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-         Scanner scanner = new Scanner(System.in);
-         String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleViewResidentInformation();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleViewResidentInformation();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
 
+        System.out.println("======================================================================");
+    }
+
     private static void displayAROptions() {
-    
+
         System.out.println("[2] View Resident Information");
         System.out.println("[3] Red Hot Chili Pepper");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[4] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[6] Back To Town Hall");
-        }}else{
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[4] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[6] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[5] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[4] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-                Scanner scanner = new Scanner(System.in);
-                String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleViewResidentInformation();
-                    break;
-                case "3":
-                    handleRedHotChiliPepper();
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleViewResidentInformation();
+                break;
+            case "3":
+                handleRedHotChiliPepper();
+                break;
+            case "4":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "6":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "5":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "6":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
-    
+
+        System.out.println("======================================================================");
+    }
+
     private static void displaySGMOptions() {
 
-    
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
-       
+
+        System.out.println("======================================================================");
+    }
+
     private static void displayGDSPOptions() {
 
-    
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
+        }
 
-            System.out.println("======================================================================");
+        System.out.println("======================================================================");
     }
 
     private static void displayLibeccioOptions() {
-    
+
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-                 Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
+        }
 
-            System.out.println("======================================================================");
-        }   
-    
+        System.out.println("======================================================================");
+    }
+
     private static void displayVineyardOptions() {
 
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-                 Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
-    
+
+        System.out.println("======================================================================");
+    }
+
     private static void displayDIOsMansionOptions() {
-    
+
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-      if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
 
         System.out.print("\nSelect:");
-        
-                 Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-               case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
+        }
 
-            System.out.println("======================================================================");
-        } 
-    
+        System.out.println("======================================================================");
+    }
+
     private static void displaySGOptions() {
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
-
-            System.out.println("======================================================================");
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
         }
-    
-    private static void displayPROptions(){
+
+        System.out.println("======================================================================");
+    }
+
+    private static void displayPROptions() {
 
         System.out.println("[2] Advance to Next Day");
         if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.peek();
-        System.out.println("[3] Back (" + previousLocation.getName() + ")");
-        if(hasMadeBackMove) {
-            if (!ForwardLocationHistory.isEmpty()) {
-            map.Location forwardLocation = ForwardLocationHistory.peek();
-            System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-        System.out.println("[5] Back To Town Hall");
-        }}else{
-        System.out.println("[4] Back To Town Hall");
-        }}else{
-        System.out.println("[3] Back To Town Hall");
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[5] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[4] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[3] Back To Town Hall");
         }
         System.out.print("\nSelect:");
-        
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
 
-            switch (input.toUpperCase()) {
-                case "1":
-                    handleMoveTo();
-                    break;
-                case "2":
-                    handleAdvanceToNextDay();
-                    break;
-                case "3":
-                    if (!locationHistory.isEmpty()) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleAdvanceToNextDay();
+                break;
+            case "3":
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                    } else {
+                } else {
                     handleDirectBackToTownHall();
-                    }
-                    break;
-                case "4":
-                    if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                       handleForwardToNewLocation();
-                        } else{
-                        handleDirectBackToTownHall();
-                    }
-                    break;
-                case "5":
-                    if(hasMadeBackMove) {
-                        handleDirectBackToTownHall(); 
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
-            }
+                }
+                break;
+            case "4":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "5":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
+        }
 
-            System.out.println("======================================================================");
-        }   
-            
+        System.out.println("======================================================================");
+    }
+
     private static void handleMoveTo() {
         System.out.print("Enter the destination: ");
 
@@ -1108,102 +1134,102 @@ public class LATESTMAP {
         hasMadeBackMove = false;
     }
 
-private static void handleAdvanceToNextDay() {
-    currentDay++;
-    // Set the currentLocation based on the selected map
-    if (gameMap == defaultMap) {
-        currentLocation = defaultMap.townHall;
-    } else if (gameMap == parallelMap) {
-        currentLocation = parallelMap.townHall1;
-    } else if (gameMap == alternateMap) {
-        currentLocation = alternateMap.townHall2;
+    private static void handleAdvanceToNextDay() {
+        currentDay++;
+        // Set the currentLocation based on the selected map
+        if (gameMap == defaultMap) {
+            currentLocation = defaultMap.townHall;
+        } else if (gameMap == parallelMap) {
+            currentLocation = parallelMap.townHall1;
+        } else if (gameMap == alternateMap) {
+            currentLocation = alternateMap.townHall2;
+        }
+        locationHistory.clear();
     }
-    locationHistory.clear();
-}
 
     private static String getDayOfWeek(int day) {
-    String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        String[] daysOfWeek = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
-    if (day >= 1 && day <= 7) {
-        return daysOfWeek[day - 1];
-    } else {
-        return "";
+        if (day >= 1 && day <= 7) {
+            return daysOfWeek[day - 1];
+        } else {
+            return "";
+        }
     }
-}
 
-private static void handleSaveGame() {
-    // Define the file path where the console output will be saved
-    String filePath = "console_output.txt";
+    private static void handleSaveGame() {
+        // Define the file path where the console output will be saved
+        String filePath = "console_output.txt";
 
-    try (PrintWriter fileWriter = new PrintWriter(new FileWriter(filePath))) {
+        try (PrintWriter fileWriter = new PrintWriter(new FileWriter(filePath))) {
 
-        System.out.println("Game saved successfully.");
-    } catch (IOException e) {
-        System.out.println("Failed to save the game. Please try again.");
+            System.out.println("Game saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Failed to save the game. Please try again.");
+        }
     }
-}
 
     private static void handleReturnToPreviousLocation() {
-    if (!locationHistory.isEmpty()) {
-        map.Location previousLocation = locationHistory.pop();
-        ForwardLocationHistory.push(currentLocation);//push
-        currentLocation = previousLocation;
-        System.out.println("Returning to " + currentLocation.getName() + ".");
-        hasMadeBackMove = true;
-    } else {
-        System.out.println("No previous location available.");
+        if (!locationHistory.isEmpty()) {
+            map.Location previousLocation = locationHistory.pop();
+            ForwardLocationHistory.push(currentLocation);// push
+            currentLocation = previousLocation;
+            System.out.println("Returning to " + currentLocation.getName() + ".");
+            hasMadeBackMove = true;
+        } else {
+            System.out.println("No previous location available.");
+        }
     }
-}
-    
+
     private static void handleForwardToNewLocation() {
-    if (!ForwardLocationHistory.isEmpty()) {
-        map.Location nextLocation = ForwardLocationHistory.pop();
-        locationHistory.push(currentLocation); // Store the current location in the back history
-        currentLocation = nextLocation;
-        System.out.println("Moving forward to " + currentLocation.getName() + ".");
-        hasMadeBackMove = false; 
-    } else {
-        System.out.println("No forward location available.");
+        if (!ForwardLocationHistory.isEmpty()) {
+            map.Location nextLocation = ForwardLocationHistory.pop();
+            locationHistory.push(currentLocation); // Store the current location in the back history
+            currentLocation = nextLocation;
+            System.out.println("Moving forward to " + currentLocation.getName() + ".");
+            hasMadeBackMove = false;
+        } else {
+            System.out.println("No forward location available.");
+        }
     }
-}
 
     private static void handleDirectBackToTownHall() {
-    // Set the currentLocation based on the selected map
-    if (gameMap == defaultMap) {
-        currentLocation = defaultMap.townHall;
-    } else if (gameMap == parallelMap) {
-        currentLocation = parallelMap.townHall1;
-    } else if (gameMap == alternateMap) {
-        currentLocation = alternateMap.townHall2;
+        // Set the currentLocation based on the selected map
+        if (gameMap == defaultMap) {
+            currentLocation = defaultMap.townHall;
+        } else if (gameMap == parallelMap) {
+            currentLocation = parallelMap.townHall1;
+        } else if (gameMap == alternateMap) {
+            currentLocation = alternateMap.townHall2;
+        }
+        locationHistory.clear();
     }
-    locationHistory.clear();
-}
 
     private static void handleWaitingList() {
-        
+
     }
 
     private static void handleViewMenu() {
-        
+
     }
 
     private static void handleViewSales() {
-        
+
     }
 
     private static void handleMilagroMan() {
-        
+
     }
 
     private static void handleViewResidentInformation() {
-       
+
     }
 
     private static void handleTheHand() {
-        
+
     }
 
     private static void handleRedHotChiliPepper() {
-        
+
     }
 }
