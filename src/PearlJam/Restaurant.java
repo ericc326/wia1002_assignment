@@ -5,40 +5,58 @@ import java.util.*;
 public class Restaurant {
     String RestaurantName;
     List<Food> Menu;
+    static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Liberrio, SavageGarden;
+    static List<Restaurant> resList;
+    List<Customer> waitingList;
 
-    //Constructor
-    public Restaurant(String RestaurantName, List<Food> Menu){
-        this.RestaurantName=RestaurantName;
-        this.Menu=Menu;
+    // Constructor
+    public Restaurant(List<Customer> waitingList) {
+        this.waitingList = waitingList;
     }
 
-    //Getters
+    public Restaurant(String RestaurantName, List<Food> Menu) {
+        this.RestaurantName = RestaurantName;
+        this.Menu = Menu;
+    }
+
+    // Empty constructor
+    public Restaurant() {
+    }
+
+    // Getters
     public String getRestaurantName() {
         return RestaurantName;
     }
-    public List<Food> getMenu(){
+
+    public List<Food> getMenu() {
         return Menu;
     }
 
-    //Setters
+    // Setters
     public void setRestaurantName(String RestaurantName) {
         this.RestaurantName = RestaurantName;
     }
+
     public void setMenu(List<Food> Menu) {
         this.Menu = Menu;
     }
 
-    public void InitializeRestaurant(){
-        //Jade Garden
+    public static void InitializeRestaurant() {
+        Restaurant resTemp = new Restaurant();
+        resTemp.InitializeRestaurantProcess();
+    }
+
+    public void InitializeRestaurantProcess() {
+        // Jade Garden
         /*
-        ○ Braised Chicken in Black Bean Sauce ($15.00)
-        ○ Braised Goose Web with Vermicelli ($21.00)
-        ○ Deep-fried Hiroshima Oysters ($17.00)
-        ○ Poached Tofu with Dried Shrimps ($12.00)
-        ○ Scrambled Egg White with Milk ($10.00)
-        */
+         * ○ Braised Chicken in Black Bean Sauce ($15.00)
+         * ○ Braised Goose Web with Vermicelli ($21.00)
+         * ○ Deep-fried Hiroshima Oysters ($17.00)
+         * ○ Poached Tofu with Dried Shrimps ($12.00)
+         * ○ Scrambled Egg White with Milk ($10.00)
+         */
         List<Food> foods1 = new ArrayList<Food>();
-    
+
         Food BraisedChickenInBlackBeanSauce = new Food("Braised Chicken in Black Bean Sauce", 15.00);
         Food BraisedGooseWebWithVermicelli = new Food("Braised Goose Web with Vermicelli", 21.00);
         Food DeepFriedHiroshimaOysters = new Food("Deep Fried Hiroshima Oysters", 17.00);
@@ -51,18 +69,18 @@ public class Restaurant {
         foods1.add(PoachedTofuWithDriedShrimp);
         foods1.add(ScrambledEggWhiteWithMilk);
 
-        Restaurant MenuJadeGarden = new Restaurant("Jade Garden", foods1);
+        Restaurant.JadeGarden = new Restaurant("Jade Garden", foods1);
 
-        //Cafe Deux Magots
+        // Cafe Deux Magots
         /*
-        ○ Sampling Matured Cheese Platter ($23.00)
-        ○ Spring Lobster Salad ($35.00)
-        ○ Spring Organic Omelette ($23.00)
-        ○ Truffle-flavoured Poultry Supreme ($34.00)
-        ○ White Asparagus ($26.00)
-        */
+         * ○ Sampling Matured Cheese Platter ($23.00)
+         * ○ Spring Lobster Salad ($35.00)
+         * ○ Spring Organic Omelette ($23.00)
+         * ○ Truffle-flavoured Poultry Supreme ($34.00)
+         * ○ White Asparagus ($26.00)
+         */
         List<Food> foods2 = new ArrayList<Food>();
-    
+
         Food SamplingMaturedCheesePlatter = new Food("Sampling Matured Cheese Platter", 23.00);
         Food SpringLobsterSalad = new Food("Spring Lobster Salad", 35.00);
         Food SpringOrganicOmelette = new Food("Spring Organic Omelette", 23.00);
@@ -75,15 +93,15 @@ public class Restaurant {
         foods2.add(TruffleFlavouredPoultrySupreme);
         foods2.add(WhiteAsparagus);
 
-        Restaurant MenuCafeDeuxMagots = new Restaurant("Cafe Deux Magots", foods2);
+        Restaurant.CafeDeuxMagots = new Restaurant("Cafe Deux Magots", foods2);
 
-        //Trattoria Trussardi
+        // Trattoria Trussardi
         /*
-        ○ Caprese Salad ($10.00)
-        ○ Creme caramel ($6.50)
-        ○ Lamb Chops with Apple Sauce ($25.00)
-        ○ Spaghetti alla Puttanesca ($15.00) 
-        */
+         * ○ Caprese Salad ($10.00)
+         * ○ Creme caramel ($6.50)
+         * ○ Lamb Chops with Apple Sauce ($25.00)
+         * ○ Spaghetti alla Puttanesca ($15.00)
+         */
 
         List<Food> foods3 = new ArrayList<Food>();
 
@@ -97,17 +115,17 @@ public class Restaurant {
         foods3.add(LambChopsWithAppleSauce);
         foods3.add(SpaghettiAllaPuttanesca);
 
-        Restaurant MenuTrattoriaTrussardi = new Restaurant("Trattoria Trussardi", foods3);
+        Restaurant.TrattoriaTrussardi = new Restaurant("Trattoria Trussardi", foods3);
 
-        //Liberrio
+        // Liberrio
         /*
-        ○ Formaggio ($12.50)
-        ○ Ghiaccio ($1.01)
-        ○ Melone ($5.20)
-        ○ Prosciutto and Pesci ($20.23)
-        ○ Risotto ($13.14)
-        ○ Zucchero and Sale ($0.60)
-        */
+         * ○ Formaggio ($12.50)
+         * ○ Ghiaccio ($1.01)
+         * ○ Melone ($5.20)
+         * ○ Prosciutto and Pesci ($20.23)
+         * ○ Risotto ($13.14)
+         * ○ Zucchero and Sale ($0.60)
+         */
 
         List<Food> foods4 = new ArrayList<Food>();
 
@@ -125,17 +143,17 @@ public class Restaurant {
         foods4.add(Risotto);
         foods4.add(ZuccheroAndSale);
 
-        Restaurant MenuLiberrio = new Restaurant("Liberrio", foods4);
+        Restaurant.Liberrio = new Restaurant("Liberrio", foods4);
 
-        //Savage Garden
+        // Savage Garden
         /*
-        ○ Abbacchio’s Tea ($1.00)
-        ○ DIO’s Bread ($36.14)
-        ○ Giorno’s Donuts ($6.66)
-        ○ Joseph’s Tequila ($35.00)
-        ○ Kakyoin’s Cherry ($3.50)
-        ○ Kakyoin’s Porridge ($4.44)
-        */
+         * ○ Abbacchio’s Tea ($1.00)
+         * ○ DIO’s Bread ($36.14)
+         * ○ Giorno’s Donuts ($6.66)
+         * ○ Joseph’s Tequila ($35.00)
+         * ○ Kakyoin’s Cherry ($3.50)
+         * ○ Kakyoin’s Porridge ($4.44)
+         */
 
         List<Food> foods5 = new ArrayList<Food>();
 
@@ -153,6 +171,176 @@ public class Restaurant {
         foods5.add(KakyoinsCherry);
         foods5.add(KakyoinsPorridge);
 
-        Restaurant MenuSavageGarden = new Restaurant("Savage Garden", foods5);
+        Restaurant.SavageGarden = new Restaurant("Savage Garden", foods5);
+
+        // Add to list
+        Restaurant.resList = new ArrayList<>();
+        resList.add(JadeGarden);
+        resList.add(CafeDeuxMagots);
+        resList.add(TrattoriaTrussardi);
+        resList.add(Liberrio);
+        resList.add(SavageGarden);
+        // System.out.println(resList.toString()); <-check
+    }
+
+    public Restaurant getResByName(String RestaurantName) {
+        for (int i = 0; i < Restaurant.resList.size(); i++) {
+            if (Restaurant.resList.get(i).RestaurantName.equals(RestaurantName)) {
+                return resList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Food getFoodByName(String FoodName) {
+        for (int i = 0; i < Menu.size(); i++) {
+            if (Menu.get(i).FoodName.equals(FoodName)) {
+                return Menu.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void removeFoodByName(String FoodName) {
+        this.Menu.remove(this.getFoodByName(FoodName));
+    }
+
+    // Jade Garden rule: Process customers in pairs (first and last, second and
+    // second-last, etc.)
+    public void processJadeGarden() {
+        int start = 0;
+        int end = waitingList.size() - 1;
+
+        while (start < end) {
+            Customer first = waitingList.get(start);
+            Customer last = waitingList.get(end);
+
+            // Process first and last customers
+            serveCustomer(first);
+            serveCustomer(last);
+
+            start++;
+            end--;
+        }
+
+        if (start == end) {
+            // Process the customer in the middle if there is one remaining
+            Customer middle = waitingList.get(start);
+            serveCustomer(middle);
+        }
+    }
+
+    // Cafe Deux Magots rule: Select oldest and youngest customers in turns until
+    // everyone is served
+    public void processCafeDeuxMagots() {
+        waitingList.sort(Comparator.comparingInt(c -> c.age));
+
+        int start = 0;
+        int end = waitingList.size() - 1;
+
+        while (start < end) {
+            Customer youngest = waitingList.get(start);
+            Customer oldest = waitingList.get(end);
+
+            // Process youngest and oldest customers
+            serveCustomer(youngest);
+            serveCustomer(oldest);
+
+            start++;
+            end--;
+        }
+
+        if (start == end) {
+            // Process the customer in the middle if there is one remaining
+            Customer middle = waitingList.get(start);
+            serveCustomer(middle);
+        }
+    }
+
+    // Trattoria Trussardi rule: Serve youngest man, oldest woman, oldest man,
+    // youngest woman, alternating genders
+    public void processTrattoriaTrussardi() {
+        waitingList.sort(Comparator.comparingInt(c -> c.age));
+        waitingList.sort(Comparator.comparing(c -> c.gender.equals("male") ? 0 : 1));
+
+        Queue<Customer> males = new LinkedList<>();
+        Queue<Customer> females = new LinkedList<>();
+
+        for (Customer customer : waitingList) {
+            if (customer.gender.equals("male")) {
+                males.add(customer);
+            } else {
+                females.add(customer);
+            }
+        }
+
+        while (!males.isEmpty() && !females.isEmpty()) {
+            serveCustomer(males.poll()); // Serve youngest man
+            serveCustomer(females.poll()); // Serve oldest woman
+            serveCustomer(males.poll()); // Serve oldest man
+            serveCustomer(females.poll()); // Serve youngest woman
+        }
+
+        while (!males.isEmpty()) {
+            serveCustomer(males.poll());
+        }
+
+        while (!females.isEmpty()) {
+            serveCustomer(females.poll());
+        }
+    }
+
+    // Libeccio rule: Remove customers based on their numbers being multiples of the
+    // current day number
+    public void processLibeccio(int currentDayNumber) {
+        Stack<Customer> tempQ = new Stack<>();
+
+        for (int i = 0; i < waitingList.size(); i++) {
+            if ((i + 1) % currentDayNumber == 0) {
+                tempQ.push(waitingList.get(i));
+            } else {
+                serveCustomer(waitingList.get(i));
+            }
+        }
+        while (!tempQ.isEmpty()) {
+            serveCustomer(tempQ.pop());
+        }
+    }
+
+    // Savage Garden rule: Serve customers based on their numbers matching the day number
+    public void processSavageGarden(int currentDayNumber) {
+        Stack<Customer> tempQ = new Stack<>();
+
+        for (int i = 0; i < waitingList.size(); i++) {
+            if ((i + 1) % currentDayNumber == 0) {
+                serveCustomer(waitingList.get(i));
+                //tempQ.push(waitingList.get(i));
+            } else {
+                tempQ.push(waitingList.get(i));
+                //serveCustomer(waitingList.get(i));
+            }
+        }
+        for (int i = 0; i < tempQ.size()+1; i++) {
+            serveCustomer(tempQ.pop());
+        }
+    }
+
+    private void serveCustomer(Customer customer) {
+        System.out.println("Serving customer: " + customer.name);
+        // Perform serving operations
+    }
+}
+
+class Customer {
+    String name;
+    int age;
+    String gender;
+    String order;
+
+    public Customer(String name, int age, String gender, String order) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.order = order;
     }
 }
