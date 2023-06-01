@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment;
+package defaultmap;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -126,7 +126,7 @@ public class TheHand {
 
         @Override
         public int compareTo(Water other) {
-            return Integer.compare(this.distance, other.distance);
+            return Integer.compare(other.distance,this.distance);
         }
     }
 }

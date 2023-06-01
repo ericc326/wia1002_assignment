@@ -12,7 +12,9 @@ public class Main {
         waitingList.add(new Customer("Sophia", 35, "female", "Salad"));
         waitingList.add(new Customer("Daniel", 20, "male", "Pasta"));
 
-        Restaurant restaurant = new Restaurant(waitingList);
+        Restaurant restaurant = new Restaurant(null, waitingList, 1);
+
+        restaurant.showWaitingList(null);
 
         System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
