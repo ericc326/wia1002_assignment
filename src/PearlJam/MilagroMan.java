@@ -32,19 +32,28 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
         this.restaurant.removeFoodByName(FoodName);
     }
 
+    public static void MenuHandler(String RestaurantName){
+        MilagroMan mm = new MilagroMan(RestaurantName);
+        mm.Menu();
+    }
+
     // public void Menu(String restaurantName){
     public void Menu() {
         while (!exit) {
             System.out.println("\nRestaurant: " + this.restaurantName + " (Milagro Man Mode)");
             System.out.println("[1] Add A New Food");
             System.out.println("[2] Modify Food Prices");
-            System.out.println("[3] View Sales Information");
+            System.out.println("[3] Moody Blues");
             System.out.println("[4] Exit Milagro Man");
             MilagroMan.choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    System.out.println("[" + choice + "] Add New Food");
+                    System.out.println("\n[" + choice + "] Add New Food");
+                    System.out.println("Food List:");
+                    for (int i = 0; i < this.restaurant.getMenu().size(); i++) {
+                        System.out.println("[" + (i + 1) + "] " + this.restaurant.getMenu().get(i).getFoodName());
+                    }
                     System.out.println("Enter food name: ");
                     String Foodname = scanner.nextLine();
                     System.out.println("Enter food price");
@@ -60,7 +69,7 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                     }
                     break;
                 case 2:
-                    System.out.println("[" + choice + "] Modify Food Prices");
+                    System.out.println("\n[" + choice + "] Modify Food Prices");
                     System.out.println("Food List:");
                     for (int i = 0; i < this.restaurant.getMenu().size(); i++) {
                         System.out.println("[" + (i + 1) + "] " + this.restaurant.getMenu().get(i).getFoodName());
@@ -83,10 +92,11 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                     }
                     break;
                 case 3:
-                    System.out.println("["+choice+"] View Sales Information");
+                    System.out.println("\n["+choice+"] Moody blues");
+                    MoodyBlues.callMenu();
                     break;
                 case 4:
-                    System.out.println("[" + choice + "] Arivederci");
+                    System.out.println("\n[" + choice + "] Arivederci");
                     exit = true;
                     break;
                 default:

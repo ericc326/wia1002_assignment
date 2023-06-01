@@ -8,12 +8,13 @@ public class Restaurant {
     static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Liberrio, SavageGarden;
     static List<Restaurant> resList;
     List<Customer> waitingList;
+    int currentDayNumber;
 
     // Constructor
-    public Restaurant(List<Customer> waitingList) {
+    public Restaurant(String RestaurantName, List<Customer> waitingList, int Day) {
+        this.RestaurantName = RestaurantName;
         this.waitingList = waitingList;
     }
-
     public Restaurant(String RestaurantName, List<Food> Menu) {
         this.RestaurantName = RestaurantName;
         this.Menu = Menu;
@@ -27,7 +28,6 @@ public class Restaurant {
     public String getRestaurantName() {
         return RestaurantName;
     }
-
     public List<Food> getMenu() {
         return Menu;
     }
@@ -36,7 +36,6 @@ public class Restaurant {
     public void setRestaurantName(String RestaurantName) {
         this.RestaurantName = RestaurantName;
     }
-
     public void setMenu(List<Food> Menu) {
         this.Menu = Menu;
     }
@@ -293,6 +292,8 @@ public class Restaurant {
     // Libeccio rule: Remove customers based on their numbers being multiples of the
     // current day number
     public void processLibeccio(int currentDayNumber) {
+        this.currentDayNumber=currentDayNumber;
+        
         Stack<Customer> tempQ = new Stack<>();
 
         for (int i = 0; i < waitingList.size(); i++) {
@@ -309,6 +310,8 @@ public class Restaurant {
 
     // Savage Garden rule: Serve customers based on their numbers matching the day number
     public void processSavageGarden(int currentDayNumber) {
+        this.currentDayNumber=currentDayNumber;
+
         Stack<Customer> tempQ = new Stack<>();
 
         for (int i = 0; i < waitingList.size(); i++) {
@@ -328,6 +331,15 @@ public class Restaurant {
     private void serveCustomer(Customer customer) {
         System.out.println("Serving customer: " + customer.name);
         // Perform serving operations
+    }
+
+    void showWaitingList(String RestaurantName){
+        System.out.println("//---------------------------------------------//");
+        for (int i = 0; i < waitingList.size(); i++) {
+            System.out.println(waitingList.get(i).name+"\t"+waitingList.get(i).age+"\t"+
+                waitingList.get(i).gender+"\t"+waitingList.get(i).order);
+        }
+        System.out.println("//---------------------------------------------//");
     }
 }
 
