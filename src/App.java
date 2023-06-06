@@ -1,9 +1,8 @@
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import ui.MainController;
 
-import PearlJam.*;
-import defaultmap.*;
-
-public class App {
+public class App extends Application{
     public static void main(String[] args) throws Exception {
         /*System.out.println("Hello, World!");
         //MoodyBlues.callMenu();
@@ -14,6 +13,13 @@ public class App {
         MilagroMan mg = new MilagroMan(restaurantName);
         mg.Menu();
         scanner.close();*/
-        Defaultmap.start();
+        launch(args);
+        //Defaultmap.start();
+    }
+
+    @Override
+    public void start(Stage arg0) throws Exception {
+        MainController ui = new MainController();
+        ui.start(arg0);
     }
 }

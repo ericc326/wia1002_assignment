@@ -16,16 +16,19 @@ import PearlJam.*;
  * @author Asus
  */
 public class Defaultmap {
-    private static map.Location currentLocation;
+    public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
+    public static map.Location currentLocation;
+    public static int currentDay;
+    public static map defaultMap, parallelMap, alternateMap;
+
     private static Stack<map.Location> locationHistory;
     private static Stack<map.Location> ForwardLocationHistory;
-    private static int currentDay;
     private static map gameMap;
     private static boolean hasMadeBackMove = false;
     private static Scanner scanner;
-    private static map defaultMap;
-    private static map parallelMap;
-    private static map alternateMap;
+    //private static map defaultMap;
+    //private static map parallelMap;
+    //private static map alternateMap;
 
     public static void main(String[] args) {
         initializeGame();
@@ -38,7 +41,6 @@ public class Defaultmap {
     }
 
     private static void initializeGame() {
-        Restaurant.InitializeRestaurant();
         gameMap = new map();
         currentLocation = gameMap.townHall;
         locationHistory = new Stack<>();
@@ -46,6 +48,15 @@ public class Defaultmap {
         currentDay = 1;
         initializeMaps();
         showMainMenu();
+    }
+
+    public static void initializeGamePublic() {
+        gameMap = new map();
+        currentLocation = gameMap.townHall;
+        locationHistory = new Stack<>();
+        ForwardLocationHistory = new Stack<>();
+        currentDay = 1;
+        initializeMaps();
     }
 
     private static void initializeMaps() {
@@ -88,6 +99,8 @@ public class Defaultmap {
     }
 
     private static void selectMap() {
+        Restaurant.InitializeRestaurant();
+
         System.out.println("Select a map:");
         System.out.println("[1] Default Map");
         System.out.println("[2] Parallel Map");
@@ -132,7 +145,21 @@ public class Defaultmap {
         playGame();
     }
 
-    private static void loadGame() {
+    public static void selectMap(map selectedMap) {
+        gameMap = selectedMap;
+
+        // Set the correct townHall based on the selected map
+        if (selectedMap == defaultMap) {
+            currentLocation = defaultMap.townHall;
+        } else if (selectedMap == parallelMap) {
+            currentLocation = parallelMap.townHall1;
+        } else if (selectedMap == alternateMap) {
+            currentLocation = alternateMap.townHall2;
+        }
+        System.out.println("check");
+    }
+
+    public static void loadGame() {
         System.out.print("Enter the path of your save file: ");
         Scanner scanner = new Scanner(System.in);
         String filePath = scanner.nextLine();
@@ -148,6 +175,7 @@ public class Defaultmap {
             System.out.println("[1] Move To:");
 
             LinkedList<map.Location.AdjacentLocation> adjacentLocations = currentLocation.getAdjacentLocations();
+            Defaultmap.adjacentLocations = adjacentLocations;
             for (int i = 0; i < adjacentLocations.size(); i++) {
                 map.Location.AdjacentLocation adjacentLocation = adjacentLocations.get(i);
                 String option = String.valueOf((char) ('A' + i));
