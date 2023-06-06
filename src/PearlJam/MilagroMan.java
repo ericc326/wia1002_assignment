@@ -43,7 +43,7 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
             System.out.println("\nRestaurant: " + this.restaurantName + " (Milagro Man Mode)");
             System.out.println("[1] Add A New Food");
             System.out.println("[2] Modify Food Prices");
-            System.out.println("[3] Moody Blues");
+            System.out.println("[3] View Sales Information");
             System.out.println("[4] Exit Milagro Man");
             MilagroMan.choice = scanner.nextInt();
             scanner.nextLine();
@@ -93,10 +93,10 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                     break;
                 case 3:
                     System.out.println("\n["+choice+"] Moody blues");
-                    MoodyBlues.callMenu();
+                    MoodyBlues.callMenu(this.restaurantName);
                     break;
                 case 4:
-                    System.out.println("\n[" + choice + "] Arivederci");
+                    System.out.println();
                     exit = true;
                     break;
                 default:
@@ -104,6 +104,5 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                     break;
             }
         }
-        scanner.close();
     }
 }

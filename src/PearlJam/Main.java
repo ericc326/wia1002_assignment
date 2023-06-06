@@ -1,16 +1,21 @@
 package PearlJam;
 
 import java.util.*;
+import PartSal2.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a sample waiting list
         List<Customer> waitingList = new ArrayList<>();
-        waitingList.add(new Customer("John", 25, "male", "Pizza"));
-        waitingList.add(new Customer("Emily", 30, "female", "Burger"));
-        waitingList.add(new Customer("Michael", 40, "male", "Steak"));
-        waitingList.add(new Customer("Sophia", 35, "female", "Salad"));
-        waitingList.add(new Customer("Daniel", 20, "male", "Pasta"));
+        Residents_P2 rP2 = new Residents_P2();
+        rP2.readRes();
+        for (int i = 0; i < rP2.list1.size(); i++) {
+            System.out.println(rP2.list1.get(rP2.Name.get(i)));
+            if (rP2.Age.get(i).equals("N/A")) {
+                waitingList.add(new Customer(rP2.Name.get(i), -1, rP2.Gender.get(i), null));
+            } else {
+                waitingList.add(new Customer(rP2.Name.get(i), Integer.parseInt(rP2.Age.get(i)), rP2.Gender.get(i), null));   
+            }
+        }
 
         Restaurant restaurant = new Restaurant(null, waitingList, 1);
 

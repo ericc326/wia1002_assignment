@@ -29,11 +29,16 @@ public class Defaultmap {
 
     public static void main(String[] args) {
         initializeGame();
-        Restaurant.InitializeRestaurant();
+        playGame();
+    }
+
+    public static void start(){
+        initializeGame();
         playGame();
     }
 
     private static void initializeGame() {
+        Restaurant.InitializeRestaurant();
         gameMap = new map();
         currentLocation = gameMap.townHall;
         locationHistory = new Stack<>();
@@ -279,65 +284,6 @@ public class Defaultmap {
 
     // Display options for the Cafe Deux Magots location
     private static void displayCafeOptions() {
-
-        System.out.println("[2] Advance to Next Day");
-        System.out.println("[3] Save Game");
-        if (!locationHistory.isEmpty()) {
-            map.Location previousLocation = locationHistory.peek();
-            System.out.println("[4] Back (" + previousLocation.getName() + ")");
-            if (hasMadeBackMove) {
-                if (!ForwardLocationHistory.isEmpty()) {
-                    map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[6] Back To Town Hall");
-                }
-            } else {
-                System.out.println("[5] Back To Town Hall");
-            }
-        } else {
-            System.out.println("[4] Back To Town Hall");
-        }
-        System.out.print("\nSelect:");
-
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-
-        switch (input.toUpperCase()) {
-            case "1":
-                handleMoveTo();
-                break;
-            case "2":
-                handleAdvanceToNextDay();
-                break;
-            case "3":
-                handleSaveGame();
-                break;
-            case "4":
-                if (!locationHistory.isEmpty()) {
-                    handleReturnToPreviousLocation();
-                } else {
-                    handleDirectBackToTownHall();
-                }
-                break;
-            case "5":
-                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
-                    handleForwardToNewLocation();
-                } else {
-                    handleDirectBackToTownHall();
-                }
-                break;
-            case "6":
-                if (hasMadeBackMove) {
-                    handleDirectBackToTownHall();
-                }
-                break;
-        }
-        System.out.println("======================================================================");
-    }
-
-    // Display options for the Jade Garden location
-    private static void displayJadeGardenOptions() {
-
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
@@ -376,7 +322,76 @@ public class Defaultmap {
                 handleViewSales();
                 break;
             case "5":
-                MilagroMan.MenuHandler(currentLocation.getName());
+                handleMilagroMan();
+                break;
+            case "6":
+                if (!locationHistory.isEmpty()) {
+                    handleReturnToPreviousLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "7":
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
+                    handleForwardToNewLocation();
+                } else {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            case "8":
+                if (hasMadeBackMove) {
+                    handleDirectBackToTownHall();
+                }
+                break;
+            default:
+                System.out.println("Invalid input. Please try again.");
+                break;
+        }
+
+        System.out.println("======================================================================");
+    }
+
+    // Display options for the Jade Garden location
+    private static void displayJadeGardenOptions() {
+        System.out.println("[2] View Waiting List and Order Processing List");
+        System.out.println("[3] View Menu");
+        System.out.println("[4] View Sales Information");
+        System.out.println("[5] Milagro Man");
+        if (!locationHistory.isEmpty()) {
+            map.Location previousLocation = locationHistory.peek();
+            System.out.println("[6] Back (" + previousLocation.getName() + ")");
+            if (hasMadeBackMove) {
+                if (!ForwardLocationHistory.isEmpty()) {
+                    map.Location forwardLocation = ForwardLocationHistory.peek();
+                    System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[8] Back To Town Hall");
+                }
+            } else {
+                System.out.println("[7] Back To Town Hall");
+            }
+        } else {
+            System.out.println("[6] Back To Town Hall");
+        }
+        System.out.print("\nSelect:");
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        switch (input.toUpperCase()) {
+            case "1":
+                handleMoveTo();
+                break;
+            case "2":
+                handleWaitingList();
+                break;
+            case "3":
+                handleViewMenu();
+                break;
+            case "4":
+                handleViewSales();
+                break;
+            case "5":
+                handleMilagroMan();
                 break;
             case "6":
                 if (!locationHistory.isEmpty()) {
@@ -501,12 +516,11 @@ public class Defaultmap {
                 break;
             case "3":
                 handleViewMenu();
-                break;
             case "4":
                 handleViewSales();
                 break;
             case "5":
-                MilagroMan.MenuHandler(currentLocation.getName());
+                handleMilagroMan();
                 break;
             case "6":
                 if (!locationHistory.isEmpty()) {
@@ -824,22 +838,24 @@ public class Defaultmap {
     }
 
     private static void displayLibeccioOptions() {
-
-        System.out.println("[2] Advance to Next Day");
+        System.out.println("[2] View Waiting List and Order Processing List");
+        System.out.println("[3] View Menu");
+        System.out.println("[4] View Sales Information");
+        System.out.println("[5] Milagro Man");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
-            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            System.out.println("[6] Back (" + previousLocation.getName() + ")");
             if (hasMadeBackMove) {
                 if (!ForwardLocationHistory.isEmpty()) {
                     map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[5] Back To Town Hall");
+                    System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[8] Back To Town Hall");
                 }
             } else {
-                System.out.println("[4] Back To Town Hall");
+                System.out.println("[7] Back To Town Hall");
             }
         } else {
-            System.out.println("[3] Back To Town Hall");
+            System.out.println("[6] Back To Town Hall");
         }
         System.out.print("\nSelect:");
 
@@ -851,23 +867,32 @@ public class Defaultmap {
                 handleMoveTo();
                 break;
             case "2":
-                handleAdvanceToNextDay();
+                handleWaitingList();
                 break;
             case "3":
+                handleViewMenu();
+                break;
+            case "4":
+                handleViewSales();
+                break;
+            case "5":
+                handleMilagroMan();
+                break;
+            case "6":
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
                     handleDirectBackToTownHall();
                 }
                 break;
-            case "4":
+            case "7":
                 if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     handleForwardToNewLocation();
                 } else {
                     handleDirectBackToTownHall();
                 }
                 break;
-            case "5":
+            case "8":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
                 }
@@ -995,21 +1020,24 @@ public class Defaultmap {
     }
 
     private static void displaySGOptions() {
-        System.out.println("[2] Advance to Next Day");
+        System.out.println("[2] View Waiting List and Order Processing List");
+        System.out.println("[3] View Menu");
+        System.out.println("[4] View Sales Information");
+        System.out.println("[5] Milagro Man");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
-            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            System.out.println("[6] Back (" + previousLocation.getName() + ")");
             if (hasMadeBackMove) {
                 if (!ForwardLocationHistory.isEmpty()) {
                     map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[5] Back To Town Hall");
+                    System.out.println("[7] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[8] Back To Town Hall");
                 }
             } else {
-                System.out.println("[4] Back To Town Hall");
+                System.out.println("[7] Back To Town Hall");
             }
         } else {
-            System.out.println("[3] Back To Town Hall");
+            System.out.println("[6] Back To Town Hall");
         }
         System.out.print("\nSelect:");
 
@@ -1021,23 +1049,32 @@ public class Defaultmap {
                 handleMoveTo();
                 break;
             case "2":
-                handleAdvanceToNextDay();
+                handleWaitingList();
                 break;
             case "3":
+                handleViewMenu();
+                break;
+            case "4":
+                handleViewSales();
+                break;
+            case "5":
+                handleMilagroMan();
+                break;
+            case "6":
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
                     handleDirectBackToTownHall();
                 }
                 break;
-            case "4":
+            case "7":
                 if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     handleForwardToNewLocation();
                 } else {
                     handleDirectBackToTownHall();
                 }
                 break;
-            case "5":
+            case "8":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
                 }
@@ -1212,15 +1249,16 @@ public class Defaultmap {
     }
 
     private static void handleViewMenu() {
-
+        Restaurant res = new Restaurant();
+        res.viewMenubyResName(currentLocation.getName());
     }
 
     private static void handleViewSales() {
-
+        MoodyBlues.callMenu(currentLocation.getName());
     }
 
     private static void handleMilagroMan() {
-
+        MilagroMan.MenuHandler(currentLocation.getName());
     }
 
     private static void handleViewResidentInformation() {

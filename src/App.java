@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 import PearlJam.*;
+import defaultmap.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        /*System.out.println("Hello, World!");
         //MoodyBlues.callMenu();
         Restaurant.InitializeRestaurant();
         System.out.println("\nEnter restaurant name:");
@@ -12,6 +13,7 @@ public class App {
         String restaurantName = scanner.nextLine();
         MilagroMan mg = new MilagroMan(restaurantName);
         mg.Menu();
-        scanner.close();
+        scanner.close();*/
+        Defaultmap.start();
     }
 }
