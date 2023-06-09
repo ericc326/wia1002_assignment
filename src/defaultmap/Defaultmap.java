@@ -15,15 +15,15 @@ import PearlJam.*;
  *
  * @author Asus
  */
-public class Defaultmap {
+public class Defaultmap implements Serializable{
     public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
     public static map.Location currentLocation;
     public static int currentDay;
-    public static map defaultMap, parallelMap, alternateMap;
+    public static map defaultMap, parallelMap, alternateMap, gameMap;
+    public static String saveID = "gamejojo";
 
     private static Stack<map.Location> locationHistory;
     private static Stack<map.Location> ForwardLocationHistory;
-    private static map gameMap;
     private static boolean hasMadeBackMove = false;
     private static Scanner scanner;
     //private static map defaultMap;
@@ -83,7 +83,7 @@ public class Defaultmap {
                 selectMap();
                 break;
             case 2:
-                loadGame();
+                handleLoadGame();
                 // Continue the game from the loaded state
                 break;
             case 3:
@@ -141,6 +141,8 @@ public class Defaultmap {
         } else if (selectedMap == alternateMap) {
             currentLocation = alternateMap.townHall2;
         }
+        
+        currentDay = 1;
 
         playGame();
     }
@@ -165,9 +167,25 @@ public class Defaultmap {
         String filePath = scanner.nextLine();
     }
 
+    public static void handleLoad() {
+        gameSaveLoad data = (gameSaveLoad) gameSaveLoad.load(saveID);
+        Defaultmap.gameMap = data.gameMap;
+        Restaurant.resList = data.resList;
+        Restaurant.saleList = data.saleList;
+        Defaultmap.currentLocation = data.currentLocation;
+        Defaultmap.currentDay = data.currentDay;
+        Defaultmap.locationHistory = data.locationHistory;
+        Defaultmap.ForwardLocationHistory = data.ForwardLocationHistory;
+    }
+
+    public static void handleLoadGame() {
+        handleLoad();
+        playGame();
+    }
+
+
     private static void playGame() {
         boolean exitGame = false;
-        currentDay = 1;
         while (!exitGame) {
             System.out.println(
                     "It's Day " + currentDay + " (" + getDayOfWeek(currentDay) + ") of our journey in JOJOLands!");
@@ -1227,13 +1245,23 @@ public class Defaultmap {
     private static void handleSaveGame() {
         // Define the file path where the console output will be saved
         String filePath = "console_output.txt";
-
+        try {
+            handleSave();
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println("FAILED!");
+            return;
+        }
         try (PrintWriter fileWriter = new PrintWriter(new FileWriter(filePath))) {
-
             System.out.println("Game saved successfully.");
         } catch (IOException e) {
             System.out.println("Failed to save the game. Please try again.");
         }
+    }
+
+    public static void handleSave(){
+        gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Restaurant.saleList, currentLocation, currentDay, locationHistory, ForwardLocationHistory);
+        gameSaveLoad.save(gsl, saveID);
     }
 
     private static void handleReturnToPreviousLocation() {

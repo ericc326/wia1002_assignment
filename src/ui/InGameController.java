@@ -3,7 +3,7 @@ package ui;
 import java.io.IOException;
 
 import defaultmap.Defaultmap;
-import defaultmap.map;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,29 +13,50 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-/**
- * LocationController
- */
-public class LocationController {
+public class InGameController extends Application{
     private Stage stage;
     private Scene scene;
 
     Label locationLabel;
     Button defaultButton, alternateButton, parallelButton, back;
 
+    public InGameController(){}
+
+    public static void startScene(Stage stage){
+        InGameController n = new InGameController();
+        try {
+            n.start(stage);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void start(Stage arg0) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("InGame_Scene.fxml"));
+            Scene scene = new Scene(root);
+            arg0.setScene(scene);
+            //locationLabel.setText(Defaultmap.currentLocation.getName());
+            System.out.println(Defaultmap.currentLocation.getName());
+            arg0.show();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
     public void defaultAction(ActionEvent e) {
         Defaultmap.selectMap(Defaultmap.defaultMap);
-        enterGame(e);
     }
 
     public void parallelAction(ActionEvent e) {
         Defaultmap.selectMap(Defaultmap.parallelMap);
-        enterGame(e);
     }
 
     public void alternateAction(ActionEvent e) {
         Defaultmap.selectMap(Defaultmap.alternateMap);
-        enterGame(e);
     }
 
     public void backToMenu(ActionEvent e) {
@@ -49,13 +70,5 @@ public class LocationController {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-    }
-    public void enterGame(ActionEvent e){
-        //Parent root = FXMLLoader.load(getClass().getResource("InGame_Scene.fxml"));
-        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        /*scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
-        InGameController.startScene(stage);
     }
 }

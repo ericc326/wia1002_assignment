@@ -1,3 +1,4 @@
+import defaultmap.Defaultmap;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.MainController;
@@ -13,8 +14,8 @@ public class App extends Application{
         MilagroMan mg = new MilagroMan(restaurantName);
         mg.Menu();
         scanner.close();*/
-        launch(args);
-        //Defaultmap.start();
+        //launch(args);
+        Defaultmap.start();
     }
 
     @Override

@@ -4,13 +4,14 @@
  */
 package defaultmap;
 
+import java.io.Serializable;
 /**
  *
  * @author Asus
  */
 import java.util.LinkedList;
 
-    public class map {
+    public class map implements Serializable{
         //default map
     Location townHall;
     Location cafeDeuxMagots;
@@ -337,7 +338,7 @@ import java.util.LinkedList;
         
     }
     
-public class Location {
+public class Location implements Serializable{
         private String name;
         private LinkedList<AdjacentLocation> adjacentLocations;
 
@@ -359,7 +360,7 @@ public class Location {
             return adjacentLocations;
         }
 
-public class AdjacentLocation {
+public class AdjacentLocation implements Serializable{
             private Location location;
             private int distance;
 

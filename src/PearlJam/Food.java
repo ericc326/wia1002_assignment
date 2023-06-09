@@ -1,6 +1,8 @@
 package PearlJam;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable{
     String FoodName;
     Double FoodPrice;
 

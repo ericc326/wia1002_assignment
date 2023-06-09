@@ -1,14 +1,17 @@
+package PearlJam;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 //package GroupAssignment;
 
+import java.io.Serializable;
+
 /**
  *
  * @author firdausazman
  */
-class Sale {
+public class Sale implements Serializable{
     private int day;
     private String food;
     private int quantity;

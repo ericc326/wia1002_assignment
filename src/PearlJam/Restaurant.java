@@ -1,12 +1,14 @@
 package PearlJam;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Restaurant {
+public class Restaurant implements Serializable{
     String RestaurantName;
     List<Food> Menu;
     static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Liberrio, SavageGarden;
-    static List<Restaurant> resList;
+    public static List<Restaurant> resList;
+    public static List<Sale> saleList;
     List<Customer> waitingList;
     int currentDayNumber;
 
