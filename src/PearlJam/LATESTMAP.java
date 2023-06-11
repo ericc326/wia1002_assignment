@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package PartSal2;
+package PearlJam;
 
 /**
  *
@@ -22,7 +22,7 @@ import java.util.Stack;
  *
  * @author Asus
  */
-public class LATESTMAP  extends Residents_P2{
+public class LATESTMAP  extends Residents{
     
     public static void main(String[] args) {
         
@@ -49,7 +49,7 @@ public class LATESTMAP  extends Residents_P2{
         locationHistory = new Stack<>();
         ForwardLocationHistory = new Stack<>();
         currentDay = 1;
-         readForMenu(currentDay);
+        readForMenu(currentDay);
         initializeMaps();
         showMainMenu();
     }
@@ -382,7 +382,7 @@ public class LATESTMAP  extends Residents_P2{
                     handleViewSales();
                     break;
                 case "5":
-                    handleMilagroMan();
+                    handleMilagroMan(currentLocation.getName());
                     break;
                 case "6":
                     if (!locationHistory.isEmpty()) {
@@ -515,7 +515,7 @@ public class LATESTMAP  extends Residents_P2{
                     handleViewSales();
                     break;
                 case "5":
-                    handleMilagroMan();
+                    handleMilagroMan(currentLocation.getName());
                     break;
                 case "6":
                     if (!locationHistory.isEmpty()) {
@@ -1253,11 +1253,7 @@ private void handleSaveGame() {
 }
 
     private void handleWaitingList(String place) {
-        
-        Restaurant_P2 rest1 = new Restaurant_P2(place);
        
-       
-        rest1.customerSort(place);
         
     }
 
@@ -1268,12 +1264,17 @@ private void handleSaveGame() {
     private void handleViewSales() {
     }
 
-    private void handleMilagroMan() {
+    private void handleMilagroMan(String place) {
+        
+        MilagroMan milo = new MilagroMan(place);
+        
         
     }
 
     private void handleViewResidentInformation(String place) {
-       readRes(currentDay);
+      
+        
+        readRes();
        printRes(place,currentDay);
     }
 

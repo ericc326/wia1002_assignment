@@ -1,12 +1,11 @@
 package PearlJam;
 
 import java.util.*;
-import PartSal2.*;
 
 public class Main {
     public static void main(String[] args) {
         List<Customer> waitingList = new ArrayList<>();
-        Residents_P2 rP2 = new Residents_P2();
+        Residents rP2 = new Residents();
         rP2.readRes();
         for (int i = 0; i < rP2.list1.size(); i++) {
             System.out.println(rP2.list1.get(rP2.Name.get(i)));

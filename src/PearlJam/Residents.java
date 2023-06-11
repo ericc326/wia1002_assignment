@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package PartSal2;
+package PearlJam;
 
 /**
  *
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Residents_P2 extends Restaurant_P2{
+public class Residents extends Restaurant{
     
     ArrayList<String> Name,Age,Gender,ResidentialArea,Parents,newName,newAge,newGender,newParent,newStand,newDes,newSpeed,newRange,newStamina,newPrecision,newDevPot,jonathan,joseph,josuke,jotaro,giorno,jolyne;
     HashMap<String,List<String>> list1;
@@ -24,6 +24,7 @@ public class Residents_P2 extends Restaurant_P2{
     HashMap<Integer,List<String>> menuRes;
     ArrayList<HashMap<Integer,List<String>>> menuByDay;
     private static int num=1;
+    
     
     
    
@@ -37,7 +38,7 @@ public class Residents_P2 extends Restaurant_P2{
     List<String> nul = new ArrayList<>();
     
     
-    public Residents_P2(){
+    public Residents(){
         
         Name = new ArrayList<>();
         Age = new ArrayList<>();
@@ -69,7 +70,9 @@ public class Residents_P2 extends Restaurant_P2{
         
     }
     
-   public void readRes(int currentDay){
+    
+    
+   public void readRes(){
 
        
         try {
@@ -580,11 +583,11 @@ public class Residents_P2 extends Restaurant_P2{
    }
    
       public void showResEat(String resName, int currentDay) {
-    orderHist(currentDay);
+    //orderHist(currentDay);
     System.out.println("Order History");
-    System.out.println("+-----+---------------------------------------------------+-----------------------------------------+");
-    System.out.println("+ Day |        Food & Price                               |    Restaurant                           |");
-    System.out.println("+-----+---------------------------------------------------+-----------------------------------------+");
+    System.out.println("+-----+----------------------------------------------+----------------+---------------------------------+");
+    System.out.println("+ Day |        Food                                  |   Price        |      Restaurant                 |");
+    System.out.println("+-----+----------------------------------------------+----------------+---------------------------------+");
 
     int day = 0;
     int dayIndex = currentDay - 1;
@@ -596,14 +599,14 @@ public class Residents_P2 extends Restaurant_P2{
             List<String> values = entry.getValue();
             if (values.get(0).equals(resName)) {
                 day++;
-                System.out.printf("| %-4s| %-50s| %-40s| \n", day, values.get(2), values.get(1));
+                System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", day, values.get(2), values.get(3),values.get(1));
             }
         }
     }
 
     Name.clear();
 
-    System.out.println("+-----+---------------------------------------------------+-----------------------------------------+");
+    System.out.println("+-----+----------------------------------------------+----------------+---------------------------------+");
 }
 
       
@@ -621,10 +624,11 @@ public class Residents_P2 extends Restaurant_P2{
                    switch(values.get(0)){
                        
                        case "Jonathan Joestar":jonathan.add(values.get(2));
-                           System.out.println("dvknf");
+                           
                                                 break;
                                                 
                        case "Joseph Joestar":joseph.add(values.get(2));
+                                             System.out.println("dvknf");
                                              break;
                                              
                        case "Jotaro Higashikata":jotaro.add(values.get(2));
@@ -667,14 +671,7 @@ public class Residents_P2 extends Restaurant_P2{
     
     public void handleJosephCase(){
         
-        if(joseph.size()>2){
-        for(int index=0; index<joseph.size(); index++){
-            if(joseph.get(index)== joseph.get(index+1)){
-                
-            }
-            
-            }
-        }
+     
     }
     
     public void handleJotaroCase(){
@@ -701,7 +698,10 @@ public class Residents_P2 extends Restaurant_P2{
       
       public void readForMenu(int currentDay){
        
-       Restaurant_P2 resMenu = new Restaurant_P2();
+          
+          System.out.println("Masuk kat bace utk menu");
+          
+       Restaurant resMenu = new Restaurant();
        
         try {
             
@@ -742,10 +742,11 @@ public class Residents_P2 extends Restaurant_P2{
             for(int index=0; index<Name.size(); index++){
                 System.out.println("<----------"+Name.get(index)+"---------->");
                     List<String> values = new ArrayList<>();
-                String[] random = resMenu.addItemsToMenu();
+                String[] random = resMenu.InitializeRestaurantProcess();
                 values.add(Name.get(index));
                 values.add(random[0]);
                 values.add(random[1]);
+                values.add(random[2]);
                 values.add(ResidentialArea.get(index));
                 menuRes.put(num, values);
                 num++;
@@ -763,7 +764,5 @@ public class Residents_P2 extends Restaurant_P2{
         } catch (IOException e) {
            e.printStackTrace();
         }        
-   } 
- 
-  
+   }
 }
