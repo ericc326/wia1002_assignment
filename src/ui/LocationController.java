@@ -3,12 +3,12 @@ package ui;
 import java.io.IOException;
 
 import defaultmap.Defaultmap;
-import defaultmap.map;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -20,6 +20,7 @@ public class LocationController {
     private Stage stage;
     private Scene scene;
 
+    @FXML
     Label locationLabel;
     Button defaultButton, alternateButton, parallelButton, back;
 
@@ -51,11 +52,22 @@ public class LocationController {
         }
     }
     public void enterGame(ActionEvent e){
-        //Parent root = FXMLLoader.load(getClass().getResource("InGame_Scene.fxml"));
-        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        /*scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
-        InGameController.startScene(stage);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InGame_Scene.fxml"));
+            Parent root = loader.load();
+
+            InGameController igc = loader.getController();
+            igc.setLocationName();
+            
+            //Parent root = FXMLLoader.load(getClass().getResource("InGame_Scene.fxml"));
+            stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        //InGameController.startScene(stage);
     }
 }

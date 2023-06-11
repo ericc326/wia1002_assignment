@@ -12,11 +12,16 @@ package PartSal2;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
+
+import defaultmap.RedHotChiliPepper;
+import defaultmap.TheHand;
+import defaultmap.map;
 
 /**
  *

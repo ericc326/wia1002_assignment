@@ -14,8 +14,8 @@ public class App extends Application{
         MilagroMan mg = new MilagroMan(restaurantName);
         mg.Menu();
         scanner.close();*/
-        //launch(args);
-        Defaultmap.start();
+        launch(args);
+        //Defaultmap.start();
     }
 
     @Override
