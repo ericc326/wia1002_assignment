@@ -6,6 +6,21 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "vmArgs": "--module-path C://lib//lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "wia1002_assignment_c055666d"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "PearlJam.Main",
+            "projectName": "wia1002_assignment_c055666d"
+        },
+        {
+            "type": "java",
             "name": "MainController",
             "request": "launch",
             "mainClass": "ui.MainController",
@@ -21,7 +36,7 @@
             "type": "java",
             "name": "App",
             "request": "launch",
-            "vmArgs": "--module-path D:/JavaFX/javafx-sdk-20.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path C://Users//Sulaiman Hashim//Documents//GitHub/wia1002_assignment//lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "App",
             "projectName": "wia1002_assignment_8fc000ea"
         }

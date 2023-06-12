@@ -2,24 +2,18 @@ package PearlJam;
 
 import java.util.*;
 import PartSal2.*;
+import PearlJam.*;
 
 public class Main {
     public static void main(String[] args) {
-        List<Customer> waitingList = new ArrayList<>();
-        Residents_P2 rP2 = new Residents_P2();
-        rP2.readRes();
-        for (int i = 0; i < rP2.list1.size(); i++) {
-            System.out.println(rP2.list1.get(rP2.Name.get(i)));
-            if (rP2.Age.get(i).equals("N/A")) {
-                waitingList.add(new Customer(rP2.Name.get(i), -1, rP2.Gender.get(i), null));
-            } else {
-                waitingList.add(new Customer(rP2.Name.get(i), Integer.parseInt(rP2.Age.get(i)), rP2.Gender.get(i), null));   
-            }
-        }
+        Restaurant.InitializeRestaurant();
+        //Restaurant.getRandomFoodByRestaurantName("Jade Garden");
 
-        Restaurant restaurant = new Restaurant(null, waitingList, 1);
+        Order.getAllResidentAsCustomer("Jade Garden");
 
-        restaurant.showWaitingList(null);
+        Restaurant restaurant = new Restaurant(null, Order.waitingList, 1);
+
+        //restaurant.showWaitingList(null);
 
         System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
@@ -34,6 +28,6 @@ public class Main {
         restaurant.processLibeccio(2); // Assuming the current day number is 3
 
         System.out.println("\nProcessing Savage Garden rule:");
-        restaurant.processSavageGarden(4); // Assuming the current day number is 4
+        restaurant.processSavageGarden(4); // Assuming the current day number is 4*/
     }
 }

@@ -3,10 +3,12 @@ package PearlJam;
 import java.io.Serializable;
 import java.util.*;
 
-public class Restaurant implements Serializable{
+import defaultmap.Defaultmap;
+
+public class Restaurant implements Serializable {
     String RestaurantName;
     List<Food> Menu;
-    static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Liberrio, SavageGarden;
+    static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Libeccio, SavageGarden;
     public static List<Restaurant> resList;
     public static List<Sale> saleList;
     List<Customer> waitingList;
@@ -17,6 +19,7 @@ public class Restaurant implements Serializable{
         this.RestaurantName = RestaurantName;
         this.waitingList = waitingList;
     }
+
     public Restaurant(String RestaurantName, List<Food> Menu) {
         this.RestaurantName = RestaurantName;
         this.Menu = Menu;
@@ -30,6 +33,7 @@ public class Restaurant implements Serializable{
     public String getRestaurantName() {
         return RestaurantName;
     }
+
     public List<Food> getMenu() {
         return Menu;
     }
@@ -38,17 +42,22 @@ public class Restaurant implements Serializable{
     public void setRestaurantName(String RestaurantName) {
         this.RestaurantName = RestaurantName;
     }
+
     public void setMenu(List<Food> Menu) {
         this.Menu = Menu;
     }
 
     public static void InitializeRestaurant() {
-        //System.out.println("try");
+        System.out.println("\nLOADING...\n");
         Restaurant resTemp = new Restaurant();
-        resTemp.InitializeRestaurantProcess();
+        resTemp.InitializeRestaurantProcess(null);
     }
 
-    public void InitializeRestaurantProcess() {
+    public String[] InitializeRestaurantProcess() {
+        return null;
+    }
+
+    public void InitializeRestaurantProcess(Void s) {
         // Jade Garden
         /*
          * ○ Braised Chicken in Black Bean Sauce ($15.00)
@@ -119,7 +128,7 @@ public class Restaurant implements Serializable{
 
         Restaurant.TrattoriaTrussardi = new Restaurant("Trattoria Trussardi", foods3);
 
-        // Liberrio
+        // Libeccio
         /*
          * ○ Formaggio ($12.50)
          * ○ Ghiaccio ($1.01)
@@ -145,7 +154,7 @@ public class Restaurant implements Serializable{
         foods4.add(Risotto);
         foods4.add(ZuccheroAndSale);
 
-        Restaurant.Liberrio = new Restaurant("Liberrio", foods4);
+        Restaurant.Libeccio = new Restaurant("Libeccio", foods4);
 
         // Savage Garden
         /*
@@ -173,17 +182,17 @@ public class Restaurant implements Serializable{
         foods5.add(KakyoinsCherry);
         foods5.add(KakyoinsPorridge);
 
-        Restaurant.SavageGarden = new Restaurant("Savage Garden", foods5);
+        Restaurant.SavageGarden = new Restaurant("SavageGarden", foods5);
 
         // Add to list
         Restaurant.resList = new ArrayList<>();
         resList.add(JadeGarden);
         resList.add(CafeDeuxMagots);
         resList.add(TrattoriaTrussardi);
-        resList.add(Liberrio);
+        resList.add(Libeccio);
         resList.add(SavageGarden);
-        //System.out.println("Success initialize restaurant.");
-        // System.out.println(resList.toString()); <-check
+        //System.out.println(resList.toString()); // <-check
+        System.out.println("\nLOADING...\n");
     }
 
     public Restaurant getResByName(String RestaurantName) {
@@ -204,18 +213,34 @@ public class Restaurant implements Serializable{
         return null;
     }
 
+    public static Food getRandomFoodByRestaurantName(String RestaurantName) {
+        Restaurant resTemp = new Restaurant();
+        resTemp = resTemp.getResByName(RestaurantName);
+
+        List<Food> foodList = resTemp.getMenu();
+
+        Random rand = new Random();
+
+        int randomNum = rand.nextInt((foodList.size() - 1) + 1);
+
+        // System.out.println(foodList.get(randomNum).getFoodName());
+
+        return foodList.get(randomNum);
+    }
+
     public void removeFoodByName(String FoodName) {
         this.Menu.remove(this.getFoodByName(FoodName));
     }
 
-    public void viewMenubyResName(String RestaurantName){
+    public void viewMenubyResName(String RestaurantName) {
         System.out.println();
-        System.out.println("Menu for "+RestaurantName);;
+        System.out.println("Menu for " + RestaurantName);
+        ;
         System.out.println("//-------------------------------------//");
         System.out.println("Price\tMenu");
         for (int i = 0; i < getResByName(RestaurantName).Menu.size(); i++) {
-            System.out.println(String.format("%.2f",getResByName(RestaurantName).Menu.get(i).getFoodPrice())+
-            "\t"+getResByName(RestaurantName).Menu.get(i).getFoodName());
+            System.out.println(String.format("RM %.2f", getResByName(RestaurantName).Menu.get(i).getFoodPrice()) +
+                    "\t" + getResByName(RestaurantName).Menu.get(i).getFoodName());
         }
         System.out.println();
         System.out.println("Press enter to continue");
@@ -255,9 +280,9 @@ public class Restaurant implements Serializable{
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<Customer>();
 
         for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).age==-1) {
+            if (waitingList.get(i).age == -1) {
                 tempList2.add(waitingList.get(i));
-            } else if (waitingList.get(i).age>-1) {
+            } else if (waitingList.get(i).age > -1) {
                 tempList.add(waitingList.get(i));
             }
         }
@@ -294,16 +319,16 @@ public class Restaurant implements Serializable{
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<>();
 
         for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).age==-1) {
+            if (waitingList.get(i).age == -1) {
                 tempList2.add(waitingList.get(i));
-            } else if (waitingList.get(i).age>-1) {
+            } else if (waitingList.get(i).age > -1) {
                 tempList.add(waitingList.get(i));
             }
         }
 
         tempList.sort(Comparator.comparingInt(c -> c.age));
-        //tempList.sort(Comparator.comparing(c -> c.gender.equals("male") ? 0 : 1));
-        //tempList2.sort(Comparator.comparing(c -> c.gender.equals("male") ? 0 : 1));
+        // tempList.sort(Comparator.comparing(c -> c.gender.equals("male") ? 0 : 1));
+        // tempList2.sort(Comparator.comparing(c -> c.gender.equals("male") ? 0 : 1));
 
         List<Customer> males = new LinkedList<>();
         List<Customer> females = new LinkedList<>();
@@ -311,7 +336,7 @@ public class Restaurant implements Serializable{
         for (Customer customer : tempList) {
             if (customer.gender.equalsIgnoreCase("male")) {
                 males.add(customer);
-            } else if (customer.gender.equalsIgnoreCase("female")){
+            } else if (customer.gender.equalsIgnoreCase("female")) {
                 females.add(customer);
             }
         }
@@ -319,24 +344,24 @@ public class Restaurant implements Serializable{
         System.out.println(males.isEmpty());
         System.out.println(females.isEmpty());
 
-        while (!males.isEmpty()||!females.isEmpty()) {
+        while (!males.isEmpty() || !females.isEmpty()) {
             if (!males.isEmpty()) {
-                //System.out.println("Serve youngest man");
+                // System.out.println("Serve youngest man");
                 serveCustomer(males.get(0));
                 males.remove(0);
             }
             if (!females.isEmpty()) {
-                //System.out.println("Serve oldest woman");
-                serveCustomer(females.get(females.size()-1));
-                females.remove(females.size()-1);
+                // System.out.println("Serve oldest woman");
+                serveCustomer(females.get(females.size() - 1));
+                females.remove(females.size() - 1);
             }
             if (!males.isEmpty()) {
-                //System.out.println("Serve oldest man");
-                serveCustomer(males.get(males.size()-1));
-                males.remove(males.size()-1);
+                // System.out.println("Serve oldest man");
+                serveCustomer(males.get(males.size() - 1));
+                males.remove(males.size() - 1);
             }
             if (!females.isEmpty()) {
-                //System.out.println("Serve youngest woman");
+                // System.out.println("Serve youngest woman");
                 serveCustomer(females.get(0));
                 females.remove(0);
             }
@@ -345,28 +370,28 @@ public class Restaurant implements Serializable{
         for (Customer customer : tempList2) {
             if (customer.gender.equalsIgnoreCase("male")) {
                 males.add(customer);
-            } else if (customer.gender.equalsIgnoreCase("female")){
+            } else if (customer.gender.equalsIgnoreCase("female")) {
                 females.add(customer);
             }
         }
-        while (!males.isEmpty()||!females.isEmpty()) {
+        while (!males.isEmpty() || !females.isEmpty()) {
             if (!males.isEmpty()) {
-                //System.out.println("Serve youngest man");
+                // System.out.println("Serve youngest man");
                 serveCustomer(males.get(0));
                 males.remove(0);
             }
             if (!females.isEmpty()) {
-                //System.out.println("Serve oldest woman");
-                serveCustomer(females.get(females.size()-1));
-                females.remove(females.size()-1);
+                // System.out.println("Serve oldest woman");
+                serveCustomer(females.get(females.size() - 1));
+                females.remove(females.size() - 1);
             }
             if (!males.isEmpty()) {
-                //System.out.println("Serve oldest man");
-                serveCustomer(males.get(males.size()-1));
-                males.remove(males.size()-1);
+                // System.out.println("Serve oldest man");
+                serveCustomer(males.get(males.size() - 1));
+                males.remove(males.size() - 1);
             }
             if (!females.isEmpty()) {
-                //System.out.println("Serve youngest woman");
+                // System.out.println("Serve youngest woman");
                 serveCustomer(females.get(0));
                 females.remove(0);
             }
@@ -376,9 +401,9 @@ public class Restaurant implements Serializable{
     // Libeccio rule: Remove customers based on their numbers being multiples of the
     // current day number
     public void processLibeccio(int currentDayNumber) {
-        this.currentDayNumber=currentDayNumber;
+        this.currentDayNumber = currentDayNumber;
         List<Customer> tempList = waitingList;
-        
+
         Stack<Customer> tempStack = new Stack<>();
 
         for (int i = 0; i < tempList.size(); i++) {
@@ -393,9 +418,10 @@ public class Restaurant implements Serializable{
         }
     }
 
-    // Savage Garden rule: Serve customers based on their numbers matching the day number
+    // Savage Garden rule: Serve customers based on their numbers matching the day
+    // number
     public void processSavageGarden(int currentDayNumber) {
-        this.currentDayNumber=currentDayNumber;
+        this.currentDayNumber = currentDayNumber;
         List<Customer> tempList = waitingList;
 
         Stack<Customer> tempQ = new Stack<>();
@@ -403,27 +429,30 @@ public class Restaurant implements Serializable{
         for (int i = 0; i < tempList.size(); i++) {
             if ((i + 1) % currentDayNumber == 0) {
                 serveCustomer(tempList.get(i));
-                //tempQ.push(waitingList.get(i));
+                // tempQ.push(waitingList.get(i));
             } else {
                 tempQ.push(tempList.get(i));
-                //serveCustomer(waitingList.get(i));
+                // serveCustomer(waitingList.get(i));
             }
         }
-        for (int i = 0; i < tempQ.size()+1; i++) {
+        for (int i = 0; i < tempQ.size() + 1; i++) {
             serveCustomer(tempQ.pop());
         }
     }
 
     private void serveCustomer(Customer customer) {
-        System.out.println("Serving customer: " + customer.name);
+        System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
+        Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
+                customer.food.getFoodPrice());
+        Sale.SaleList.add(sale);
         // Perform serving operations
     }
 
-    void showWaitingList(String RestaurantName){
+    void showWaitingList(String RestaurantName) {
         System.out.println("//---------------------------------------------//");
         for (int i = 0; i < waitingList.size(); i++) {
-            System.out.println(waitingList.get(i).name+"\t"+waitingList.get(i).age+"\t"+
-                waitingList.get(i).gender+"\t"+waitingList.get(i).order);
+            System.out.println(waitingList.get(i).name + "\t" + waitingList.get(i).age + "\t" +
+                    waitingList.get(i).gender + "\t" + waitingList.get(i).food);
         }
         System.out.println("//---------------------------------------------//");
     }
@@ -433,12 +462,12 @@ class Customer {
     String name;
     int age;
     String gender;
-    String order;
+    Food food;
 
-    public Customer(String name, int age, String gender, String order) {
+    public Customer(String name, int age, String gender, Food food) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.order = order;
+        this.food = food;
     }
 }
