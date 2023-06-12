@@ -57,7 +57,7 @@ public class LocationController {
             Parent root = loader.load();
 
             InGameController igc = loader.getController();
-            igc.setLocationName();
+            igc.firstLoad();
             
             //Parent root = FXMLLoader.load(getClass().getResource("InGame_Scene.fxml"));
             stage = (Stage)((Node) e.getSource()).getScene().getWindow();

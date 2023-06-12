@@ -8,110 +8,96 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.InGameController">
    <children>
-      <AnchorPane fx:id="TownHallDefaultPane" disable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="TownHallPane" disable="true" layoutX="20.0" layoutY="20.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <AnchorPane fx:id="imageAnchor" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="imageAnchor31" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="movebtn1" layoutX="90.0" layoutY="138.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn1" layoutX="230.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn3" layoutX="510.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn2" layoutX="370.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back" layoutX="650.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button fx:id="toCafeBtn" layoutX="349.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoCafe" prefHeight="35.0" prefWidth="140.0" text="Cafe Deux Magots" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toJadeGardenBtn" layoutX="570.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoJadeGarden" prefHeight="35.0" prefWidth="140.0" text="Jade Garden" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="570.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toHotelBtn" layoutX="773.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoHotel" prefHeight="35.0" prefWidth="140.0" text="Morioh Grand Hotel" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="138.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="310.0">
                <children>
-                  <Button layoutX="95.0" layoutY="129.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn11" layoutX="235.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn31" layoutX="515.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn21" layoutX="375.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back1" layoutX="655.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="nextDayBtn" layoutX="570.0" layoutY="138.0" mnemonicParsing="false" onAction="#toNextDay" prefHeight="35.0" prefWidth="200.0" text="Advance to the Next Day" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="540.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="saveBtn" layoutX="235.0" layoutY="138.0" mnemonicParsing="false" onAction="#saveGame" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="exitBtn" layoutX="829.0" layoutY="138.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="35.0" prefWidth="140.0" text="Exit" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="138.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="42.0" prefHeight="45.0" text="Location Action:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="TownHallAlternativePane" disable="true" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="CafePane" disable="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <AnchorPane fx:id="imageAnchor2" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="imageAnchor311" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="movebtn12" layoutX="90.0" layoutY="138.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn11" layoutX="230.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn31" layoutX="510.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn21" layoutX="370.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back1" layoutX="650.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button fx:id="toCafeBtn1" layoutX="188.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoPL" prefHeight="35.0" prefWidth="140.0" text="Polnareff Land" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toJadeGardenBtn1" layoutX="500.0" layoutY="137.0" mnemonicParsing="false" onAction="#gotoSG" prefHeight="35.0" prefWidth="140.0" text="Savage Garden" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toHotelBtn1" layoutX="704.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoJadeGarden" prefHeight="35.0" prefWidth="140.0" text="Jade Garden" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toTownHallBtn" layoutX="952.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoTownHall" prefHeight="35.0" prefWidth="140.0" text="Town Hall" AnchorPane.bottomAnchor="138.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="137.0" />
+                  <Button fx:id="exitBtn111" layoutX="400.0" layoutY="215.0" mnemonicParsing="false" onAction="#gotoBacktrack" prefHeight="35.0" prefWidth="140.0" text="Backtrack" />
+                  <Button fx:id="exitBtn1111" layoutX="740.0" layoutY="215.0" mnemonicParsing="false" onAction="#gotoForward" prefHeight="35.0" prefWidth="140.0" text="Forword" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
+                  <Button fx:id="exitBtn11111" layoutX="570.0" layoutY="215.0" mnemonicParsing="false" onAction="#gotoTownHall" prefHeight="35.0" prefWidth="140.0" text="Town Hall" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="310.0">
                <children>
-                  <Button layoutX="95.0" layoutY="129.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn112" layoutX="235.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn312" layoutX="515.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn212" layoutX="375.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back12" layoutX="655.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="nextDayBtn1" layoutX="473.0" layoutY="138.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="35.0" prefWidth="140.0" text="View Menu" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="saveBtn1" layoutX="204.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoOrderList" prefHeight="35.0" prefWidth="239.0" text="View Waiting and Order Processing List" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="exitBtn1" layoutX="669.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoMB" prefHeight="35.0" prefWidth="140.0" text="View Sales Info" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="42.0" prefHeight="45.0" text="Location Action:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="exitBtn11" layoutX="839.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoMM" prefHeight="35.0" prefWidth="140.0" text="Milagro Man" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="138.0" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="TownHallParallelPane" disable="true" layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="JadeGardenPane" disable="true" layoutX="10.0" layoutY="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <AnchorPane fx:id="imageAnchor21" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="imageAnchor3111" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="movebtn121" layoutX="90.0" layoutY="138.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn112" layoutX="230.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn312" layoutX="510.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn212" layoutX="370.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back12" layoutX="650.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button fx:id="toCafeBtn11" layoutX="188.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoCafe" prefHeight="35.0" prefWidth="140.0" text="Polnareff Land" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toJadeGardenBtn11" layoutX="500.0" layoutY="137.0" mnemonicParsing="false" onAction="#gotoSG" prefHeight="35.0" prefWidth="140.0" text="Savage Garden" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toHotelBtn11" layoutX="704.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoJadeGarden" prefHeight="35.0" prefWidth="140.0" text="Jade Garden" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="toTownHallBtn1" layoutX="952.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoTownHall" prefHeight="35.0" prefWidth="140.0" text="Town Hall" AnchorPane.bottomAnchor="138.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="137.0" />
+                  <Button fx:id="exitBtn1111" layoutX="400.0" layoutY="215.0" mnemonicParsing="false" onAction="#gotoBacktrack" prefHeight="35.0" prefWidth="140.0" text="Backtrack" />
+                  <Button fx:id="exitBtn11111" layoutX="740.0" layoutY="215.0" mnemonicParsing="false" onAction="#gotoForward" prefHeight="35.0" prefWidth="140.0" text="Forword" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
+                  <Button fx:id="exitBtn111111" layoutX="570.0" layoutY="215.0" mnemonicParsing="false" onAction="#gotoTownHall" prefHeight="35.0" prefWidth="140.0" text="Town Hall" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="310.0">
                <children>
-                  <Button layoutX="95.0" layoutY="129.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn1121" layoutX="235.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn3121" layoutX="515.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn2121" layoutX="375.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back121" layoutX="655.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="CafePane" disable="true" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
-         <children>
-            <AnchorPane fx:id="imageAnchor1" prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Button fx:id="movebtn11" layoutX="90.0" layoutY="138.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn11" layoutX="230.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn31" layoutX="510.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn21" layoutX="370.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back1" layoutX="650.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="30.0" prefHeight="45.0" text="Move to:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button fx:id="nextDayBtn11" layoutX="473.0" layoutY="138.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="35.0" prefWidth="140.0" text="View Menu" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="saveBtn11" layoutX="204.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoOrderList" prefHeight="35.0" prefWidth="239.0" text="View Waiting and Order Processing List" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="exitBtn11" layoutX="669.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoMB" prefHeight="35.0" prefWidth="140.0" text="View Sales Info" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="138.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="570.0" layoutY="42.0" prefHeight="45.0" text="Location Action:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="310.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="310.0">
-               <children>
-                  <Button layoutX="95.0" layoutY="129.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn111" layoutX="235.0" layoutY="138.0" mnemonicParsing="false" onAction="#defaultAction" prefHeight="35.0" prefWidth="140.0" text="1" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn311" layoutX="515.0" layoutY="138.0" mnemonicParsing="false" onAction="#parallelAction" prefHeight="35.0" prefWidth="140.0" text="3" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="btn211" layoutX="375.0" layoutY="138.0" mnemonicParsing="false" onAction="#alternateAction" prefHeight="35.0" prefWidth="140.0" text="2" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="138.0" />
-                  <Button fx:id="back11" layoutX="655.0" layoutY="138.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="140.0" text="Save" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="138.0" />
+                  <Button fx:id="exitBtn111" layoutX="839.0" layoutY="138.0" mnemonicParsing="false" onAction="#gotoMM" prefHeight="35.0" prefWidth="140.0" text="Milagro Man" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="138.0" />
                </children>
             </AnchorPane>
          </children>
@@ -119,7 +105,12 @@
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b2" height="100.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Label fx:id="locationTxt" alignment="CENTER" text="Map Selection" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <Label fx:id="locationTxt" prefHeight="60.0" prefWidth="671.0" text="Map Selection" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="640.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="dayTxt" alignment="CENTER_RIGHT" layoutX="539.0" layoutY="20.0" text="Map Selection" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="640.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font size="30.0" />
                </font>
