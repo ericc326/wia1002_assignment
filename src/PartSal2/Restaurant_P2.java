@@ -23,7 +23,7 @@ import java.util.Random;
 public class Restaurant_P2{
     private String place;
     private String name;
-     private double price;
+    private double price;
     private Map<String, Double> menu;
     HashMap<String,List<String>> waitingList;
 
