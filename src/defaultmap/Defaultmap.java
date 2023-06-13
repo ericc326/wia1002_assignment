@@ -1224,7 +1224,7 @@ public class Defaultmap implements Serializable{
         hasMadeBackMove = false;
     }
 
-    private static void handleAdvanceToNextDay() {
+    public static void handleAdvanceToNextDay() {
         currentDay++;
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {

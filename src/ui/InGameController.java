@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 
+import PearlJam.Restaurant;
 import defaultmap.Defaultmap;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,21 +16,28 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class InGameController extends Application{
+public class InGameController extends Application {
     private Stage stage;
     private Scene scene;
 
     @FXML
-    Label locationTxt;
-    AnchorPane TownHallPane, CafePane, JadeGardenPane, HotelPane, TTPane, PolLandPane, JoestarMansionPane, AngeloPane, SGMPane, PrisonPane, 
-        LibeccioPane, VineyardPane, DIOsMansionPane, SavageGardenPane, PassionePane;
-    Button nextDayBtn, backBtn, saveBtn, exitBtn, forwardBtn, toTownHallBtn, toCafeBtn, toTTBtn, toJadeGardenBtn, toHotelBtn, 
-        toPolLandBtn, toJoestarMansionBtn, toAngeloBtn, toSGMBtn, toPrisonBtn, toLibeccioBtn, toVineyardBtn, toDIOsMansionBtn,
-        toSavageGardenBtn, toPassioneBtn;
+    Label locationTxt, dayTxt;
+    @FXML
+    AnchorPane TownHallPane, CafePane, JadeGardenPane, HotelPane, TTPane, PolLandPane, JoestarMansionPane, AngeloPane,
+            SGMPane, PrisonPane,
+            LibeccioPane, VineyardPane, DIOsMansionPane, SavageGardenPane, PassionePane;
+    /*
+     * Button nextDayBtn, backBtn, saveBtn, exitBtn, forwardBtn, toTownHallBtn,
+     * toCafeBtn, toTTBtn, toJadeGardenBtn, toHotelBtn,
+     * toPolLandBtn, toJoestarMansionBtn, toAngeloBtn, toSGMBtn, toPrisonBtn,
+     * toLibeccioBtn, toVineyardBtn, toDIOsMansionBtn,
+     * toSavageGardenBtn, toPassioneBtn;
+     */
 
-    public InGameController(){}
+    public InGameController() {
+    }
 
-    public static void startScene(Stage stage){
+    public static void startScene(Stage stage) {
         InGameController n = new InGameController();
         try {
             n.start(stage);
@@ -38,7 +46,7 @@ public class InGameController extends Application{
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void start(Stage arg0) throws Exception {
         try {
@@ -68,7 +76,7 @@ public class InGameController extends Application{
     public void backToMenu(ActionEvent e) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Main_Scene.fxml"));
-            stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -78,68 +86,130 @@ public class InGameController extends Application{
         }
     }
 
-    public void setLocationName(){
-        locationTxt.setText(Defaultmap.currentLocation.getName()+" Day:"+Defaultmap.currentDay);
+    public void firstLoad() {
+        locationTxt.setText(Defaultmap.currentLocation.getName());
+        dayTxt.setText("Day: "+Defaultmap.currentDay);
+        TownHallPane.setVisible(true);
+        TownHallPane.setDisable(false);
     }
 
-    public void changeLocation(String LocationName){
+    public void changeLocation(String LocationName) {
         locationTxt.setText(Defaultmap.currentLocation.getName());
         int adjCount = Defaultmap.currentLocation.getAdjacentLocations().size();
     }
 
-    /*public void changePane(String locationName){
-        switch (locationName) {
-            case value:
-                
-                break;
-        
-            default:
-                break;
-        }
-    }*/
+    /*
+     * public void changePane(String locationName){
+     * switch (locationName) {
+     * case value:
+     * 
+     * break;
+     * 
+     * default:
+     * break;
+     * }
+     * }
+     */
 
-    private static void gotoPR() {
+    public void gotoPR(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoSG() {
+    public void gotoSG(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoDIOsMansion() {
+    public void gotoDIOsMansion(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoVineyard() {
+    public void gotoVineyard(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoLibeccio() {
+    public void gotoLibeccio(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoGDSP() {
+    public void gotoGDSP(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoSGM() {
+    public void gotoSGM(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoAR() {
+    public void gotoAR(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoJM() {
+    public void gotoJM(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoPL() {
+    public void gotoPL(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoTT() {
+    public void gotoTT(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoHotel() {
+    public void gotoHotel(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoJadeGarden() {
+    public void gotoJadeGarden(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void gotoCafe() {
+    public void gotoCafe(ActionEvent e) {
+        System.out.println("hello");
     }
 
-    private static void displayTownHall() {
+    public void gotoTownHall(ActionEvent e) {
+        System.out.println("hello");
+    }
+
+    public void toNextDay(ActionEvent e) {
+        System.out.println("next day");
+        Defaultmap.handleAdvanceToNextDay();
+        dayTxt.setText("Day: "+Defaultmap.currentDay);
+        gotoTownHall(e);
+    }
+
+    public void saveGame(ActionEvent e) {
+        System.out.println("save");
+        Defaultmap.handleSave();
+    }
+
+    public void exitGame(ActionEvent e) {
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
+        System.exit(0);
+    }
+
+    public void gotoBacktrack(ActionEvent e) {
+        System.out.println("backtrack");
+    }
+    public void gotoForward(ActionEvent e) {
+        System.out.println("forward");
+    }
+
+    public void openMenu(ActionEvent e) {
+        Restaurant resTemp = new Restaurant().getResByName(Defaultmap.currentLocation.getName());
+        resTemp.viewMenubyResName(resTemp.getRestaurantName());
+    }
+
+    public void gotoOrderList(ActionEvent e) {
+        System.out.println("order");
+    }
+
+    public void gotoMB(ActionEvent e) {
+        System.out.println("Moody Blues");
+    }
+
+    public void gotoMM(ActionEvent e) {
+        System.out.println("Milagro Man");
     }
 }
