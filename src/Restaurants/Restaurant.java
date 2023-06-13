@@ -1,4 +1,4 @@
-package PearlJam;
+package Restaurants;
 
 import java.io.Serializable;
 import java.util.*;
@@ -11,15 +11,10 @@ public class Restaurant implements Serializable {
     static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Libeccio, SavageGarden;
     public static List<Restaurant> resList;
     public static List<Sale> saleList;
-    List<Customer> waitingList;
+    public static List<Customer> waitingList;
     int currentDayNumber;
 
     // Constructor
-    public Restaurant(String RestaurantName, List<Customer> waitingList, int Day) {
-        this.RestaurantName = RestaurantName;
-        this.waitingList = waitingList;
-    }
-
     public Restaurant(String RestaurantName, List<Food> Menu) {
         this.RestaurantName = RestaurantName;
         this.Menu = Menu;
@@ -46,23 +41,21 @@ public class Restaurant implements Serializable {
     public void setMenu(List<Food> Menu) {
         this.Menu = Menu;
     }
+    public static void setWaitingList(List<Customer> waitingList){
+        Restaurant.waitingList = waitingList;
+    }
 
     public static void InitializeRestaurant() {
         System.out.println("\nLOADING...\n");
         Restaurant resTemp = new Restaurant();
-        resTemp.InitializeRestaurantProcess(null);
+        resTemp.InitializeRestaurantProcess();
     }
 
-    public String[] InitializeRestaurantProcess() {
-<<<<<<< HEAD
-       
-        // Create a HashMap to store the restaurant menu
-    Map<String, List<String>> restaurantMenu = new HashMap<>();
-=======
+    public String[] InitializeRestaurantProcess(Void v) {
         return null;
     }
 
-    public void InitializeRestaurantProcess(Void s) {
+    public void InitializeRestaurantProcess() {
         // Jade Garden
         /*
          * ○ Braised Chicken in Black Bean Sauce ($15.00)
@@ -72,86 +65,60 @@ public class Restaurant implements Serializable {
          * ○ Scrambled Egg White with Milk ($10.00)
          */
         List<Food> foods1 = new ArrayList<Food>();
->>>>>>> f2d89c3cfdd737280f5c947b70f0eb4c6943c9aa
 
-    // Jade Garden
-    List<String> jadeGardenMenu = Arrays.asList(
-            "Braised Chicken in Black Bean Sauce ($15.00)",
-            "Braised Goose Web with Vermicelli ($21.00)",
-            "Deep-fried Hiroshima Oysters ($17.00)",
-            "Poached Tofu with Dried Shrimps ($12.00)",
-            "Scrambled Egg White with Milk ($10.00)"
-    );
-    restaurantMenu.put("Jade Garden", jadeGardenMenu);
+        Food BraisedChickenInBlackBeanSauce = new Food("Braised Chicken in Black Bean Sauce", 15.00);
+        Food BraisedGooseWebWithVermicelli = new Food("Braised Goose Web with Vermicelli", 21.00);
+        Food DeepFriedHiroshimaOysters = new Food("Deep Fried Hiroshima Oysters", 17.00);
+        Food PoachedTofuWithDriedShrimp = new Food("Poached Tofu with Dried Shrimp", 12.00);
+        Food ScrambledEggWhiteWithMilk = new Food("ScrambledEggWhiteWithMilk", 10.00);
 
-    // Cafe Deux Magots
-    List<String> cafeDeuxMagotsMenu = Arrays.asList(
-            "Sampling Matured Cheese Platter ($23.00)",
-            "Spring Lobster Salad ($35.00)",
-            "Spring Organic Omelette ($23.00)",
-            "Truffle-flavoured Poultry Supreme ($34.00)",
-            "White Asparagus ($26.00)"
-    );
-    restaurantMenu.put("Cafe Deux Magots", cafeDeuxMagotsMenu);
+        foods1.add(BraisedChickenInBlackBeanSauce);
+        foods1.add(BraisedGooseWebWithVermicelli);
+        foods1.add(DeepFriedHiroshimaOysters);
+        foods1.add(PoachedTofuWithDriedShrimp);
+        foods1.add(ScrambledEggWhiteWithMilk);
 
-    // Trattoria Trussardi
-    List<String> trattoriaTrussardiMenu = Arrays.asList(
-            "Caprese Salad ($10.00)",
-            "Creme caramel ($6.50)",
-            "Lamb Chops with Apple Sauce ($25.00)",
-            "Spaghetti alla Puttanesca ($15.00)"
-    );
-    restaurantMenu.put("Trattoria Trussardi", trattoriaTrussardiMenu);
+        Restaurant.JadeGarden = new Restaurant("Jade Garden", foods1);
 
-    // Liberrio
-    List<String> liberrioMenu = Arrays.asList(
-            "Formaggio ($12.50)",
-            "Ghiaccio ($1.01)",
-            "Melone ($5.20)",
-            "Prosciutto and Pesci ($20.23)",
-            "Risotto ($13.14)",
-            "Zucchero and Sale ($0.60)"
-    );
-    restaurantMenu.put("Liberrio", liberrioMenu);
+        // Cafe Deux Magots
+        /*
+         * ○ Sampling Matured Cheese Platter ($23.00)
+         * ○ Spring Lobster Salad ($35.00)
+         * ○ Spring Organic Omelette ($23.00)
+         * ○ Truffle-flavoured Poultry Supreme ($34.00)
+         * ○ White Asparagus ($26.00)
+         */
+        List<Food> foods2 = new ArrayList<Food>();
 
-    // Savage Garden
-    List<String> savageGardenMenu = Arrays.asList(
-            "Abbacchio’s Tea ($1.00)",
-            "DIO’s Bread ($36.14)",
-            "Giorno’s Donuts ($6.66)",
-            "Joseph’s Tequila ($35.00)",
-            "Kakyoin’s Cherry ($3.50)",
-            "Kakyoin’s Porridge ($4.44)"
-    );
-    restaurantMenu.put("Savage Garden", savageGardenMenu);
+        Food SamplingMaturedCheesePlatter = new Food("Sampling Matured Cheese Platter", 23.00);
+        Food SpringLobsterSalad = new Food("Spring Lobster Salad", 35.00);
+        Food SpringOrganicOmelette = new Food("Spring Organic Omelette", 23.00);
+        Food TruffleFlavouredPoultrySupreme = new Food("Truffle-flavoured Poultry Supreme", 34.00);
+        Food WhiteAsparagus = new Food("White Asparagus", 26.00);
 
-    // Get a random menu item from the restaurantMenu HashMap
-    List<String> keys = new ArrayList<>(restaurantMenu.keySet());
-    Random random = new Random();
-    String randomKey = keys.get(random.nextInt(keys.size()));
-    List<String> randomValues = restaurantMenu.get(randomKey);
-    String randomMenuItem = randomValues.get(random.nextInt(randomValues.size()));
+        foods2.add(SamplingMaturedCheesePlatter);
+        foods2.add(SpringLobsterSalad);
+        foods2.add(SpringOrganicOmelette);
+        foods2.add(TruffleFlavouredPoultrySupreme);
+        foods2.add(WhiteAsparagus);
 
-    System.out.println("Random Menu Item:");
-    System.out.println("Restaurant: " + randomKey);
-    System.out.println("Menu Item: " + randomMenuItem);
+        Restaurant.CafeDeuxMagots = new Restaurant("Cafe Deux Magots", foods2);
 
-    // Split the menu item into name and price
-    String[] menuItemParts = randomMenuItem.split("\\s+\\(");
-    String menuItemName = menuItemParts[0];
-    String menuItemPrice = menuItemParts[1].replaceAll("\\)", "");
+        // Trattoria Trussardi
+        /*
+         * ○ Caprese Salad ($10.00)
+         * ○ Creme caramel ($6.50)
+         * ○ Lamb Chops with Apple Sauce ($25.00)
+         * ○ Spaghetti alla Puttanesca ($15.00)
+         */
 
-    System.out.println("Separated Menu Item:");
-    System.out.println("Restaurant: " + randomKey);
-    System.out.println("Menu Item: " + menuItemName);
-    System.out.println("Price: " + menuItemPrice);
+        List<Food> foods3 = new ArrayList<Food>();
 
-    String[] randomMenu = {randomKey, menuItemName, menuItemPrice};
+        Food CapreseSalad = new Food("Caprese Salad", 10.00);
+        Food CremeCaramel = new Food("Creme caramel", 6.50);
+        Food LambChopsWithAppleSauce = new Food("Lamb Chops with Apple Sauce", 25.00);
+        Food SpaghettiAllaPuttanesca = new Food("Spaghetti alla Puttanesca", 15.00);
 
-<<<<<<< HEAD
-    return randomMenu;
-    
-=======
         foods3.add(CapreseSalad);
         foods3.add(CremeCaramel);
         foods3.add(LambChopsWithAppleSauce);
@@ -224,7 +191,6 @@ public class Restaurant implements Serializable {
         resList.add(SavageGarden);
         //System.out.println(resList.toString()); // <-check
         System.out.println("\nLOADING...\n");
->>>>>>> f2d89c3cfdd737280f5c947b70f0eb4c6943c9aa
     }
 
     public Restaurant getResByName(String RestaurantName) {
@@ -248,16 +214,20 @@ public class Restaurant implements Serializable {
     public static Food getRandomFoodByRestaurantName(String RestaurantName) {
         Restaurant resTemp = new Restaurant();
         resTemp = resTemp.getResByName(RestaurantName);
-
         List<Food> foodList = resTemp.getMenu();
 
         Random rand = new Random();
-
         int randomNum = rand.nextInt((foodList.size() - 1) + 1);
 
         // System.out.println(foodList.get(randomNum).getFoodName());
 
         return foodList.get(randomNum);
+    }
+
+    public static Restaurant getRandomRestaurant(){
+        Random rand = new Random();
+        int randomNum = rand.nextInt((resList.size() - 1) + 1);
+        return resList.get(randomNum);
     }
 
     public void removeFoodByName(String FoodName) {
@@ -283,7 +253,7 @@ public class Restaurant implements Serializable {
     // Jade Garden rule: Process customers in pairs (first and last, second and
     // second-last, etc.)
     public void processJadeGarden() {
-        List<Customer> tempList = waitingList;
+        List<Customer> tempList = Customer.JadeList;
         int start = 0;
         int end = tempList.size() - 1;
 
@@ -311,11 +281,11 @@ public class Restaurant implements Serializable {
     public void processCafeDeuxMagots() {
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<Customer>();
 
-        for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).age == -1) {
-                tempList2.add(waitingList.get(i));
-            } else if (waitingList.get(i).age > -1) {
-                tempList.add(waitingList.get(i));
+        for (int i = 0; i < Customer.CafeList.size(); i++) {
+            if (Customer.CafeList.get(i).age == -1) {
+                tempList2.add(Customer.CafeList.get(i));
+            } else if (Customer.CafeList.get(i).age > -1) {
+                tempList.add(Customer.CafeList.get(i));
             }
         }
         tempList.sort(Comparator.comparingInt(c -> c.age));
@@ -350,11 +320,11 @@ public class Restaurant implements Serializable {
     public void processTrattoriaTrussardi() {
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<>();
 
-        for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).age == -1) {
-                tempList2.add(waitingList.get(i));
-            } else if (waitingList.get(i).age > -1) {
-                tempList.add(waitingList.get(i));
+        for (int i = 0; i < Customer.TTList.size(); i++) {
+            if (Customer.TTList.get(i).age == -1) {
+                tempList2.add(Customer.TTList.get(i));
+            } else if (Customer.TTList.get(i).age > -1) {
+                tempList.add(Customer.TTList.get(i));
             }
         }
 
@@ -373,8 +343,8 @@ public class Restaurant implements Serializable {
             }
         }
 
-        System.out.println(males.isEmpty());
-        System.out.println(females.isEmpty());
+        //System.out.println(males.isEmpty());
+        //System.out.println(females.isEmpty());
 
         while (!males.isEmpty() || !females.isEmpty()) {
             if (!males.isEmpty()) {
@@ -434,7 +404,7 @@ public class Restaurant implements Serializable {
     // current day number
     public void processLibeccio(int currentDayNumber) {
         this.currentDayNumber = currentDayNumber;
-        List<Customer> tempList = waitingList;
+        List<Customer> tempList = Customer.LibeccioList;
 
         Stack<Customer> tempStack = new Stack<>();
 
@@ -454,7 +424,7 @@ public class Restaurant implements Serializable {
     // number
     public void processSavageGarden(int currentDayNumber) {
         this.currentDayNumber = currentDayNumber;
-        List<Customer> tempList = waitingList;
+        List<Customer> tempList = Customer.SavageList;
 
         Stack<Customer> tempQ = new Stack<>();
 
@@ -474,32 +444,18 @@ public class Restaurant implements Serializable {
 
     private void serveCustomer(Customer customer) {
         System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
-        Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
-                customer.food.getFoodPrice());
-        Sale.SaleList.add(sale);
+        //Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
+        //        customer.food.getFoodPrice());
+        //Sale.SaleList.add(sale);
         // Perform serving operations
     }
 
-    void showWaitingList(String RestaurantName) {
-        System.out.println("//---------------------------------------------//");
+    public void showWaitingList() {
+        System.out.println("\n//---------------------------------------------//");
         for (int i = 0; i < waitingList.size(); i++) {
             System.out.println(waitingList.get(i).name + "\t" + waitingList.get(i).age + "\t" +
                     waitingList.get(i).gender + "\t" + waitingList.get(i).food);
         }
-        System.out.println("//---------------------------------------------//");
-    }
-}
-
-class Customer {
-    String name;
-    int age;
-    String gender;
-    Food food;
-
-    public Customer(String name, int age, String gender, Food food) {
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.food = food;
+        System.out.println("//---------------------------------------------//\n");
     }
 }

@@ -7,8 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Stack;
-import PearlJam.Restaurant;
-import PearlJam.Sale;
+
+import Restaurants.Restaurant;
+import Restaurants.Sale;
 import defaultmap.map.Location;
 
 

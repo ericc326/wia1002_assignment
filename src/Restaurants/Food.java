@@ -1,10 +1,11 @@
-package PearlJam;
+package Restaurants;
 
 import java.io.Serializable;
 
 public class Food implements Serializable{
     String FoodName;
     Double FoodPrice;
+    int frequency;
 
     //constructors
     public Food(String FoodName, Double FoodPrice){
@@ -19,6 +20,9 @@ public class Food implements Serializable{
     public Double getFoodPrice(){
         return FoodPrice;
     }
+    public int getFrequency() {
+        return frequency;
+    }
 
     //setters
     public void setFoodName(String FoodName){
@@ -26,5 +30,8 @@ public class Food implements Serializable{
     }
     public void setFoodPrice(Double FoodPrice){
         this.FoodPrice=FoodPrice;
+    }
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 }

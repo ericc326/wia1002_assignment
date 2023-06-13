@@ -2,7 +2,7 @@ package ui;
 
 import java.io.IOException;
 
-import PearlJam.Restaurant;
+import Restaurants.Restaurant;
 import defaultmap.Defaultmap;
 import javafx.application.Application;
 import javafx.event.ActionEvent;

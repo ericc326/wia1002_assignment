@@ -1,4 +1,4 @@
-package PearlJam;
+package Restaurants;
 
 import java.util.*;
 <<<<<<< HEAD
@@ -18,20 +18,22 @@ public class Main {
         }
 =======
 import PartSal2.*;
-import PearlJam.*;
+import Restaurants.*;
+import defaultmap.Defaultmap;
 
-public class Main {
-    public static void main(String[] args) {
+public class ProcessOrder {
+    public static void doProcess() {
         Restaurant.InitializeRestaurant();
         //Restaurant.getRandomFoodByRestaurantName("Jade Garden");
 >>>>>>> f2d89c3cfdd737280f5c947b70f0eb4c6943c9aa
 
-        Order.getAllResidentAsCustomer("Jade Garden");
+        Customer.getAllResidentAsCustomer();
+        Customer.assignFood();
 
-        Restaurant restaurant = new Restaurant(null, Order.waitingList, 1);
+        Restaurant restaurant = new Restaurant();
+        Restaurant.setWaitingList(Customer.waitingList);
 
-        //restaurant.showWaitingList(null);
-
+        restaurant.showWaitingList();
         System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
 
@@ -42,9 +44,9 @@ public class Main {
         restaurant.processTrattoriaTrussardi();
 
         System.out.println("\nProcessing Libeccio rule:");
-        restaurant.processLibeccio(2); // Assuming the current day number is 3
+        restaurant.processLibeccio(Defaultmap.currentDay);
 
         System.out.println("\nProcessing Savage Garden rule:");
-        restaurant.processSavageGarden(4); // Assuming the current day number is 4*/
+        restaurant.processSavageGarden(Defaultmap.currentDay);
     }
 }
