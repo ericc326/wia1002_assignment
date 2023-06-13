@@ -5,6 +5,7 @@ import java.io.IOException;
 import defaultmap.Defaultmap;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -20,6 +21,7 @@ public class MainController extends Application {
     private Stage stage;
     private Scene scene;
 
+    @FXML
     Label locationLabel;
     Button startGameButton, loadGameButton, exiButton;
 
@@ -48,6 +50,7 @@ public class MainController extends Application {
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e1) {
             // TODO Auto-generated catch block

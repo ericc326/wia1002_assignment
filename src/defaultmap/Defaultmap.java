@@ -4,12 +4,17 @@
  */
 package defaultmap;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 
-import PearlJam.*;
+import PearlJam.MilagroMan;
+import PearlJam.MoodyBlues;
+import PearlJam.Restaurant;
 
 /**
  *
@@ -1219,7 +1224,7 @@ public class Defaultmap implements Serializable{
         hasMadeBackMove = false;
     }
 
-    private static void handleAdvanceToNextDay() {
+    public static void handleAdvanceToNextDay() {
         currentDay++;
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {

@@ -6,6 +6,7 @@ package PearlJam;
 //package GroupAssignment;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Sale implements Serializable{
     private String food;
     private int quantity;
     private double totalPrice;
+    public static List<Sale> SaleList;
     
     public Sale(int day, String food, int quantity, double totalPrice) {
         this.day = day;

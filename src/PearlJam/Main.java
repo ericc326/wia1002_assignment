@@ -1,6 +1,7 @@
 package PearlJam;
 
 import java.util.*;
+<<<<<<< HEAD
 
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +16,21 @@ public class Main {
                 waitingList.add(new Customer(rP2.Name.get(i), Integer.parseInt(rP2.Age.get(i)), rP2.Gender.get(i), null));   
             }
         }
+=======
+import PartSal2.*;
+import PearlJam.*;
 
-        Restaurant restaurant = new Restaurant(null, waitingList, 1);
+public class Main {
+    public static void main(String[] args) {
+        Restaurant.InitializeRestaurant();
+        //Restaurant.getRandomFoodByRestaurantName("Jade Garden");
+>>>>>>> f2d89c3cfdd737280f5c947b70f0eb4c6943c9aa
 
-        restaurant.showWaitingList(null);
+        Order.getAllResidentAsCustomer("Jade Garden");
+
+        Restaurant restaurant = new Restaurant(null, Order.waitingList, 1);
+
+        //restaurant.showWaitingList(null);
 
         System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
@@ -33,6 +45,6 @@ public class Main {
         restaurant.processLibeccio(2); // Assuming the current day number is 3
 
         System.out.println("\nProcessing Savage Garden rule:");
-        restaurant.processSavageGarden(4); // Assuming the current day number is 4
+        restaurant.processSavageGarden(4); // Assuming the current day number is 4*/
     }
 }
