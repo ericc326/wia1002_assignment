@@ -1,72 +1,65 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package defaultmap;
-
-import java.io.*;
-import java.util.*;
-import Restaurants.*;
-import extrafeatures.*;
-import PartSal2.*;
+package LatestMap_Combined;
 
 /**
  *
- * @author Asus
+ * @author USER
+ */
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
-public class Defaultmap implements Serializable {
-    public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
-    public static map.Location currentLocation;
-    public static int currentDay;
-    public static map defaultMap, parallelMap, alternateMap, gameMap;
-    public static String saveID = "gamejojo";
-    private static Stack<map.Location> locationHistory;
-    private static Stack<map.Location> ForwardLocationHistory;
-    private static boolean hasMadeBackMove = false;
-    private static Scanner scanner;
-    private static Residents r = new Residents();
-    // private static map defaultMap;
-    // private static map parallelMap;
-    // private static map alternateMap;
+import java.io.*;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Stack;
+
+/**
+ *
+ * @author
+ */
+public class LATESTMAP extends Residents {
 
     public static void main(String[] args) {
-        initializeGame();
-        playGame();
+
+        LATESTMAP mayor = new LATESTMAP();
+        mayor.initializeGame();
+        mayor.playGame();
     }
 
-    public static void start() {
-        initializeGame();
-        playGame();
-    }
+    private static map.Location currentLocation;
+    private Stack<map.Location> locationHistory;
+    private Stack<map.Location> ForwardLocationHistory;
+    private int currentDay;
+    private map gameMap;
+    private boolean hasMadeBackMove = false;
+    private Scanner scanner;
+    private map defaultMap;
+    private map parallelMap;
+    private map alternateMap;
 
-    private static void initializeGame() {
+    private void initializeGame() {
         gameMap = new map();
         currentLocation = gameMap.townHall;
         locationHistory = new Stack<>();
         ForwardLocationHistory = new Stack<>();
         currentDay = 1;
-        r.readForMenu(currentDay);
+        readForMenu(currentDay);
         initializeMaps();
         showMainMenu();
     }
 
-    public static void initializeGamePublic() {
-        gameMap = new map();
-        currentLocation = gameMap.townHall;
-        locationHistory = new Stack<>();
-        ForwardLocationHistory = new Stack<>();
-        currentDay = 1;
-        initializeMaps();
-    }
-
-    private static void initializeMaps() {
+    private void initializeMaps() {
         defaultMap = new map();
         parallelMap = new map();
         alternateMap = new map();
     }
 
-    private static void showMainMenu() {
+    private void showMainMenu() {
         System.out.println("Welcome to the fantastical realm of JOJOLands.");
         System.out.println("[1] Start Game");
         System.out.println("[2] Load Game");
@@ -77,14 +70,15 @@ public class Defaultmap implements Serializable {
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
 
         switch (choice) {
             case 1:
                 selectMap();
                 break;
             case 2:
-                handleLoadGame();
+                loadGame();
                 // Continue the game from the loaded state
                 break;
             case 3:
@@ -99,9 +93,9 @@ public class Defaultmap implements Serializable {
 
     }
 
-    private static void selectMap() {
-        Restaurant.InitializeRestaurant();
+    private void selectMap() {
 
+        Restaurant.InitializeRestaurant();
         System.out.println("Select a map:");
         System.out.println("[1] Default Map");
         System.out.println("[2] Parallel Map");
@@ -112,7 +106,8 @@ public class Defaultmap implements Serializable {
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
 
         switch (choice) {
             case 1:
@@ -131,7 +126,7 @@ public class Defaultmap implements Serializable {
 
     }
 
-    private static void startGame(map selectedMap) {
+    private void startGame(map selectedMap) {
         gameMap = selectedMap;
 
         // Set the correct townHall based on the selected map
@@ -142,58 +137,25 @@ public class Defaultmap implements Serializable {
         } else if (selectedMap == alternateMap) {
             currentLocation = alternateMap.townHall2;
         }
-
-        currentDay = 1;
 
         playGame();
     }
 
-    public static void selectMap(map selectedMap) {
-        gameMap = selectedMap;
-
-        // Set the correct townHall based on the selected map
-        if (selectedMap == defaultMap) {
-            currentLocation = defaultMap.townHall;
-        } else if (selectedMap == parallelMap) {
-            currentLocation = parallelMap.townHall1;
-        } else if (selectedMap == alternateMap) {
-            currentLocation = alternateMap.townHall2;
-        }
-        System.out.println("check");
-    }
-
-    public static void loadGame() {
+    private void loadGame() {
         System.out.print("Enter the path of your save file: ");
         Scanner scanner = new Scanner(System.in);
         String filePath = scanner.nextLine();
     }
 
-    public static void handleLoad() {
-        gameSaveLoad data = (gameSaveLoad) gameSaveLoad.load(saveID);
-        Defaultmap.gameMap = data.gameMap;
-        Restaurant.resList = data.resList;
-        Restaurant.saleList = data.saleList;
-        Defaultmap.currentLocation = data.currentLocation;
-        Defaultmap.currentDay = data.currentDay;
-        Defaultmap.locationHistory = data.locationHistory;
-        Defaultmap.ForwardLocationHistory = data.ForwardLocationHistory;
-    }
-
-    public static void handleLoadGame() {
-        handleLoad();
-        playGame();
-    }
-
-    private static void playGame() {
+    private void playGame() {
         boolean exitGame = false;
+        currentDay = 1;
         while (!exitGame) {
-            System.out.println(
-                    "It's Day " + currentDay + " (" + getDayOfWeek(currentDay) + ") of our journey in JOJOLands!");
+            System.out.println("It's Day " + currentDay + " (" + getDayOfWeek(currentDay) + ") of our journey in JOJOLands!");
             System.out.println("Current Location: " + currentLocation.getName());
             System.out.println("[1] Move To:");
 
             LinkedList<map.Location.AdjacentLocation> adjacentLocations = currentLocation.getAdjacentLocations();
-            Defaultmap.adjacentLocations = adjacentLocations;
             for (int i = 0; i < adjacentLocations.size(); i++) {
                 map.Location.AdjacentLocation adjacentLocation = adjacentLocations.get(i);
                 String option = String.valueOf((char) ('A' + i));
@@ -207,9 +169,10 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void displayLocationOptions() {
+    private void displayLocationOptions() {
 
         // Check the current location and display options accordingly
+        String place = currentLocation.getName();
         switch (currentLocation.getName()) {
             case "Town Hall":
                 displayTownHallOptions();
@@ -263,7 +226,7 @@ public class Defaultmap implements Serializable {
     }
 
     // Display options for the Town Hall location
-    private static void displayTownHallOptions() {
+    private void displayTownHallOptions() {
 
         System.out.println("[2] Advance to Next Day");
         System.out.println("[3] Save Game");
@@ -325,11 +288,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
     // Display options for the Cafe Deux Magots location
-    private static void displayCafeOptions() {
+    private void displayCafeOptions() {
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
@@ -394,11 +358,13 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
     // Display options for the Jade Garden location
-    private static void displayJadeGardenOptions() {
+    private void displayJadeGardenOptions() {
+
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
@@ -463,11 +429,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
     // Display options for the Morioh Grand Hotel location
-    private static void displayHotelOptions() {
+    private void displayHotelOptions() {
 
         System.out.println("[2] View Resident Information");
         System.out.println("[3] The Hand");
@@ -518,6 +485,8 @@ public class Defaultmap implements Serializable {
             case "6":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -525,10 +494,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displayTTOptions() {
+    // Trattoria Trussardi
+    private void displayTTOptions() {
 
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
@@ -562,6 +533,7 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 handleViewMenu();
+                break;
             case "4":
                 handleViewSales();
                 break;
@@ -585,6 +557,8 @@ public class Defaultmap implements Serializable {
             case "8":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -592,10 +566,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displaPLOptions() {
+    // Polnareff Land
+    private void displaPLOptions() {
 
         System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
@@ -625,7 +601,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -642,6 +618,8 @@ public class Defaultmap implements Serializable {
             case "5":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -649,10 +627,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displayJMOptions() {
+    // Joestar mansion
+    private void displayJMOptions() {
 
         System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
@@ -683,7 +663,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -700,6 +680,8 @@ public class Defaultmap implements Serializable {
             case "5":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -707,10 +689,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displayAROptions() {
+    // Angelo Rock
+    private void displayAROptions() {
 
         System.out.println("[2] View Resident Information");
         System.out.println("[3] Red Hot Chili Pepper");
@@ -742,7 +726,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                r_clear();
                 handleRedHotChiliPepper();
                 break;
             case "4":
@@ -762,6 +746,8 @@ public class Defaultmap implements Serializable {
             case "6":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -769,27 +755,28 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displaySGMOptions() {
+    // San Giorgio Maggiore
+    private void displaySGMOptions() {
 
-        System.out.println("[2] Advance to Next Day");
+        System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
             System.out.println("[3] Back (" + previousLocation.getName() + ")");
-            if (hasMadeBackMove) {
-                if (!ForwardLocationHistory.isEmpty()) {
-                    map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[5] Back To Town Hall");
-                }
+            if (!ForwardLocationHistory.isEmpty()) {
+                map.Location forwardLocation = ForwardLocationHistory.peek();
+                System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                System.out.println("[5] Back To Town Hall");
             } else {
                 System.out.println("[4] Back To Town Hall");
             }
         } else {
             System.out.println("[3] Back To Town Hall");
         }
+
         System.out.print("\nSelect:");
 
         Scanner scanner = new Scanner(System.in);
@@ -800,10 +787,10 @@ public class Defaultmap implements Serializable {
                 handleMoveTo();
                 break;
             case "2":
-                handleAdvanceToNextDay();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -820,6 +807,8 @@ public class Defaultmap implements Serializable {
             case "5":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -827,27 +816,28 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displayGDSPOptions() {
+    // Green Dolphin Street Prison
+    private void displayGDSPOptions() {
 
-        System.out.println("[2] Advance to Next Day");
+        System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
             System.out.println("[3] Back (" + previousLocation.getName() + ")");
-            if (hasMadeBackMove) {
-                if (!ForwardLocationHistory.isEmpty()) {
-                    map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[5] Back To Town Hall");
-                }
+            if (!ForwardLocationHistory.isEmpty()) {
+                map.Location forwardLocation = ForwardLocationHistory.peek();
+                System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                System.out.println("[5] Back To Town Hall");
             } else {
                 System.out.println("[4] Back To Town Hall");
             }
         } else {
             System.out.println("[3] Back To Town Hall");
         }
+
         System.out.print("\nSelect:");
 
         Scanner scanner = new Scanner(System.in);
@@ -858,10 +848,10 @@ public class Defaultmap implements Serializable {
                 handleMoveTo();
                 break;
             case "2":
-                handleAdvanceToNextDay();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -878,6 +868,8 @@ public class Defaultmap implements Serializable {
             case "5":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -885,10 +877,12 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displayLibeccioOptions() {
+    private void displayLibeccioOptions() {
+
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
@@ -956,7 +950,8 @@ public class Defaultmap implements Serializable {
         System.out.println("======================================================================");
     }
 
-    private static void displayVineyardOptions() {
+    // Vineyard
+    private void displayVineyardOptions() {
         System.out.println("[2] View Resident Information");
         System.out.println("[3] Vento Aureo");
         if (!locationHistory.isEmpty()) {
@@ -983,12 +978,12 @@ public class Defaultmap implements Serializable {
                 handleMoveTo();
                 break;
             case "2":
-                handleAdvanceToNextDay();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
                 handleVentoAureo();
             case "4":
-                r.r_clear();
+                r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -1005,6 +1000,8 @@ public class Defaultmap implements Serializable {
             case "6":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -1012,21 +1009,21 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displayDIOsMansionOptions() {
+    // Dio mansion
+    private void displayDIOsMansionOptions() {
 
         System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
             System.out.println("[3] Back (" + previousLocation.getName() + ")");
-            if (hasMadeBackMove) {
-                if (!ForwardLocationHistory.isEmpty()) {
-                    map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[5] Back To Town Hall");
-                }
+            if (!ForwardLocationHistory.isEmpty()) {
+                map.Location forwardLocation = ForwardLocationHistory.peek();
+                System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
+                System.out.println("[5] Back To Town Hall");
             } else {
                 System.out.println("[4] Back To Town Hall");
             }
@@ -1047,7 +1044,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -1064,6 +1061,8 @@ public class Defaultmap implements Serializable {
             case "5":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
+                } else {
+                    System.out.println("Invalid input. Please try again.");
                 }
                 break;
             default:
@@ -1071,10 +1070,13 @@ public class Defaultmap implements Serializable {
                 break;
         }
 
-        System.out.println("======================================================================");
+        System.out.println(
+                "==================================================================================================================");
     }
 
-    private static void displaySGOptions() {
+    // Savage Garden
+    private void displaySGOptions() {
+
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
@@ -1142,7 +1144,8 @@ public class Defaultmap implements Serializable {
         System.out.println("======================================================================");
     }
 
-    private static void displayPROptions() {
+    // Passione Restaurant
+    private void displayPROptions() {
 
         System.out.println("[2] View Waiting List and Order Processing List");
         System.out.println("[3] View Menu");
@@ -1212,7 +1215,7 @@ public class Defaultmap implements Serializable {
         System.out.println("======================================================================");
     }
 
-    private static void handleMoveTo() {
+    private void handleMoveTo() {
         System.out.print("Enter the destination: ");
 
         Scanner scanner = new Scanner(System.in);
@@ -1234,16 +1237,16 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void moveToNextLocation(map.Location nextLocation) {
+    private void moveToNextLocation(map.Location nextLocation) {
         locationHistory.push(currentLocation);
         currentLocation = nextLocation;
         System.out.println("Moving to " + currentLocation.getName() + ".");
         hasMadeBackMove = false;
     }
 
-    public static void handleAdvanceToNextDay() {
+    private void handleAdvanceToNextDay() {
         currentDay++;
-        r.readForMenu(currentDay);
+        readForMenu(currentDay);
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {
             currentLocation = defaultMap.townHall;
@@ -1253,9 +1256,10 @@ public class Defaultmap implements Serializable {
             currentLocation = alternateMap.townHall2;
         }
         locationHistory.clear();
+
     }
 
-    private static String getDayOfWeek(int day) {
+    public String getDayOfWeek(int day) {
         String[] daysOfWeek = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
         if (day >= 1 && day <= 7) {
@@ -1265,30 +1269,20 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void handleSaveGame() {
-        // Define the file path where the console output will be saved
+    private void handleSaveGame() {
+        // Define the file path where the console output will be saved1
+
         String filePath = "console_output.txt";
-        try {
-            handleSave();
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("FAILED!");
-            return;
-        }
+
         try (PrintWriter fileWriter = new PrintWriter(new FileWriter(filePath))) {
+
             System.out.println("Game saved successfully.");
         } catch (IOException e) {
             System.out.println("Failed to save the game. Please try again.");
         }
     }
 
-    public static void handleSave() {
-        gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Restaurant.saleList, currentLocation,
-                currentDay, locationHistory, ForwardLocationHistory);
-        gameSaveLoad.save(gsl, saveID);
-    }
-
-    private static void handleReturnToPreviousLocation() {
+    private void handleReturnToPreviousLocation() {
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.pop();
             ForwardLocationHistory.push(currentLocation);// push
@@ -1300,7 +1294,7 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void handleForwardToNewLocation() {
+    private void handleForwardToNewLocation() {
         if (!ForwardLocationHistory.isEmpty()) {
             map.Location nextLocation = ForwardLocationHistory.pop();
             locationHistory.push(currentLocation); // Store the current location in the back history
@@ -1312,7 +1306,7 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void handleDirectBackToTownHall() {
+    private void handleDirectBackToTownHall() {
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {
             currentLocation = defaultMap.townHall;
@@ -1325,7 +1319,7 @@ public class Defaultmap implements Serializable {
         ForwardLocationHistory.clear();
     }
 
-    private static void handleWaitingList() {
+    private void handleWaitingList() {
 
     }
 
@@ -1342,12 +1336,13 @@ public class Defaultmap implements Serializable {
         MilagroMan.MenuHandler(currentLocation.getName());
     }
 
-    private static void handleViewResidentInformation(String place) {
-        r.readRes();
-        r.printRes(place, currentDay);
+    private void handleViewResidentInformation(String place) {
+        readRes();
+        printRes(place, currentDay);
     }
 
-    private static void handleTheHand() {
+    private void handleTheHand() {
+
         map myMap = new map();
 
         if (gameMap.equals(defaultMap)) {
@@ -1368,7 +1363,8 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void handleRedHotChiliPepper() {
+    private void handleRedHotChiliPepper() {
+
         map myMap = new map();
 
         // Create an instance of RedHotChiliPepper using AngeloRock
@@ -1385,9 +1381,10 @@ public class Defaultmap implements Serializable {
             RedHotChiliPepper chiliPepper = new RedHotChiliPepper(angeloRock);
             chiliPepper.necessaryPowerCable();
         }
+
     }
 
-    private static void handleVentoAureo() {
+    private void handleVentoAureo() {
         String map = "";
         if (gameMap.equals(defaultMap)) {
             map = "defaultMap";

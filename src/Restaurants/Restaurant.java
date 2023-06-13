@@ -1,9 +1,7 @@
 package Restaurants;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
-
-import defaultmap.Defaultmap;
 
 public class Restaurant implements Serializable {
     String RestaurantName;

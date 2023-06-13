@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LATESTMAP",
+            "request": "launch",
+            "mainClass": "LatestMap_Combined.LATESTMAP",
+            "projectName": "wia1002_assignment_8fc000ea"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "App",
