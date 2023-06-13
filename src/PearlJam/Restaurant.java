@@ -11,15 +11,10 @@ public class Restaurant implements Serializable {
     static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Libeccio, SavageGarden;
     public static List<Restaurant> resList;
     public static List<Sale> saleList;
-    List<Customer> waitingList;
+    public static List<Customer> waitingList;
     int currentDayNumber;
 
     // Constructor
-    public Restaurant(String RestaurantName, List<Customer> waitingList, int Day) {
-        this.RestaurantName = RestaurantName;
-        this.waitingList = waitingList;
-    }
-
     public Restaurant(String RestaurantName, List<Food> Menu) {
         this.RestaurantName = RestaurantName;
         this.Menu = Menu;
@@ -46,18 +41,21 @@ public class Restaurant implements Serializable {
     public void setMenu(List<Food> Menu) {
         this.Menu = Menu;
     }
+    public static void setWaitingList(List<Customer> waitingList){
+        Restaurant.waitingList = waitingList;
+    }
 
     public static void InitializeRestaurant() {
         System.out.println("\nLOADING...\n");
         Restaurant resTemp = new Restaurant();
-        resTemp.InitializeRestaurantProcess(null);
+        resTemp.InitializeRestaurantProcess();
     }
 
-    public String[] InitializeRestaurantProcess() {
+    public String[] InitializeRestaurantProcess(Void v) {
         return null;
     }
 
-    public void InitializeRestaurantProcess(Void s) {
+    public void InitializeRestaurantProcess() {
         // Jade Garden
         /*
          * ○ Braised Chicken in Black Bean Sauce ($15.00)
@@ -216,16 +214,20 @@ public class Restaurant implements Serializable {
     public static Food getRandomFoodByRestaurantName(String RestaurantName) {
         Restaurant resTemp = new Restaurant();
         resTemp = resTemp.getResByName(RestaurantName);
-
         List<Food> foodList = resTemp.getMenu();
 
         Random rand = new Random();
-
         int randomNum = rand.nextInt((foodList.size() - 1) + 1);
 
         // System.out.println(foodList.get(randomNum).getFoodName());
 
         return foodList.get(randomNum);
+    }
+
+    public static Restaurant getRandomRestaurant(){
+        Random rand = new Random();
+        int randomNum = rand.nextInt((resList.size() - 1) + 1);
+        return resList.get(randomNum);
     }
 
     public void removeFoodByName(String FoodName) {
@@ -442,32 +444,18 @@ public class Restaurant implements Serializable {
 
     private void serveCustomer(Customer customer) {
         System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
-        Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
-                customer.food.getFoodPrice());
-        Sale.SaleList.add(sale);
+        //Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
+        //        customer.food.getFoodPrice());
+        //Sale.SaleList.add(sale);
         // Perform serving operations
     }
 
-    void showWaitingList(String RestaurantName) {
+    public void showWaitingList() {
         System.out.println("//---------------------------------------------//");
         for (int i = 0; i < waitingList.size(); i++) {
             System.out.println(waitingList.get(i).name + "\t" + waitingList.get(i).age + "\t" +
                     waitingList.get(i).gender + "\t" + waitingList.get(i).food);
         }
         System.out.println("//---------------------------------------------//");
-    }
-}
-
-class Customer {
-    String name;
-    int age;
-    String gender;
-    Food food;
-
-    public Customer(String name, int age, String gender, Food food) {
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.food = food;
     }
 }

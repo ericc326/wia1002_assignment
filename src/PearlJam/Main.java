@@ -9,12 +9,14 @@ public class Main {
         Restaurant.InitializeRestaurant();
         //Restaurant.getRandomFoodByRestaurantName("Jade Garden");
 
-        Order.getAllResidentAsCustomer("Jade Garden");
+        Customer.getAllResidentAsCustomer();
+        Customer c = new Customer();
+        c.assignFood(Restaurant.getRandomRestaurant().getRestaurantName());
 
-        Restaurant restaurant = new Restaurant(null, Order.waitingList, 1);
+        Restaurant restaurant = new Restaurant();
+        Restaurant.setWaitingList(Customer.waitingList);
 
-        //restaurant.showWaitingList(null);
-
+        restaurant.showWaitingList();
         System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
 
