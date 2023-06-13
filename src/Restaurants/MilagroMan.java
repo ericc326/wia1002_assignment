@@ -1,4 +1,4 @@
-package PearlJam;
+package Restaurants;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package PearlJam;
+package Restaurants;
 
 import java.io.Serializable;
 import java.util.*;
@@ -253,7 +253,7 @@ public class Restaurant implements Serializable {
     // Jade Garden rule: Process customers in pairs (first and last, second and
     // second-last, etc.)
     public void processJadeGarden() {
-        List<Customer> tempList = waitingList;
+        List<Customer> tempList = Customer.JadeList;
         int start = 0;
         int end = tempList.size() - 1;
 
@@ -281,11 +281,11 @@ public class Restaurant implements Serializable {
     public void processCafeDeuxMagots() {
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<Customer>();
 
-        for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).age == -1) {
-                tempList2.add(waitingList.get(i));
-            } else if (waitingList.get(i).age > -1) {
-                tempList.add(waitingList.get(i));
+        for (int i = 0; i < Customer.CafeList.size(); i++) {
+            if (Customer.CafeList.get(i).age == -1) {
+                tempList2.add(Customer.CafeList.get(i));
+            } else if (Customer.CafeList.get(i).age > -1) {
+                tempList.add(Customer.CafeList.get(i));
             }
         }
         tempList.sort(Comparator.comparingInt(c -> c.age));
@@ -320,11 +320,11 @@ public class Restaurant implements Serializable {
     public void processTrattoriaTrussardi() {
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<>();
 
-        for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).age == -1) {
-                tempList2.add(waitingList.get(i));
-            } else if (waitingList.get(i).age > -1) {
-                tempList.add(waitingList.get(i));
+        for (int i = 0; i < Customer.TTList.size(); i++) {
+            if (Customer.TTList.get(i).age == -1) {
+                tempList2.add(Customer.TTList.get(i));
+            } else if (Customer.TTList.get(i).age > -1) {
+                tempList.add(Customer.TTList.get(i));
             }
         }
 
@@ -343,8 +343,8 @@ public class Restaurant implements Serializable {
             }
         }
 
-        System.out.println(males.isEmpty());
-        System.out.println(females.isEmpty());
+        //System.out.println(males.isEmpty());
+        //System.out.println(females.isEmpty());
 
         while (!males.isEmpty() || !females.isEmpty()) {
             if (!males.isEmpty()) {
@@ -404,7 +404,7 @@ public class Restaurant implements Serializable {
     // current day number
     public void processLibeccio(int currentDayNumber) {
         this.currentDayNumber = currentDayNumber;
-        List<Customer> tempList = waitingList;
+        List<Customer> tempList = Customer.LibeccioList;
 
         Stack<Customer> tempStack = new Stack<>();
 
@@ -424,7 +424,7 @@ public class Restaurant implements Serializable {
     // number
     public void processSavageGarden(int currentDayNumber) {
         this.currentDayNumber = currentDayNumber;
-        List<Customer> tempList = waitingList;
+        List<Customer> tempList = Customer.SavageList;
 
         Stack<Customer> tempQ = new Stack<>();
 
@@ -451,11 +451,11 @@ public class Restaurant implements Serializable {
     }
 
     public void showWaitingList() {
-        System.out.println("//---------------------------------------------//");
+        System.out.println("\n//---------------------------------------------//");
         for (int i = 0; i < waitingList.size(); i++) {
             System.out.println(waitingList.get(i).name + "\t" + waitingList.get(i).age + "\t" +
                     waitingList.get(i).gender + "\t" + waitingList.get(i).food);
         }
-        System.out.println("//---------------------------------------------//");
+        System.out.println("//---------------------------------------------//\n");
     }
 }

@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 
-import PearlJam.MilagroMan;
-import PearlJam.MoodyBlues;
-import PearlJam.Restaurant;
+import Restaurants.MilagroMan;
+import Restaurants.MoodyBlues;
+import Restaurants.Restaurant;
 
 /**
  *
