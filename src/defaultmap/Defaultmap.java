@@ -6,6 +6,8 @@ package defaultmap;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.Flow.Processor;
+
 import Restaurants.*;
 import extrafeatures.*;
 import PartSal2.*;
@@ -101,7 +103,8 @@ public class Defaultmap implements Serializable {
 
     private static void selectMap() {
         Restaurant.InitializeRestaurant();
-
+        Customer.getAllResidentAsCustomer();
+        ProcessOrder.doProcess();
         System.out.println("Select a map:");
         System.out.println("[1] Default Map");
         System.out.println("[2] Parallel Map");
@@ -1244,6 +1247,7 @@ public class Defaultmap implements Serializable {
     public static void handleAdvanceToNextDay() {
         currentDay++;
         r.readForMenu(currentDay);
+        ProcessOrder.doProcess();
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {
             currentLocation = defaultMap.townHall;
@@ -1255,7 +1259,7 @@ public class Defaultmap implements Serializable {
         locationHistory.clear();
     }
 
-    private static String getDayOfWeek(int day) {
+    public static String getDayOfWeek(int day) {
         String[] daysOfWeek = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
         if (day >= 1 && day <= 7) {

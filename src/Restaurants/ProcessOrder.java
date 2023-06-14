@@ -8,9 +8,6 @@ import defaultmap.Defaultmap;
 public class ProcessOrder {
     public static void doProcess() {
         Restaurant.InitializeRestaurant();
-        //Restaurant.getRandomFoodByRestaurantName("Jade Garden");
-
-        Customer.getAllResidentAsCustomer();
         Customer.assignRestaurantAndFood();
 
         Restaurant restaurant = new Restaurant();
