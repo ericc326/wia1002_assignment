@@ -11,7 +11,7 @@ public class ProcessOrder {
         //Restaurant.getRandomFoodByRestaurantName("Jade Garden");
 
         Customer.getAllResidentAsCustomer();
-        Customer.assignFood();
+        Customer.assignRestaurantAndFood();
 
         Restaurant restaurant = new Restaurant();
         Restaurant.setWaitingList(Customer.waitingList);
