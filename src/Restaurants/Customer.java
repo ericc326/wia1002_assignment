@@ -10,10 +10,10 @@ public class Customer implements Serializable {
     public int age;
     public String gender;
     public Food food;
-    public Stack<Food> orderHistory = new Stack<>();
-    public HashMap<Food, Integer> foodFrequency = new HashMap<>();
-    public Stack<Restaurant> restaurantHistory = new Stack<>();
-    public HashMap<Restaurant, Integer> restaurantFrequency = new HashMap<>();
+    public Stack<Food> orderHistory;
+    public HashMap<Food, Integer> foodFrequency;
+    public Stack<Restaurant> restaurantHistory;
+    public HashMap<Restaurant, Integer> restaurantFrequency;
     public static List<Customer> waitingList = new LinkedList<>(),
             JadeList = new LinkedList<>(),
             CafeList = new LinkedList<>(),
@@ -22,11 +22,18 @@ public class Customer implements Serializable {
             SavageList = new LinkedList<>();
     public static Residents residents = new Residents();
     public static Restaurant JotaroRestaurant;
+    public static Stack<Restaurant> JolyneHistory = new Stack<>();
+    private static Double JosukeBudget = 100.00;
+    private static List<Double> debt = new LinkedList<>();
 
     public Customer(String name, int age, String gender) {
         this.name = name;
         this.age = age;
         this.gender = gender;
+        this.orderHistory = new Stack<>();
+        this.foodFrequency = new HashMap<>();
+        this.restaurantHistory = new Stack<>();
+        this.restaurantFrequency = new HashMap<>();
     }
 
     public Customer() {
@@ -67,6 +74,11 @@ public class Customer implements Serializable {
     }
 
     public static void assignRestaurantAndFood() {
+        JadeList.clear();
+        CafeList.clear();
+        TTList.clear();
+        LibeccioList.clear();
+        SavageList.clear();
         for (int i = 0; i < waitingList.size(); i++) {
             Customer customer = waitingList.get(i);
             switch (customer.name) {
@@ -90,7 +102,8 @@ public class Customer implements Serializable {
                     break;
                 default:
                     Restaurant res = Restaurant.getRandomRestaurant();
-                    setRandomFood(res, customer);
+                    Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                    setFood(res, customer, food);
             }
         }
     }
@@ -119,154 +132,158 @@ public class Customer implements Serializable {
 
     public static void JonathanOrder(Customer customer) {
         Restaurant res = Restaurant.getRandomRestaurant();
-        /*
-         * Set<Food> dishes = customer.foodFrequency.keySet();
-         * int minFrequency = Integer.MAX_VALUE;
-         * int maxFrequency = Integer.MIN_VALUE;
-         * 
-         * for (Food dish : dishes) {
-         * int frequency = customer.foodFrequency.getOrDefault(dish, 0);
-         * minFrequency = Math.min(minFrequency, frequency);
-         * maxFrequency = Math.max(maxFrequency, frequency);
-         * }
-         * 
-         * for (Food dish : dishes) {
-         * int frequency = customer.foodFrequency.getOrDefault(dish, 0);
-         * if (maxFrequency - frequency <= 1) {
-         * selectedDish = dish;
-         * break;
-         * }
-         * }
-         * 
-         * if (selectedDish != null) {
-         * dishFrequency.put(selectedDish, dishFrequency.getOrDefault(selectedDish, 0) +
-         * 1);
-         * }
-         */
-        setRandomFood(res, customer);
+        Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        int check = 0;
+        if (!customer.foodFrequency.isEmpty()) {
+            for (int i = 0; i < res.getMenu().size(); i++) {
+                if (customer.foodFrequency.containsKey(res.getMenu().get(i))) {
+                    check = customer.foodFrequency.get(food);
+                    if (check - customer.foodFrequency.get(res.getMenu().get(i)) >= 1) {
+                        food = res.getMenu().get(i);
+                    }
+                }
+            }
+        }
+        customer.foodFrequency.put(food, check + 1);
+        setFood(res, customer, food);
     }
 
     public static void JosephOrder(Customer customer) {
-        /*
-         * List<String> dishes = restaurant.getDishes();
-         * allAvailableDishes.addAll(dishes);
-         * allAvailableDishes.removeAll(eatenDishes);
-         * 
-         * if (allAvailableDishes.isEmpty()) {
-         * // Reset eaten dishes list if all dishes have been tried
-         * eatenDishes.clear();
-         * allAvailableDishes.addAll(dishes);
-         * }
-         * 
-         * Random random = new Random();
-         * int randomIndex = random.nextInt(allAvailableDishes.size());
-         * String selectedDish = allAvailableDishes.get(randomIndex);
-         * eatenDishes.add(selectedDish);
-         */
-
         Restaurant res = Restaurant.getRandomRestaurant();
-        setRandomFood(res, customer);
+        Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        while (customer.orderHistory.contains(food)) {
+            res = Restaurant.getRandomRestaurant();
+            food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        }
+
+        setFood(res, customer, food);
     }
 
     public static void JotaroOrder(Customer customer) {
-        /*
-         * List<String> dishes = restaurant.getDishes();
-         * for (String dish : dishes) {
-         * // Try every dish at the current restaurant
-         * // You can perform any action with the dish here
-         * System.out.println("Tasting " + dish);
-         * }
-         * visitedRestaurants.add(restaurant.getName());
-         * return null;
-         */
         Restaurant res = Restaurant.getRandomRestaurant();
+        Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        if (!customer.orderHistory.isEmpty()) {
+            if (customer.orderHistory.containsAll(JotaroRestaurant.getMenu())) {
+                res = JotaroRestaurant;
+                food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                while (customer.orderHistory.contains(food)) {
+                    food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                }
+            }
+        }
         JotaroRestaurant = res;
-        setRandomFood(res, customer);
+        setFood(res, customer, food);
     }
 
     public static void JosukeOrder(Customer customer) {
-        Double budget = 100.00;
-        List<Double> debt;
-        /*
-         * List<String> dishes = restaurant.getDishes();
-         * Random random = new Random();
-         * int randomIndex = random.nextInt(dishes.size());
-         * String selectedDish = dishes.get(randomIndex);
-         * double dishCost = getDishCost(selectedDish);
-         * 
-         * if (dishCost > budget) {
-         * double remainingCost = dishCost - budget;
-         * double borrowAmount = remainingCost - getRemainingBudget();
-         * borrowedAmounts.add(borrowAmount);
-         * budget += borrowAmount;
-         * }
-         * 
-         * budget -= dishCost;
-         */
+        Double price = Double.MAX_VALUE;
+        if (Defaultmap.currentDay % 8 == 0) {
+            JosukeBudget = 100.00;
+        }
         Restaurant res = Restaurant.getRandomRestaurant();
-        setRandomFood(res, customer);
+        Food food = res.getMenu().get(0);
+        for (int i = 0; i < res.getMenu().size(); i++) {
+            food = res.getMenu().get(i);
+            if (price > food.FoodPrice) {
+                price = food.FoodPrice;
+            }
+        }
+        if (JosukeBudget < price) {
+            debt.add(price - JosukeBudget);
+            JosukeBudget = 0.0;
+        } else {
+            JosukeBudget = JosukeBudget - price;
+        }
+        setFood(res, customer, food);
     }
 
     public static void GiornoOrder(Customer customer) {
         String day = Defaultmap.getDayOfWeek(Defaultmap.currentDay);
-        Restaurant res = new Restaurant();
+        Restaurant res = new Restaurant().getResByName("Trattoria Trussardi");
+        int temp;
+        Food food = null;
         switch (day) {
             case "Friday":
-            res = res.getResByName("Restaurant res");
-                if (customer.restaurantFrequency.get(res)<2) {
-                       
+                if (customer.restaurantFrequency.containsKey(res)) {
+                    temp = customer.restaurantFrequency.get(res);
+                    if (temp < 2) {
+                        food = customer.orderHistory.peek();
+                        while (food.equals(customer.orderHistory.peek())) {
+                            food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                        }
+                    }else{
+                        res = Restaurant.getRandomRestaurant();
+                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                    }
+                } else {
+                    food = customer.orderHistory.peek();
+                    while (food.equals(customer.orderHistory.peek())) {
+                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                    }
                 }
                 break;
             case "Saturday":
-                res = res.getResByName("Restaurant res");
+                if (customer.restaurantFrequency.containsKey(res)) {
+                    temp = customer.restaurantFrequency.get(res);
+                    if (temp < 1) {
+                        food = customer.orderHistory.peek();
+                        while (food.equals(customer.orderHistory.peek())) {
+                            food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                        }
+                    }else{
+                        res = Restaurant.getRandomRestaurant();
+                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                    }
+                } else {
+                    food = customer.orderHistory.peek();
+                    while (food.equals(customer.orderHistory.peek())) {
+                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                    }
+                }
                 break;
             default:
                 res = Restaurant.getRandomRestaurant();
+                food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                 break;
         }
         if (customer.restaurantFrequency.containsKey(res)) {
             Integer i = customer.restaurantFrequency.get(res) + 1;
             customer.restaurantFrequency.replace(res, i);
         } else {
-            customer.restaurantHistory.add(res);
             customer.restaurantFrequency.put(res, 1);
         }
-        /*
-         * List<String> dishes = restaurant.getDishes();
-         * 
-         * if (dishes.size() == 1) {
-         * return dishes.get(0);
-         * }
-         * 
-         * Random random = new Random();
-         * String selectedDish;
-         * do {
-         * selectedDish = dishes.get(random.nextInt(dishes.size()));
-         * } while (selectedDish.equals(lastVisitedDish));
-         * 
-         * lastVisitedDish = selectedDish;
-         */
-        setRandomFood(res, customer);
+        setFood(res, customer, food);
     }
 
     public static void JolyneOrder(Customer customer) {
         Restaurant res;
-        if (Defaultmap.getDayOfWeek(Defaultmap.currentDay).equals("Saturday")
-                && !JotaroRestaurant.equals(customer.restaurantHistory.peek())) {
-            res = JotaroRestaurant;
-            customer.restaurantHistory.push(res);
-        } else {
-            res = Restaurant.getRandomRestaurant();
-            while (res.equals(customer.restaurantHistory.peek())) {
+        switch (Defaultmap.getDayOfWeek(Defaultmap.currentDay)) {
+            case "Saturday":
+                res = JotaroRestaurant;
+                customer.restaurantHistory.push(res);
+                break;
+            case "Friday":
                 res = Restaurant.getRandomRestaurant();
-            }
-            customer.restaurantHistory.push(res);
+                while (res.equals(JotaroRestaurant) || res.equals(customer.restaurantHistory.peek())) {
+                    res = Restaurant.getRandomRestaurant();
+                }
+                customer.restaurantHistory.push(res);
+                break;
+            default:
+                res = Restaurant.getRandomRestaurant();
+                if (!customer.restaurantHistory.empty()) {
+                    while (res.equals(customer.restaurantHistory.peek())) {
+                        res = Restaurant.getRandomRestaurant();
+                    }
+                }
+                customer.restaurantHistory.push(res);
+                break;
         }
-        setRandomFood(res, customer);
+        Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        setFood(res, customer, food);
     }
 
-    private static void setRandomFood(Restaurant res, Customer customer){
-        Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+    private static void setFood(Restaurant res, Customer customer, Food food) {
         customer.setFood(food);
         if (customer.orderHistory.contains(food)) {
             Integer i = customer.foodFrequency.get(food) + 1;

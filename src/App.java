@@ -12,7 +12,7 @@ public class App extends Application {
         // Restaurant.InitializeRestaurant();
         // System.out.println("\nEnter restaurant name:");
         Scanner scanner = new Scanner(System.in);
-        String string = "1";//scanner.nextLine();
+        String string = /*"1";*/scanner.nextLine();
         switch (string) {
             case "1":
                 launch(args);
