@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MoodyBlues",
+            "request": "launch",
+            "mainClass": "Restaurants.MoodyBlues",
+            "projectName": "wia1002_assignment_c055666d"
+        },
+        {
+            "type": "java",
             "name": "LATESTMAP",
             "request": "launch",
             "mainClass": "LatestMap_Combined.LATESTMAP",

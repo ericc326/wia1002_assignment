@@ -7,24 +7,24 @@ import ui.MainController;
 
 public class App extends Application {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!\nENTER 1 FOR GUI, 2 FOR CLI:");
+        /*System.out.println("Hello, World!\nENTER 1 FOR GUI, 2 FOR CLI:");
         // MoodyBlues.callMenu();
         // Restaurant.InitializeRestaurant();
         // System.out.println("\nEnter restaurant name:");
         Scanner scanner = new Scanner(System.in);
-        String string = /*"1";*/scanner.nextLine();
+        String string = /*"1";scanner.nextLine();
         switch (string) {
             case "1":
                 launch(args);
                 break;
-            case "2":
+            case "2":*/
                 Defaultmap.start();
-                break;
+                /*break;
             default:
                 System.out.println("wtf?");
                 System.exit(0);
                 break;
-        }
+        }*/
         // MilagroMan mg = new MilagroMan(string);
         // mg.Menu();
         // scanner.close();*/

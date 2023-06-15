@@ -20,11 +20,11 @@ public class Customer implements Serializable {
             TTList = new LinkedList<>(),
             LibeccioList = new LinkedList<>(),
             SavageList = new LinkedList<>();
-    public static Residents residents = new Residents();
     public static Restaurant JotaroRestaurant;
     public static Stack<Restaurant> JolyneHistory = new Stack<>();
     private static Double JosukeBudget = 100.00;
-    private static List<Double> debt = new LinkedList<>();
+    private static List<Double> JosukeDebt = new LinkedList<>();
+    public static Residents residents = new Residents();
 
     public Customer(String name, int age, String gender) {
         this.name = name;
@@ -34,6 +34,15 @@ public class Customer implements Serializable {
         this.foodFrequency = new HashMap<>();
         this.restaurantHistory = new Stack<>();
         this.restaurantFrequency = new HashMap<>();
+    }
+
+    public Customer(List<Customer> waitingList, Restaurant JotaroRestaurant,
+            Stack<Restaurant> JolyneHistory, Double JosukeBudget, List<Double> JosukeDebt) {
+        Customer.waitingList = waitingList;
+        Customer.JotaroRestaurant = JotaroRestaurant;
+        Customer.JolyneHistory = JolyneHistory;
+        Customer.JosukeBudget = JosukeBudget;
+        Customer.JosukeDebt = JosukeDebt;
     }
 
     public Customer() {
@@ -189,7 +198,7 @@ public class Customer implements Serializable {
             }
         }
         if (JosukeBudget < price) {
-            debt.add(price - JosukeBudget);
+            JosukeDebt.add(price - JosukeBudget);
             JosukeBudget = 0.0;
         } else {
             JosukeBudget = JosukeBudget - price;
@@ -211,7 +220,7 @@ public class Customer implements Serializable {
                         while (food.equals(customer.orderHistory.peek())) {
                             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                         }
-                    }else{
+                    } else {
                         res = Restaurant.getRandomRestaurant();
                         food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                     }
@@ -230,7 +239,7 @@ public class Customer implements Serializable {
                         while (food.equals(customer.orderHistory.peek())) {
                             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                         }
-                    }else{
+                    } else {
                         res = Restaurant.getRandomRestaurant();
                         food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                     }
@@ -294,5 +303,31 @@ public class Customer implements Serializable {
             customer.foodFrequency.put(food, 1);
         }
         addToRestaurantList(res.getRestaurantName(), customer);
+    }
+
+    public static DataCustomer CustomerDataSave() {
+        DataCustomer data = new DataCustomer(waitingList, JotaroRestaurant, JolyneHistory, JosukeBudget, JosukeDebt);
+        return data;
+    }
+
+    public static void CustomerDataLoad(Customer c) {
+
+    }
+}
+
+class DataCustomer {
+    List<Customer> waitingList;
+    Restaurant JotaroRestaurant;
+    Stack<Restaurant> JolyneHistory;
+    Double JosukeBudget;
+    List<Double> JosukeDebt;
+
+    public DataCustomer(List<Customer> waitingList, Restaurant JotaroRestaurant,
+            Stack<Restaurant> JolyneHistory, Double JosukeBudget, List<Double> JosukeDebt) {
+        this.waitingList = waitingList;
+        this.JotaroRestaurant = JotaroRestaurant;
+        this.JolyneHistory = JolyneHistory;
+        this.JosukeBudget = JosukeBudget;
+        this.JosukeDebt = JosukeDebt;
     }
 }
