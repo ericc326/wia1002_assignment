@@ -48,7 +48,7 @@ public class VentoAureo {
         Location trattoriaTrussardi = new Location("Trattoria Trussardi");
         Location sanGiorgioMaggiore = new Location("San Giorgio Maggiore");
         Location greenDolphinStreetPrison = new Location("Green Dolphin Street Prison");
-        Location passioneRestaurant = new Location("Libeccio");
+        Location libeccio = new Location("Libeccio");
         Location angeloRock = new Location("Angelo Rock");
         Location vineyard = new Location("Vineyard");
         Location dIOsMansion = new Location("DIO's Mansion");
@@ -64,13 +64,13 @@ public class VentoAureo {
         connectLocations(trattoriaTrussardi, greenDolphinStreetPrison);
         connectLocations(trattoriaTrussardi, sanGiorgioMaggiore);
 
-        connectLocations(greenDolphinStreetPrison, passioneRestaurant);
+        connectLocations(greenDolphinStreetPrison, libeccio);
         connectLocations(greenDolphinStreetPrison, angeloRock);
 
         connectLocations(angeloRock, dIOsMansion);
 
         connectLocations(dIOsMansion, vineyard);
-        connectLocations(dIOsMansion, passioneRestaurant);
+        connectLocations(dIOsMansion, libeccio);
 
         connectLocations(vineyard, joestarMansion);
         connectLocations(vineyard, savageGarden);
@@ -89,14 +89,15 @@ public class VentoAureo {
         connectLocations(jadeGarden, townHall);
 
         connectLocations(sanGiorgioMaggiore, trattoriaTrussardi);
-        connectLocations(sanGiorgioMaggiore, passioneRestaurant);
+        connectLocations(sanGiorgioMaggiore, libeccio);
 
-        connectLocations(passioneRestaurant, joestarMansion);
-        connectLocations(passioneRestaurant, dIOsMansion);
-        connectLocations(passioneRestaurant, greenDolphinStreetPrison);
+        connectLocations(libeccio, joestarMansion);
+        connectLocations(libeccio, dIOsMansion);
+        connectLocations(libeccio, greenDolphinStreetPrison);
+        connectLocations(libeccio, vineyard);
 
         connectLocations(joestarMansion, vineyard);
-        connectLocations(joestarMansion, passioneRestaurant);
+        connectLocations(joestarMansion, libeccio);
 
         // Add locations to the map
         addLocation(cafeDeuxMagots);
@@ -109,7 +110,7 @@ public class VentoAureo {
         addLocation(trattoriaTrussardi);
         addLocation(sanGiorgioMaggiore);
         addLocation(greenDolphinStreetPrison);
-        addLocation(passioneRestaurant);
+        addLocation(libeccio);
         addLocation(angeloRock);
         addLocation(vineyard);
         addLocation(dIOsMansion);
@@ -130,7 +131,7 @@ public class VentoAureo {
         Location trattoriaTrussardi = new Location("Trattoria Trussardi");
         Location sanGiorgioMaggiore = new Location("San Giorgio Maggiore");
         Location greenDolphinStreetPrison = new Location("Green Dolphin Street Prison");
-        Location passioneRestaurant = new Location("Libeccio");
+        Location libeccio = new Location("Libeccio");
         Location angeloRock = new Location("Angelo Rock");
         Location vineyard = new Location("Vineyard");
         Location dIOsMansion = new Location("DIO's Mansion");
@@ -139,7 +140,7 @@ public class VentoAureo {
        connectLocations(townHall, cafeDeuxMagots);
         connectLocations(townHall, trattoriaTrussardi);
         connectLocations(townHall, vineyard);
-        connectLocations(townHall, passioneRestaurant);
+        connectLocations(townHall, libeccio);
 
 connectLocations(moriohGrandHotel, joestarMansion);
 connectLocations(moriohGrandHotel, cafeDeuxMagots);
@@ -158,7 +159,7 @@ connectLocations(dIOsMansion, angeloRock);
 connectLocations(dIOsMansion, greenDolphinStreetPrison);
 
 connectLocations(vineyard, townHall);
-connectLocations(vineyard, passioneRestaurant);
+connectLocations(vineyard, libeccio);
 
 connectLocations(savageGarden, jadeGarden);
 connectLocations(savageGarden, sanGiorgioMaggiore);
@@ -179,8 +180,8 @@ connectLocations(jadeGarden, cafeDeuxMagots);
 connectLocations(sanGiorgioMaggiore, joestarMansion);
 connectLocations(sanGiorgioMaggiore, savageGarden);
 
-connectLocations(passioneRestaurant, townHall);
-connectLocations(passioneRestaurant, vineyard);
+connectLocations(libeccio, townHall);
+connectLocations(libeccio, vineyard);
 
 connectLocations(joestarMansion, sanGiorgioMaggiore);
 connectLocations(joestarMansion, jadeGarden);
@@ -198,7 +199,7 @@ connectLocations(joestarMansion, trattoriaTrussardi);
         addLocation(trattoriaTrussardi);
         addLocation(sanGiorgioMaggiore);
         addLocation(greenDolphinStreetPrison);
-        addLocation(passioneRestaurant);
+        addLocation(libeccio);
         addLocation(angeloRock);
         addLocation(vineyard);
         addLocation(dIOsMansion);

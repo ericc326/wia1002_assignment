@@ -993,6 +993,7 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 handleVentoAureo();
+                break;
             case "4":
                 r.r_clear();
                 if (!locationHistory.isEmpty()) {
