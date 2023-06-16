@@ -1,9 +1,6 @@
 package Restaurants;
 
-import java.util.*;
-import PartSal2.*;
-import Restaurants.*;
-import defaultmap.Defaultmap;
+import defaultmap.*;
 
 public class ProcessOrder {
     public static void doProcess() {
@@ -12,7 +9,7 @@ public class ProcessOrder {
         Restaurant restaurant = new Restaurant();
         Restaurant.setWaitingList(Customer.waitingList);
 
-        restaurant.showWaitingList();
+        //restaurant.showWaitingList();
         System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
 

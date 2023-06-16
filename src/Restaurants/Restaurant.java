@@ -3,6 +3,8 @@ package Restaurants;
 import java.io.*;
 import java.util.*;
 
+import defaultmap.Defaultmap;
+
 public class Restaurant implements Serializable {
     private String RestaurantName;
     private List<Food> Menu;
@@ -440,9 +442,8 @@ public class Restaurant implements Serializable {
 
     private void serveCustomer(Customer customer) {
         System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
-        //Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
-        //        customer.food.getFoodPrice());
-        //Sale.SaleList.add(sale);
+        Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1, customer.food.getFoodPrice());
+        Sale.SaleList.add(sale);
         // Perform serving operations
     }
 
