@@ -15,7 +15,8 @@ import Restaurants.*;
 
 public class Residents {
 
-    public ArrayList<String> Name, Age, Gender, ResidentialArea, Parents, Name2, Age2, Gender2, ResidentialArea2, Parents2,
+    public ArrayList<String> Name, Age, Gender, ResidentialArea, Parents, Name2, Age2, Gender2, ResidentialArea2,
+            Parents2,
             newName, newAge, newGender, newParent, newStand, newDes, newSpeed, newRange, newStamina, newPrecision,
             newDevPot;
     public HashMap<String, List<String>> list1;
@@ -34,7 +35,6 @@ public class Residents {
     List<String> nul = new ArrayList<>();
 
     public Residents() {
-
         Name = new ArrayList<>();
         Name2 = new ArrayList<>();
         Age = new ArrayList<>();
@@ -68,7 +68,6 @@ public class Residents {
         jotaro = new HashMap<>();
         giorno = new HashMap<>();
         jolyne = new HashMap<>();
-
     }
 
     public void readRes() {
@@ -98,7 +97,8 @@ public class Residents {
                 }
 
                 for (int i = 0; i < Name.size(); i++) {
-                    list1.put(Name.get(i), new ArrayList(Arrays.asList(Age.get(i), Gender.get(i), ResidentialArea.get(i), Parents.get(i))));
+                    list1.put(Name.get(i), new ArrayList(
+                            Arrays.asList(Age.get(i), Gender.get(i), ResidentialArea.get(i), Parents.get(i))));
                 }
             }
 
@@ -593,6 +593,9 @@ public class Residents {
             case 3:
                 r.clear();
                 break;
+            default:
+                System.out.println("Invalid input.");
+                return;
         }
     }
 
@@ -644,7 +647,7 @@ public class Residents {
     }
 
     public void showResEat(String resName, int currentDay) {
-        orderHist(currentDay);
+        // orderHist(currentDay);
         System.out.println("Order History");
         System.out.println(
                 "+-----+----------------------------------------------+----------------+---------------------------------+");
@@ -652,145 +655,17 @@ public class Residents {
                 "+ Day |        Food                                  |   Price        |      Restaurant                 |");
         System.out.println(
                 "+-----+----------------------------------------------+----------------+---------------------------------+");
-
-        int day = 0;
-        int dayIndex = currentDay - 1;
-
-        if (dayIndex >= 0 && dayIndex < menuByDay.size()) {
-            HashMap<Integer, List<String>> menuItems = menuByDay.get(dayIndex);
-            for (Map.Entry<Integer, List<String>> entry : menuItems.entrySet()) {
-                int key = entry.getKey();
-                List<String> values = entry.getValue();
-                if (values.get(0).equals(resName)) {
-                    day++;
-                    System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", day, values.get(5), values.get(6),
-                            values.get(4));
-                }
+        if (!Customer.getCustomerbyName(resName).orderHistory.isEmpty()) {
+            List<Food> foodList = Customer.getCustomerbyName(resName).orderHistory;
+            for (int i = 0; i < foodList.size(); i++) {
+                System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", i + 1, foodList.get(i).getFoodName(),
+                        foodList.get(i).getFoodPrice(),
+                        Restaurant.getRestNameByFood(foodList.get(i)));
             }
-
-            HashMap<Integer, List<String>> menuItems2 = menuByDay2.get(dayIndex);
-            for (Map.Entry<Integer, List<String>> entry : menuItems2.entrySet()) {
-                int key = entry.getKey();
-                List<String> values = entry.getValue();
-                if (values.get(0).equals(resName)) {
-                    day++;
-                    System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", day, values.get(5), values.get(6),
-                            values.get(4));
-                }
-            }
-
         }
-
-        Name.clear();
 
         System.out.println(
                 "+-----+----------------------------------------------+----------------+---------------------------------+");
-
-    }
-
-    public void orderHist(int currentDay) {
-
-        int dayIndex = currentDay - 1;
-
-        if (dayIndex >= 0 && dayIndex < menuByDay.size()) {
-            Map<Integer, List<String>> personNum = menuByDay.get(dayIndex);
-            for (Map.Entry<Integer, List<String>> entry : personNum.entrySet()) {
-                int key = entry.getKey();
-                List<String> values = entry.getValue();
-
-                if (values.get(3).equals("Joestar Mansion")) {
-                    List<String> newValues = new ArrayList<>();
-
-                    switch (values.get(0)) {
-                        case "Jonathan Joestar":
-                            newValues.addAll(values.subList(0, 7));
-                            jonathan.put(key, newValues);
-                            break;
-
-                        case "Joseph Joestar":
-                            newValues.addAll(values.subList(0, 7));
-                            joseph.put(key, newValues);
-                            break;
-
-                        case "Jotaro Kujo":
-                            newValues.addAll(values.subList(0, 7));
-                            jotaro.put(key, newValues);
-                            break;
-
-                        case "Josuke Higashikata":
-                            newValues.addAll(values.subList(0, 7));
-                            josuke.put(key, newValues);
-                            break;
-
-                        case "Giorno Giovanna":
-                            newValues.addAll(values.subList(0, 7));
-                            giorno.put(key, newValues);
-                            break;
-
-                        case "Jolyne Cujoh":
-                            newValues.addAll(values.subList(0, 7));
-                            jolyne.put(key, newValues);
-                            break;
-
-                        default:
-                            handleDefaultCase();
-                            break;
-                    }
-                }
-            }
-        }
-
-        handleJonathanCase();
-        handleJosephCase();
-        handleJotaroCase();
-        handleJosukeCase();
-        handleGiornoCase();
-        handleJolyneCase();
-
-        joseph.clear();
-        jotaro.clear();
-        josuke.clear();
-        giorno.clear();
-        jolyne.clear();
-        jonathan.clear();
-    }
-
-    public void handleJonathanCase() {
-
-    }
-
-    public void handleJosephCase() {
-
-        Set<String> uniqueFoods = new HashSet<>();
-        for (List<String> values : joseph.values()) {
-            String food = values.get(5);
-            if (uniqueFoods.contains(food)) {
-                // Joseph has already tried this food, handle accordingly
-                // ...
-            } else {
-                uniqueFoods.add(food);
-            }
-        }
-
-    }
-
-    public void handleJotaroCase() {
-
-    }
-
-    public void handleJosukeCase() {
-
-    }
-
-    public void handleGiornoCase() {
-
-    }
-
-    public void handleJolyneCase() {
-
-    }
-
-    public void handleDefaultCase() {
 
     }
 

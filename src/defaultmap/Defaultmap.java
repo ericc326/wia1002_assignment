@@ -1332,7 +1332,7 @@ public class Defaultmap implements Serializable {
     }
 
     private static void handleWaitingList() {
-
+        Customer.showRestaurantList(currentLocation.getName());
     }
 
     private static void handleViewMenu() {
@@ -1406,4 +1406,6 @@ public class Defaultmap implements Serializable {
         ventoAureo.initializeMap(map);
         ventoAureo.startVentoAureo();
     }
+
+    
 }

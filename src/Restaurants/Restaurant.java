@@ -2,6 +2,7 @@ package Restaurants;
 
 import java.io.*;
 import java.util.*;
+import defaultmap.Defaultmap;
 
 public class Restaurant implements Serializable {
     private String RestaurantName;
@@ -199,7 +200,7 @@ public class Restaurant implements Serializable {
 
     public Food getFoodByName(String FoodName) {
         for (int i = 0; i < Menu.size(); i++) {
-            if (Menu.get(i).FoodName.equals(FoodName)) {
+            if (Menu.get(i).getFoodName().equals(FoodName)) {
                 return Menu.get(i);
             }
         }
@@ -440,8 +441,7 @@ public class Restaurant implements Serializable {
 
     private void serveCustomer(Customer customer) {
         System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
-        //Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1,
-        //        customer.food.getFoodPrice());
+        //Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1, customer.food.getFoodPrice());
         //Sale.SaleList.add(sale);
         // Perform serving operations
     }
@@ -453,6 +453,18 @@ public class Restaurant implements Serializable {
         allFood.addAll(Libeccio.getMenu());
         allFood.addAll(SavageGarden.getMenu());
         return allFood;
+    }
+
+    public static String getRestNameByFood(Food food){
+        for (int i = 0; i < resList.size(); i++) {
+            List<Food> menu = resList.get(i).Menu;
+            for (int j = 0; j < menu.size(); j++) {
+                if (menu.get(j).equals(food)) {
+                    return resList.get(i).RestaurantName;
+                }
+            }
+        }
+        return "Restaurant not available.";
     }
 
     public void showWaitingList() {

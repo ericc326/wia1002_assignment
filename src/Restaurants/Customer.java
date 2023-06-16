@@ -145,11 +145,13 @@ public class Customer implements Serializable {
         Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
         int check = 0;
         if (!customer.foodFrequency.isEmpty()) {
-            for (int i = 0; i < res.getMenu().size(); i++) {
-                if (customer.foodFrequency.containsKey(res.getMenu().get(i))) {
+            if (customer.foodFrequency.containsKey(food)) {
+                for (int i = 0; i < res.getMenu().size(); i++) {
                     check = customer.foodFrequency.get(food);
-                    if (check - customer.foodFrequency.get(res.getMenu().get(i)) >= 1) {
-                        food = res.getMenu().get(i);
+                    if (customer.foodFrequency.containsKey(res.getMenu().get(i))) {
+                        if (check - customer.foodFrequency.get(res.getMenu().get(i)) >= 1) {
+                            food = res.getMenu().get(i);
+                        }
                     }
                 }
             }
@@ -194,8 +196,8 @@ public class Customer implements Serializable {
         Food food = res.getMenu().get(0);
         for (int i = 0; i < res.getMenu().size(); i++) {
             food = res.getMenu().get(i);
-            if (price > food.FoodPrice) {
-                price = food.FoodPrice;
+            if (price > food.getFoodPrice()) {
+                price = food.getFoodPrice();
             }
         }
         if (JosukeBudget < price) {
@@ -304,6 +306,56 @@ public class Customer implements Serializable {
             customer.foodFrequency.put(food, 1);
         }
         addToRestaurantList(res.getRestaurantName(), customer);
+        Sale.addSale(Restaurant.getRestNameByFood(food),Defaultmap.currentDay, food, 1, food.getFoodPrice());
+    }
+
+    public static Customer getCustomerbyName(String CusName) {
+        for (int i = 0; i < waitingList.size(); i++) {
+            if (waitingList.get(i).name.equals(CusName)) {
+                return waitingList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static void showRestaurantList(String RestaurantName) {
+        List<Customer> temp;
+        switch (RestaurantName) {
+            case "Jade Garden":
+                temp = JadeList;
+                break;
+            case "Cafe Deux Magots":
+                temp = CafeList;
+                break;
+            case "Trattoria Trussardi":
+                temp = TTList;
+                break;
+            case "Libeccio":
+                temp = LibeccioList;
+                break;
+            case "SavageGarden":
+                temp = SavageList;
+                break;
+            default:
+                temp = waitingList;
+                break;
+        }
+        System.out.println("Waiting list for " + RestaurantName);
+        System.out.println(
+                "+-----+----------------------------------------------+----------------+---------------------------------+");
+        System.out.println(
+                "+ No |        Customer                                  |   Price        |      Food                 |");
+        System.out.println(
+                "+-----+----------------------------------------------+----------------+---------------------------------+");
+        if (!temp.isEmpty()) {
+            for (int i = 0; i < temp.size(); i++) {
+                System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", i + 1, temp.get(i).name,
+                temp.get(i).food.getFoodPrice(), temp.get(i).food.getFoodName());
+            }
+        }
+
+        System.out.println(
+                "+-----+----------------------------------------------+----------------+---------------------------------+");
     }
 
     public static DataCustomer CustomerDataSave() {

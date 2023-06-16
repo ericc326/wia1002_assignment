@@ -3,9 +3,9 @@ package Restaurants;
 import java.io.Serializable;
 
 public class Food implements Serializable{
-    String FoodName;
-    Double FoodPrice;
-    int frequency;
+    private String FoodName;
+    private Double FoodPrice;
+    private int frequency;
 
     //constructors
     public Food(String FoodName, Double FoodPrice){
