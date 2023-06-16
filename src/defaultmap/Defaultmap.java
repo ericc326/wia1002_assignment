@@ -1258,14 +1258,14 @@ public class Defaultmap implements Serializable {
     }
 
     public static String getDayOfWeek(int day) {
-        String[] daysOfWeek = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-
+        String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    
         if (day >= 1 && day <= 7) {
             return daysOfWeek[day - 1];
         } else {
-            int normalizedDay = (day-1)%7;
-            if (normalizedDay<0) {
-                normalizedDay+=7;
+            int normalizedDay = (day - 1) % 7;
+            if (normalizedDay < 0) {
+                normalizedDay += 7;
             }
             return daysOfWeek[normalizedDay];
         }
