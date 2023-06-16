@@ -1263,7 +1263,11 @@ public class Defaultmap implements Serializable {
         if (day >= 1 && day <= 7) {
             return daysOfWeek[day - 1];
         } else {
-            return "";
+            int normalizedDay = (day-1)%7;
+            if (normalizedDay<0) {
+                normalizedDay+=7;
+            }
+            return daysOfWeek[normalizedDay];
         }
     }
 

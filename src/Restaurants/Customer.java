@@ -113,6 +113,7 @@ public class Customer implements Serializable {
                     Restaurant res = Restaurant.getRandomRestaurant();
                     Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                     setFood(res, customer, food);
+                    break;
             }
         }
     }
@@ -310,8 +311,12 @@ public class Customer implements Serializable {
         return data;
     }
 
-    public static void CustomerDataLoad(Customer c) {
-
+    public static void CustomerDataLoad(DataCustomer datac) {
+        Customer.waitingList = datac.waitingList;
+        Customer.JotaroRestaurant = datac.JotaroRestaurant;
+        Customer.JolyneHistory = datac.JolyneHistory;
+        Customer.JosukeBudget = datac.JosukeBudget;
+        Customer.JosukeDebt = datac.JosukeDebt;
     }
 }
 
