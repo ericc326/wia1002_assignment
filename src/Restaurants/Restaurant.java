@@ -2,7 +2,6 @@ package Restaurants;
 
 import java.io.*;
 import java.util.*;
-
 import defaultmap.Defaultmap;
 
 public class Restaurant implements Serializable {
@@ -201,7 +200,7 @@ public class Restaurant implements Serializable {
 
     public Food getFoodByName(String FoodName) {
         for (int i = 0; i < Menu.size(); i++) {
-            if (Menu.get(i).FoodName.equals(FoodName)) {
+            if (Menu.get(i).getFoodName().equals(FoodName)) {
                 return Menu.get(i);
             }
         }

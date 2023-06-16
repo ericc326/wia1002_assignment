@@ -60,14 +60,14 @@ public class MilagroMan {
                     System.out.println("Enter food price");
                     double FoodPrice = scanner.nextDouble();
                     scanner.nextLine();
-                    System.out.println("Enter food price");
-                    startDay = scanner.nextInt();
-                    System.out.println("Enter food price");
-                    endDay = scanner.nextInt();
+                    //System.out.println("Enter food price");
+                    //startDay = scanner.nextInt();
+                    //System.out.println("Enter food price");
+                    //endDay = scanner.nextInt();
                     try {
                         System.out.println("Creating new food");
                         CreateFood(Foodname, FoodPrice);
-                        System.out.println("Success: " + restaurant.getFoodByName(Foodname).FoodName +
+                        System.out.println("Success: " + restaurant.getFoodByName(Foodname).getFoodName() +
                                 " at $" + String.format("%.2f", restaurant.getFoodByName(Foodname).getFoodPrice()));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -82,7 +82,7 @@ public class MilagroMan {
                     System.out.println("Enter the number for the food you want to modify:");
                     int choice2 = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println(this.restaurant.getMenu().get(choice2 - 1).FoodName
+                    System.out.println(this.restaurant.getMenu().get(choice2 - 1).getFoodName()
                             + " at $"
                             + String.format("%.2f", this.restaurant.getMenu().get(choice2 - 1).getFoodPrice()));
                     System.out.println("Enter the new price:");

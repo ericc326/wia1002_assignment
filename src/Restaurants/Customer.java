@@ -196,8 +196,8 @@ public class Customer implements Serializable {
         Food food = res.getMenu().get(0);
         for (int i = 0; i < res.getMenu().size(); i++) {
             food = res.getMenu().get(i);
-            if (price > food.FoodPrice) {
-                price = food.FoodPrice;
+            if (price > food.getFoodPrice()) {
+                price = food.getFoodPrice();
             }
         }
         if (JosukeBudget < price) {
@@ -306,6 +306,7 @@ public class Customer implements Serializable {
             customer.foodFrequency.put(food, 1);
         }
         addToRestaurantList(res.getRestaurantName(), customer);
+        Sale.addSale(Restaurant.getRestNameByFood(food),Defaultmap.currentDay, food, 1, food.getFoodPrice());
     }
 
     public static Customer getCustomerbyName(String CusName) {
@@ -349,7 +350,7 @@ public class Customer implements Serializable {
         if (!temp.isEmpty()) {
             for (int i = 0; i < temp.size(); i++) {
                 System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", i + 1, temp.get(i).name,
-                temp.get(i).food.FoodPrice, temp.get(i).food.FoodName);
+                temp.get(i).food.getFoodPrice(), temp.get(i).food.getFoodName());
             }
         }
 
