@@ -11,6 +11,7 @@ import extrafeatures.*;
 import PartSal2.*;
 
 /**
+ * 
  *
  * @author Asus
  */
@@ -775,7 +776,7 @@ public class Defaultmap implements Serializable {
 
     private static void displaySGMOptions() {
 
-        System.out.println("[2] Advance to Next Day");
+        System.out.println("[2] View Resident Information");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
             System.out.println("[3] Back (" + previousLocation.getName() + ")");
@@ -833,21 +834,22 @@ public class Defaultmap implements Serializable {
 
     private static void displayGDSPOptions() {
 
-        System.out.println("[2] Advance to Next Day");
+    System.out.println("[2] View Resident Information");
+    System.out.println("[3] Dirty Deeds Done Dirt Cheap");
         if (!locationHistory.isEmpty()) {
             map.Location previousLocation = locationHistory.peek();
-            System.out.println("[3] Back (" + previousLocation.getName() + ")");
+            System.out.println("[4] Back (" + previousLocation.getName() + ")");
             if (hasMadeBackMove) {
                 if (!ForwardLocationHistory.isEmpty()) {
                     map.Location forwardLocation = ForwardLocationHistory.peek();
-                    System.out.println("[4] Forward (" + forwardLocation.getName() + ")");
-                    System.out.println("[5] Back To Town Hall");
+                    System.out.println("[5] Forward (" + forwardLocation.getName() + ")");
+                    System.out.println("[6] Back To Town Hall");
                 }
             } else {
-                System.out.println("[4] Back To Town Hall");
+                System.out.println("[5] Back To Town Hall");
             }
         } else {
-            System.out.println("[3] Back To Town Hall");
+            System.out.println("[4] Back To Town Hall");
         }
         System.out.print("\nSelect:");
 
@@ -859,9 +861,12 @@ public class Defaultmap implements Serializable {
                 handleMoveTo();
                 break;
             case "2":
-                handleAdvanceToNextDay();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
+                handleDirtyDeedsDoneDirtCheap();
+                break;
+            case "4":
                 r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
@@ -869,14 +874,14 @@ public class Defaultmap implements Serializable {
                     handleDirectBackToTownHall();
                 }
                 break;
-            case "4":
+            case "5":
                 if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     handleForwardToNewLocation();
                 } else {
                     handleDirectBackToTownHall();
                 }
                 break;
-            case "5":
+            case "6":
                 if (hasMadeBackMove) {
                     handleDirectBackToTownHall();
                 }
@@ -1258,14 +1263,14 @@ public class Defaultmap implements Serializable {
     }
 
     public static String getDayOfWeek(int day) {
-        String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    
+        String[] daysOfWeek = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
         if (day >= 1 && day <= 7) {
             return daysOfWeek[day - 1];
         } else {
-            int normalizedDay = (day - 1) % 7;
-            if (normalizedDay < 0) {
-                normalizedDay += 7;
+            int normalizedDay = (day-1)%7;
+            if (normalizedDay<0) {
+                normalizedDay+=7;
             }
             return daysOfWeek[normalizedDay];
         }
@@ -1332,7 +1337,7 @@ public class Defaultmap implements Serializable {
     }
 
     private static void handleWaitingList() {
-        Customer.showRestaurantList(currentLocation.getName());
+
     }
 
     private static void handleViewMenu() {
@@ -1403,9 +1408,16 @@ public class Defaultmap implements Serializable {
             map = "parallelMap";
         }
         VentoAureo ventoAureo = new VentoAureo();
+        System.out.println("Map: "+map);
         ventoAureo.initializeMap(map);
         ventoAureo.startVentoAureo();
     }
 
-    
+    public static void handleDirtyDeedsDoneDirtCheap(){
+
+       DirtyDeedsDoneDirtCheap DC = new DirtyDeedsDoneDirtCheap();
+
+       DC.prisonerTravel();
+    }
+
 }
