@@ -1,2 +1,0 @@
-Restaurants.Customer
-Restaurants.DataCustomer
