@@ -455,6 +455,18 @@ public class Restaurant implements Serializable {
         return allFood;
     }
 
+    public static String getRestNameByFood(Food food){
+        for (int i = 0; i < resList.size(); i++) {
+            List<Food> menu = resList.get(i).Menu;
+            for (int j = 0; j < menu.size(); j++) {
+                if (menu.get(j).equals(food)) {
+                    return resList.get(i).RestaurantName;
+                }
+            }
+        }
+        return "Restaurant not available.";
+    }
+
     public void showWaitingList() {
         System.out.println("\n//---------------------------------------------//");
         for (int i = 0; i < waitingList.size(); i++) {

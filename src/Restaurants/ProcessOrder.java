@@ -7,7 +7,6 @@ import defaultmap.Defaultmap;
 
 public class ProcessOrder {
     public static void doProcess() {
-        Restaurant.InitializeRestaurant();
         Customer.assignRestaurantAndFood();
 
         Restaurant restaurant = new Restaurant();

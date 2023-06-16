@@ -24,7 +24,7 @@ public class Customer implements Serializable {
     public static Restaurant JotaroRestaurant;
     public static Stack<Restaurant> JolyneHistory = new Stack<>();
     private static Double JosukeBudget = 100.00;
-    private static List<Double> debt = new LinkedList<>();
+    private static List<Double> JosukeDebt = new LinkedList<>();
 
     public Customer(String name, int age, String gender) {
         this.name = name;
@@ -135,11 +135,13 @@ public class Customer implements Serializable {
         Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
         int check = 0;
         if (!customer.foodFrequency.isEmpty()) {
-            for (int i = 0; i < res.getMenu().size(); i++) {
-                if (customer.foodFrequency.containsKey(res.getMenu().get(i))) {
+            if (customer.foodFrequency.containsKey(food)) {
+                for (int i = 0; i < res.getMenu().size(); i++) {
                     check = customer.foodFrequency.get(food);
-                    if (check - customer.foodFrequency.get(res.getMenu().get(i)) >= 1) {
-                        food = res.getMenu().get(i);
+                    if (customer.foodFrequency.containsKey(res.getMenu().get(i))) {
+                        if (check - customer.foodFrequency.get(res.getMenu().get(i)) >= 1) {
+                            food = res.getMenu().get(i);
+                        }
                     }
                 }
             }
@@ -189,7 +191,7 @@ public class Customer implements Serializable {
             }
         }
         if (JosukeBudget < price) {
-            debt.add(price - JosukeBudget);
+            JosukeDebt.add(price - JosukeBudget);
             JosukeBudget = 0.0;
         } else {
             JosukeBudget = JosukeBudget - price;
@@ -295,4 +297,46 @@ public class Customer implements Serializable {
         }
         addToRestaurantList(res.getRestaurantName(), customer);
     }
+
+    public static Customer getCustomerbyName(String CusName) {
+        for (int i = 0; i < waitingList.size(); i++) {
+            if (waitingList.get(i).name.equals(CusName)) {
+                return waitingList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static DataCustomer CustomerDataSave() {
+        DataCustomer data = new DataCustomer(waitingList, JotaroRestaurant, JolyneHistory, JosukeBudget, JosukeDebt);
+        return data;
+    }
+
+    public static void CustomerDataLoad(DataCustomer datac) {
+        Customer.waitingList = datac.waitingList;
+        Customer.JotaroRestaurant = datac.JotaroRestaurant;
+        Customer.JolyneHistory = datac.JolyneHistory;
+        Customer.JosukeBudget = datac.JosukeBudget;
+        Customer.JosukeDebt = datac.JosukeDebt;
+    }
 }
+
+class DataCustomer {
+    List<Customer> waitingList;
+    Restaurant JotaroRestaurant;
+    Stack<Restaurant> JolyneHistory;
+    Double JosukeBudget;
+    List<Double> JosukeDebt;
+
+    public DataCustomer(List<Customer> waitingList, Restaurant JotaroRestaurant,
+            Stack<Restaurant> JolyneHistory, Double JosukeBudget, List<Double> JosukeDebt) {
+        this.waitingList = waitingList;
+        this.JotaroRestaurant = JotaroRestaurant;
+        this.JolyneHistory = JolyneHistory;
+        this.JosukeBudget = JosukeBudget;
+        this.JosukeDebt = JosukeDebt;
+    }
+}
+
+
+    
