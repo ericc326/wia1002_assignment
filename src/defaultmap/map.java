@@ -6,14 +6,11 @@ package defaultmap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-/**
- *
- * @author Asus
- */
 import java.util.LinkedList;
 import java.util.List;
 
-public class map implements Serializable {
+
+    public class map {
     // default map
     Location townHall;
     Location cafeDeuxMagots;
@@ -256,7 +253,7 @@ public class map implements Serializable {
         PolnareffLand2.addAdjacentLocation(jadeGarden2, 2);
         PolnareffLand2.addAdjacentLocation(DIOsMansion2, 2);
 
-        cafeDeuxMagots2.addAdjacentLocation(DIOsMansion2, 2);
+        cafeDeuxMagots2.addAdjacentLocation(DIOsMansion2, 1);
         cafeDeuxMagots2.addAdjacentLocation(PassioneRestaurant2, 4);
         cafeDeuxMagots2.addAdjacentLocation(Vineyard2, 4);
 
@@ -382,29 +379,90 @@ public class map implements Serializable {
         }
     }
 
-    public List<Location> getAllLocations() {
-        List<Location> allLocations = new ArrayList<>();
-        allLocations.add(townHall);
-        allLocations.add(cafeDeuxMagots);
-        allLocations.add(jadeGarden);
-        allLocations.add(moriohGrandHotel);
-        allLocations.add(TrattoriaTrussardi);
-        allLocations.add(SanGiorgioMaggiore);
-        allLocations.add(GreenDolphinStreetPrison);
-        allLocations.add(Libeccio);
-        allLocations.add(AngeloRock);
-        allLocations.add(SavageGarden);
-        allLocations.add(PolnareffLand);
-        allLocations.add(JoestarMansion);
-        allLocations.add(Vineyard);
-        allLocations.add(DIOsMansion);
-
-        return allLocations;
+    public List<Location> getDefaultMapLocations() {
+        
+        LinkedList<Location> defaultMap = new LinkedList<>();
+        defaultMap.add(townHall);
+        defaultMap.add(cafeDeuxMagots);
+        defaultMap.add(jadeGarden);
+        defaultMap.add(moriohGrandHotel);
+        defaultMap.add(TrattoriaTrussardi);
+        defaultMap.add(SanGiorgioMaggiore);
+        defaultMap.add(GreenDolphinStreetPrison);
+        defaultMap.add(Libeccio);
+        defaultMap.add(AngeloRock);
+        defaultMap.add(SavageGarden);
+        defaultMap.add(PolnareffLand);
+        defaultMap.add(JoestarMansion);
+        defaultMap.add(Vineyard);
+        defaultMap.add(DIOsMansion);
+        
+        return defaultMap;
     }
+    
+    public List<Location> getParallelMapLocations() {
+        
+        LinkedList<Location> parallelMap = new LinkedList<>();
+        parallelMap.add(townHall1);
+        parallelMap.add(cafeDeuxMagots1);
+        parallelMap.add(jadeGarden1);
+        parallelMap.add(moriohGrandHotel1);
+        parallelMap.add(TrattoriaTrussardi1);
+        parallelMap.add(SanGiorgioMaggiore1);
+        parallelMap.add(GreenDolphinStreetPrison1);
+        parallelMap.add(Libeccio1);
+        parallelMap.add(AngeloRock1);
+        parallelMap.add(SavageGarden1);
+        parallelMap.add(PolnareffLand1);
+        parallelMap.add(JoestarMansion1);
+        parallelMap.add(Vineyard1);
+        parallelMap.add(DIOsMansion1);
+        
+        return parallelMap;
+    }
+    
+    public List<Location> getAlternateMapLocations() {
+        
+        LinkedList<Location> alternateMap = new LinkedList<>();
+        alternateMap.add(townHall2);
+        alternateMap.add(cafeDeuxMagots2);
+        alternateMap.add(jadeGarden2);
+        alternateMap.add(moriohGrandHotel2);
+        alternateMap.add(TrattoriaTrussardi2);
+        alternateMap.add(SanGiorgioMaggiore2);
+        alternateMap.add(GreenDolphinStreetPrison2);
+        alternateMap.add(Libeccio2);
+        alternateMap.add(AngeloRock2);
+        alternateMap.add(SavageGarden2);
+        alternateMap.add(PolnareffLand2);
+        alternateMap.add(JoestarMansion2);
+        alternateMap.add(Vineyard2);
+        alternateMap.add(DIOsMansion2);
+        alternateMap.add(PassioneRestaurant2);
+        
+        return alternateMap;
+    }
+    
+    
 
-    public boolean hasLocation(String locationName) {
-        List<Location> allLocations = getAllLocations();
-
+    public boolean hasLocation(String locationName,String mapType) {
+        
+        List<Location> allLocations=new LinkedList<>();
+        
+        switch (mapType) {
+            case "defaultMap":
+                allLocations = getDefaultMapLocations();
+                break;
+            case "parallelMap":
+                allLocations = getParallelMapLocations();
+                break;
+            case "alternateMap":
+                allLocations = getAlternateMapLocations();
+                break;
+            default:
+                break;
+        }
+        
         for (Location location : allLocations) {
             if (location.getName().equalsIgnoreCase(locationName)) {
                 return true;
@@ -414,9 +472,23 @@ public class map implements Serializable {
         return false;
     }
 
-    public Location getLocationByName(String name) {
-        List<Location> allLocations = getAllLocations();
-
+    public Location getLocationByName(String name,String mapType) {
+         List<Location> allLocations=new LinkedList<>();
+        
+           switch (mapType) {
+            case "defaultMap":
+                allLocations = getDefaultMapLocations();
+                break;
+            case "parallelMap":
+                allLocations = getParallelMapLocations();
+                break;
+            case "alternateMap":
+                allLocations = getAlternateMapLocations();
+                break;
+            default:
+                break;
+        }
+        
         for (Location location : allLocations) {
             if (location.getName().equalsIgnoreCase(name)) {
                 return location;
