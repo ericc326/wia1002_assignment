@@ -1399,17 +1399,19 @@ public class Defaultmap implements Serializable {
         }
     }
 
-    private static void handleVentoAureo() {
-        String map = "";
-        if (gameMap.equals(defaultMap)) {
-            map = "defaultMap";
-        } else if (gameMap.equals(alternateMap)) {
-            map = "alternateMap";
-        } else {
-            map = "parallelMap";
+     private void handleVentoAureo(){
+        String map ="";
+        if(gameMap.equals(defaultMap)){
+            map = "DefaultMap";
+        }
+        else if(gameMap.equals(alternateMap)){
+            map = "AlternateMap";
+        }
+        else{
+            map = "ParallelMap";
         }
         VentoAureo ventoAureo = new VentoAureo();
-        System.out.println("Map: "+map);
+        System.out.print("Map : "+map);
         ventoAureo.initializeMap(map);
         ventoAureo.startVentoAureo();
     }
