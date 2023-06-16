@@ -2,10 +2,11 @@ package Restaurants;
 
 import java.util.Scanner;
 
-public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
+public class MilagroMan {
     static int choice;
     static Scanner scanner = new Scanner(System.in);
     static boolean exit;
+    static int startDay, endDay;
     private String restaurantName;
     private Restaurant restaurant;
 
@@ -59,6 +60,10 @@ public class MilagroMan /* extends MoodyBlues and/or PearlJam */ {
                     System.out.println("Enter food price");
                     double FoodPrice = scanner.nextDouble();
                     scanner.nextLine();
+                    System.out.println("Enter food price");
+                    startDay = scanner.nextInt();
+                    System.out.println("Enter food price");
+                    endDay = scanner.nextInt();
                     try {
                         System.out.println("Creating new food");
                         CreateFood(Foodname, FoodPrice);

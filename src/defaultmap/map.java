@@ -5,14 +5,16 @@
 package defaultmap;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 /**
  *
  * @author Asus
  */
 import java.util.LinkedList;
+import java.util.List;
 
-    public class map implements Serializable{
-        //default map
+public class map implements Serializable {
+    // default map
     Location townHall;
     Location cafeDeuxMagots;
     Location jadeGarden;
@@ -27,8 +29,8 @@ import java.util.LinkedList;
     Location JoestarMansion;
     Location Vineyard;
     Location DIOsMansion;
-    
-    //parallel map
+
+    // parallel map
     Location townHall1;
     Location cafeDeuxMagots1;
     Location jadeGarden1;
@@ -43,8 +45,8 @@ import java.util.LinkedList;
     Location JoestarMansion1;
     Location Vineyard1;
     Location DIOsMansion1;
-    
-    //alternate map
+
+    // alternate map
     Location townHall2;
     Location cafeDeuxMagots2;
     Location jadeGarden2;
@@ -62,7 +64,8 @@ import java.util.LinkedList;
     Location PassioneRestaurant2;
 
     public map() {
-        // Initialize the locations and their adjacent locations with distances(default map)
+        // Initialize the locations and their adjacent locations with distances(default
+        // map)
         townHall = new Location("Town Hall");
         cafeDeuxMagots = new Location("Cafe Deux Magots");
         jadeGarden = new Location("Jade Garden");
@@ -79,20 +82,20 @@ import java.util.LinkedList;
         DIOsMansion = new Location("DIO's Mansion");
 
         // Connect the locations by adding adjacent locations with distances
-        townHall.addAdjacentLocation(cafeDeuxMagots, 4); 
-        townHall.addAdjacentLocation(jadeGarden, 5); 
-        townHall.addAdjacentLocation(moriohGrandHotel, 5); 
-        
-        moriohGrandHotel.addAdjacentLocation(townHall, 5); 
-        moriohGrandHotel.addAdjacentLocation(jadeGarden, 5); 
-        moriohGrandHotel.addAdjacentLocation(TrattoriaTrussardi, 3); 
+        townHall.addAdjacentLocation(cafeDeuxMagots, 4);
+        townHall.addAdjacentLocation(jadeGarden, 5);
+        townHall.addAdjacentLocation(moriohGrandHotel, 5);
 
-        TrattoriaTrussardi.addAdjacentLocation(moriohGrandHotel, 6); 
-        TrattoriaTrussardi.addAdjacentLocation(SanGiorgioMaggiore, 3); 
-        TrattoriaTrussardi.addAdjacentLocation(GreenDolphinStreetPrison, 6); 
-        
-        GreenDolphinStreetPrison.addAdjacentLocation(TrattoriaTrussardi, 6); 
-        GreenDolphinStreetPrison.addAdjacentLocation(Libeccio, 3); 
+        moriohGrandHotel.addAdjacentLocation(townHall, 5);
+        moriohGrandHotel.addAdjacentLocation(jadeGarden, 5);
+        moriohGrandHotel.addAdjacentLocation(TrattoriaTrussardi, 3);
+
+        TrattoriaTrussardi.addAdjacentLocation(moriohGrandHotel, 6);
+        TrattoriaTrussardi.addAdjacentLocation(SanGiorgioMaggiore, 3);
+        TrattoriaTrussardi.addAdjacentLocation(GreenDolphinStreetPrison, 6);
+
+        GreenDolphinStreetPrison.addAdjacentLocation(TrattoriaTrussardi, 6);
+        GreenDolphinStreetPrison.addAdjacentLocation(Libeccio, 3);
         GreenDolphinStreetPrison.addAdjacentLocation(AngeloRock, 2);
 
         PolnareffLand.addAdjacentLocation(cafeDeuxMagots, 4);
@@ -100,48 +103,49 @@ import java.util.LinkedList;
 
         cafeDeuxMagots.addAdjacentLocation(townHall, 4);
         cafeDeuxMagots.addAdjacentLocation(PolnareffLand, 4);
-        cafeDeuxMagots.addAdjacentLocation(jadeGarden,3);
+        cafeDeuxMagots.addAdjacentLocation(jadeGarden, 3);
         cafeDeuxMagots.addAdjacentLocation(SavageGarden, 4);
-        
+
         jadeGarden.addAdjacentLocation(townHall, 5);
         jadeGarden.addAdjacentLocation(cafeDeuxMagots, 3);
         jadeGarden.addAdjacentLocation(moriohGrandHotel, 3);
         jadeGarden.addAdjacentLocation(SanGiorgioMaggiore, 2);
         jadeGarden.addAdjacentLocation(JoestarMansion, 2);
-        
+
         SanGiorgioMaggiore.addAdjacentLocation(jadeGarden, 2);
         SanGiorgioMaggiore.addAdjacentLocation(TrattoriaTrussardi, 3);
         SanGiorgioMaggiore.addAdjacentLocation(Libeccio, 4);
-        
+
         Libeccio.addAdjacentLocation(SanGiorgioMaggiore, 4);
         Libeccio.addAdjacentLocation(JoestarMansion, 6);
         Libeccio.addAdjacentLocation(Vineyard, 6);
         Libeccio.addAdjacentLocation(DIOsMansion, 2);
         Libeccio.addAdjacentLocation(GreenDolphinStreetPrison, 3);
-        
+
         AngeloRock.addAdjacentLocation(GreenDolphinStreetPrison, 2);
         AngeloRock.addAdjacentLocation(DIOsMansion, 3);
-        
+
         DIOsMansion.addAdjacentLocation(Libeccio, 2);
         DIOsMansion.addAdjacentLocation(Vineyard, 3);
         DIOsMansion.addAdjacentLocation(AngeloRock, 3);
-        
+
         JoestarMansion.addAdjacentLocation(jadeGarden, 2);
         JoestarMansion.addAdjacentLocation(Libeccio, 6);
         JoestarMansion.addAdjacentLocation(Vineyard, 3);
         JoestarMansion.addAdjacentLocation(SavageGarden, 4);
-        
+
         SavageGarden.addAdjacentLocation(PolnareffLand, 6);
         SavageGarden.addAdjacentLocation(cafeDeuxMagots, 4);
         SavageGarden.addAdjacentLocation(JoestarMansion, 4);
         SavageGarden.addAdjacentLocation(Vineyard, 8);
-        
+
         Vineyard.addAdjacentLocation(SavageGarden, 8);
         Vineyard.addAdjacentLocation(JoestarMansion, 3);
         Vineyard.addAdjacentLocation(Libeccio, 6);
         Vineyard.addAdjacentLocation(DIOsMansion, 3);
-        
-        // Initialize the locations and their adjacent locations with distances(parallel map)
+
+        // Initialize the locations and their adjacent locations with distances(parallel
+        // map)
         townHall1 = new Location("Town Hall");
         cafeDeuxMagots1 = new Location("Cafe Deux Magots");
         jadeGarden1 = new Location("Jade Garden");
@@ -158,62 +162,62 @@ import java.util.LinkedList;
         DIOsMansion1 = new Location("DIO's Mansion");
 
         // Connect the locations by adding adjacent locations with distances
-        townHall1.addAdjacentLocation(cafeDeuxMagots1, 4); 
-        townHall1.addAdjacentLocation(Libeccio1, 2); 
-        townHall1.addAdjacentLocation(Vineyard1, 3); 
-        townHall1.addAdjacentLocation(TrattoriaTrussardi1, 6); 
+        townHall1.addAdjacentLocation(cafeDeuxMagots1, 4);
+        townHall1.addAdjacentLocation(Libeccio1, 2);
+        townHall1.addAdjacentLocation(Vineyard1, 3);
+        townHall1.addAdjacentLocation(TrattoriaTrussardi1, 6);
 
-        moriohGrandHotel1.addAdjacentLocation(JoestarMansion1, 4); 
-        moriohGrandHotel1.addAdjacentLocation(cafeDeuxMagots1, 6);  
+        moriohGrandHotel1.addAdjacentLocation(JoestarMansion1, 4);
+        moriohGrandHotel1.addAdjacentLocation(cafeDeuxMagots1, 6);
 
-        TrattoriaTrussardi1.addAdjacentLocation(townHall1, 6); 
-        TrattoriaTrussardi1.addAdjacentLocation(JoestarMansion1, 5); 
-        TrattoriaTrussardi1.addAdjacentLocation(DIOsMansion1,4); 
-        TrattoriaTrussardi1.addAdjacentLocation(AngeloRock1,3); 
-        
-        GreenDolphinStreetPrison1.addAdjacentLocation(DIOsMansion1, 6); 
-        GreenDolphinStreetPrison1.addAdjacentLocation(AngeloRock1, 8); 
+        TrattoriaTrussardi1.addAdjacentLocation(townHall1, 6);
+        TrattoriaTrussardi1.addAdjacentLocation(JoestarMansion1, 5);
+        TrattoriaTrussardi1.addAdjacentLocation(DIOsMansion1, 4);
+        TrattoriaTrussardi1.addAdjacentLocation(AngeloRock1, 3);
+
+        GreenDolphinStreetPrison1.addAdjacentLocation(DIOsMansion1, 6);
+        GreenDolphinStreetPrison1.addAdjacentLocation(AngeloRock1, 8);
 
         PolnareffLand1.addAdjacentLocation(cafeDeuxMagots1, 2);
 
         cafeDeuxMagots1.addAdjacentLocation(townHall1, 4);
         cafeDeuxMagots1.addAdjacentLocation(PolnareffLand1, 2);
-        cafeDeuxMagots1.addAdjacentLocation(jadeGarden1,3);
+        cafeDeuxMagots1.addAdjacentLocation(jadeGarden1, 3);
         cafeDeuxMagots1.addAdjacentLocation(SavageGarden1, 5);
         cafeDeuxMagots1.addAdjacentLocation(moriohGrandHotel1, 6);
-        
+
         jadeGarden1.addAdjacentLocation(SavageGarden1, 4);
         jadeGarden1.addAdjacentLocation(cafeDeuxMagots1, 3);
-        jadeGarden1.addAdjacentLocation(JoestarMansion1,3);
-        
+        jadeGarden1.addAdjacentLocation(JoestarMansion1, 3);
+
         SanGiorgioMaggiore1.addAdjacentLocation(SavageGarden1, 6);
         SanGiorgioMaggiore1.addAdjacentLocation(JoestarMansion1, 5);
-        
+
         Libeccio1.addAdjacentLocation(townHall1, 2);
         Libeccio1.addAdjacentLocation(Vineyard1, 3);
- 
+
         AngeloRock1.addAdjacentLocation(GreenDolphinStreetPrison1, 8);
         AngeloRock1.addAdjacentLocation(DIOsMansion1, 1);
         AngeloRock1.addAdjacentLocation(TrattoriaTrussardi1, 3);
-        
+
         DIOsMansion1.addAdjacentLocation(GreenDolphinStreetPrison1, 6);
         DIOsMansion1.addAdjacentLocation(TrattoriaTrussardi1, 4);
         DIOsMansion1.addAdjacentLocation(AngeloRock1, 1);
-        
+
         JoestarMansion1.addAdjacentLocation(jadeGarden1, 3);
         JoestarMansion1.addAdjacentLocation(TrattoriaTrussardi1, 5);
         JoestarMansion1.addAdjacentLocation(moriohGrandHotel1, 4);
         JoestarMansion1.addAdjacentLocation(SanGiorgioMaggiore1, 5);
-        
+
         SavageGarden1.addAdjacentLocation(jadeGarden1, 4);
         SavageGarden1.addAdjacentLocation(cafeDeuxMagots1, 5);
         SavageGarden1.addAdjacentLocation(SanGiorgioMaggiore1, 6);
-        
+
         Vineyard1.addAdjacentLocation(Libeccio1, 3);
         Vineyard1.addAdjacentLocation(townHall1, 3);
-                
 
-        // Initialize the locations and their adjacent locations with distances(alternate map)
+        // Initialize the locations and their adjacent locations with
+        // distances(alternate map)
         townHall2 = new Location("Town Hall");
         cafeDeuxMagots2 = new Location("Cafe Deux Magots");
         jadeGarden2 = new Location("Jade Garden");
@@ -231,21 +235,21 @@ import java.util.LinkedList;
         PassioneRestaurant2 = new Location("Passione Restaurant");
 
         // Connect the locations by adding adjacent locations with distances
-        townHall2.addAdjacentLocation(GreenDolphinStreetPrison2, 3); 
-        townHall2.addAdjacentLocation(PassioneRestaurant2, 7); 
-        townHall2.addAdjacentLocation(moriohGrandHotel2, 2); 
-        
-        moriohGrandHotel2.addAdjacentLocation(townHall2, 2); 
-        moriohGrandHotel2.addAdjacentLocation(GreenDolphinStreetPrison2, 2); 
-        moriohGrandHotel2.addAdjacentLocation(SanGiorgioMaggiore2, 3); 
-        moriohGrandHotel2.addAdjacentLocation(JoestarMansion2, 4); 
+        townHall2.addAdjacentLocation(GreenDolphinStreetPrison2, 3);
+        townHall2.addAdjacentLocation(PassioneRestaurant2, 7);
+        townHall2.addAdjacentLocation(moriohGrandHotel2, 2);
 
-        TrattoriaTrussardi2.addAdjacentLocation(JoestarMansion2, 5); 
-        TrattoriaTrussardi2.addAdjacentLocation(GreenDolphinStreetPrison2, 4); 
-        TrattoriaTrussardi2.addAdjacentLocation(PassioneRestaurant2, 1); 
-        
-        GreenDolphinStreetPrison2.addAdjacentLocation(TrattoriaTrussardi2, 4); 
-        GreenDolphinStreetPrison2.addAdjacentLocation(townHall2, 3); 
+        moriohGrandHotel2.addAdjacentLocation(townHall2, 2);
+        moriohGrandHotel2.addAdjacentLocation(GreenDolphinStreetPrison2, 2);
+        moriohGrandHotel2.addAdjacentLocation(SanGiorgioMaggiore2, 3);
+        moriohGrandHotel2.addAdjacentLocation(JoestarMansion2, 4);
+
+        TrattoriaTrussardi2.addAdjacentLocation(JoestarMansion2, 5);
+        TrattoriaTrussardi2.addAdjacentLocation(GreenDolphinStreetPrison2, 4);
+        TrattoriaTrussardi2.addAdjacentLocation(PassioneRestaurant2, 1);
+
+        GreenDolphinStreetPrison2.addAdjacentLocation(TrattoriaTrussardi2, 4);
+        GreenDolphinStreetPrison2.addAdjacentLocation(townHall2, 3);
         GreenDolphinStreetPrison2.addAdjacentLocation(moriohGrandHotel2, 2);
 
         PolnareffLand2.addAdjacentLocation(AngeloRock2, 2);
@@ -254,31 +258,31 @@ import java.util.LinkedList;
 
         cafeDeuxMagots2.addAdjacentLocation(DIOsMansion2, 2);
         cafeDeuxMagots2.addAdjacentLocation(PassioneRestaurant2, 4);
-        cafeDeuxMagots2.addAdjacentLocation(Vineyard2,4);
-        
+        cafeDeuxMagots2.addAdjacentLocation(Vineyard2, 4);
+
         jadeGarden2.addAdjacentLocation(AngeloRock2, 1);
-        jadeGarden2.addAdjacentLocation(PolnareffLand2,2);
-        
+        jadeGarden2.addAdjacentLocation(PolnareffLand2, 2);
+
         SanGiorgioMaggiore2.addAdjacentLocation(moriohGrandHotel2, 3);
         SanGiorgioMaggiore2.addAdjacentLocation(SavageGarden2, 6);
-        
+
         AngeloRock2.addAdjacentLocation(jadeGarden2, 1);
         AngeloRock2.addAdjacentLocation(PolnareffLand2, 2);
         AngeloRock2.addAdjacentLocation(PassioneRestaurant2, 6);
-        
+
         DIOsMansion2.addAdjacentLocation(PassioneRestaurant2, 2);
         DIOsMansion2.addAdjacentLocation(PolnareffLand2, 2);
         DIOsMansion2.addAdjacentLocation(cafeDeuxMagots2, 1);
-        
+
         JoestarMansion2.addAdjacentLocation(moriohGrandHotel2, 4);
         JoestarMansion2.addAdjacentLocation(TrattoriaTrussardi2, 5);
-        
+
         SavageGarden2.addAdjacentLocation(SanGiorgioMaggiore2, 6);
         SavageGarden2.addAdjacentLocation(Vineyard2, 4);
-        
+
         Vineyard2.addAdjacentLocation(SavageGarden2, 4);
         Vineyard2.addAdjacentLocation(cafeDeuxMagots2, 4);
-        
+
         PassioneRestaurant2.addAdjacentLocation(townHall2, 7);
         PassioneRestaurant2.addAdjacentLocation(cafeDeuxMagots2, 4);
         PassioneRestaurant2.addAdjacentLocation(TrattoriaTrussardi2, 1);
@@ -301,7 +305,7 @@ import java.util.LinkedList;
         defaultMap.add(JoestarMansion);
         defaultMap.add(Vineyard);
         defaultMap.add(DIOsMansion);
-        
+
         LinkedList<Location> parallelMap = new LinkedList<>();
         parallelMap.add(townHall1);
         parallelMap.add(cafeDeuxMagots1);
@@ -317,7 +321,7 @@ import java.util.LinkedList;
         parallelMap.add(JoestarMansion1);
         parallelMap.add(Vineyard1);
         parallelMap.add(DIOsMansion1);
-        
+
         LinkedList<Location> alternateMap = new LinkedList<>();
         alternateMap.add(townHall2);
         alternateMap.add(cafeDeuxMagots2);
@@ -335,10 +339,9 @@ import java.util.LinkedList;
         alternateMap.add(DIOsMansion2);
         alternateMap.add(PassioneRestaurant2);
 
-        
     }
-    
-public class Location implements Serializable{
+
+    public class Location implements Serializable {
         private String name;
         private LinkedList<AdjacentLocation> adjacentLocations;
 
@@ -352,15 +355,15 @@ public class Location implements Serializable{
             adjacentLocations.add(adjacentLocation);
         }
 
-        public String getName(){
+        public String getName() {
             return name;
         }
-        
-        public LinkedList<AdjacentLocation> getAdjacentLocations(){
+
+        public LinkedList<AdjacentLocation> getAdjacentLocations() {
             return adjacentLocations;
         }
 
-public class AdjacentLocation implements Serializable{
+        public class AdjacentLocation implements Serializable {
             private Location location;
             private int distance;
 
@@ -369,13 +372,71 @@ public class AdjacentLocation implements Serializable{
                 this.distance = distance;
             }
 
-    public Location getLocation() {
-        return location;
+            public Location getLocation() {
+                return location;
+            }
+
+            public int getDistance() {
+                return distance;
+            }
+        }
     }
 
-    public int getDistance() {
-        return distance;
+    public List<Location> getAllLocations() {
+        List<Location> allLocations = new ArrayList<>();
+        allLocations.add(townHall);
+        allLocations.add(cafeDeuxMagots);
+        allLocations.add(jadeGarden);
+        allLocations.add(moriohGrandHotel);
+        allLocations.add(TrattoriaTrussardi);
+        allLocations.add(SanGiorgioMaggiore);
+        allLocations.add(GreenDolphinStreetPrison);
+        allLocations.add(Libeccio);
+        allLocations.add(AngeloRock);
+        allLocations.add(SavageGarden);
+        allLocations.add(PolnareffLand);
+        allLocations.add(JoestarMansion);
+        allLocations.add(Vineyard);
+        allLocations.add(DIOsMansion);
+
+        return allLocations;
+    }
+
+    public boolean hasLocation(String locationName) {
+        List<Location> allLocations = getAllLocations();
+
+        for (Location location : allLocations) {
+            if (location.getName().equalsIgnoreCase(locationName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Location getLocationByName(String name) {
+        List<Location> allLocations = getAllLocations();
+
+        for (Location location : allLocations) {
+            if (location.getName().equalsIgnoreCase(name)) {
+                return location;
+            }
+        }
+
+        return null; // Location not found
+    }
+
+    public int getDistanceBetweenLocations(Location location1, Location location2) {
+
+        if (location1 != null && location2 != null) {
+            LinkedList<Location.AdjacentLocation> adjacentLocations = location1.getAdjacentLocations();
+            for (Location.AdjacentLocation adjacentLocation : adjacentLocations) {
+                if (adjacentLocation.getLocation().equals(location2)) {
+                    return adjacentLocation.getDistance();
+                }
+            }
+        }
+
+        return -1; // Locations are not adjacent or not found
     }
 }
-}
-    }

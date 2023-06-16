@@ -5,8 +5,8 @@ package Restaurants;
  */
 //package GroupAssignment;
 
-import java.io.Serializable;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -14,12 +14,13 @@ import java.util.List;
  */
 public class Sale implements Serializable{
     private int day;
-    private String food;
+    private Food food;
     private int quantity;
     private double totalPrice;
-    public static List<Sale> SaleList;
+    public static List<Food> foodList;
+    public static HashMap<Sale> SaleList;
     
-    public Sale(int day, String food, int quantity, double totalPrice) {
+    public Sale(int day, Food food, double totalPrice) {
         this.day = day;
         this.food = food;
         this.quantity = quantity;
@@ -30,7 +31,7 @@ public class Sale implements Serializable{
         return day;
     }
     
-    public String getFood() {
+    public Food getFood() {
         return food;
     }
     
@@ -40,6 +41,22 @@ public class Sale implements Serializable{
     
     public double getTotalPrice() {
         return totalPrice;
+    }
+
+    public static void updateSaleList(Sale sale){
+        for (Food food : foodList) {
+            
+            
+        }
+    }
+    
+    public static Sale getSaleByFood(Food food){
+        for (int i = 0; i < SaleList.size(); i++) {
+            if(SaleList.get(i).food.equals(food)){
+                return SaleList.get(i);
+            }
+        }
+        return null;
     }
 }
 

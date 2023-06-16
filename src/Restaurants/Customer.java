@@ -20,11 +20,11 @@ public class Customer implements Serializable {
             TTList = new LinkedList<>(),
             LibeccioList = new LinkedList<>(),
             SavageList = new LinkedList<>();
-    public static Residents residents = new Residents();
     public static Restaurant JotaroRestaurant;
     public static Stack<Restaurant> JolyneHistory = new Stack<>();
     private static Double JosukeBudget = 100.00;
     private static List<Double> JosukeDebt = new LinkedList<>();
+    public static Residents residents = new Residents();
 
     public Customer(String name, int age, String gender) {
         this.name = name;
@@ -34,6 +34,15 @@ public class Customer implements Serializable {
         this.foodFrequency = new HashMap<>();
         this.restaurantHistory = new Stack<>();
         this.restaurantFrequency = new HashMap<>();
+    }
+
+    public Customer(List<Customer> waitingList, Restaurant JotaroRestaurant,
+            Stack<Restaurant> JolyneHistory, Double JosukeBudget, List<Double> JosukeDebt) {
+        Customer.waitingList = waitingList;
+        Customer.JotaroRestaurant = JotaroRestaurant;
+        Customer.JolyneHistory = JolyneHistory;
+        Customer.JosukeBudget = JosukeBudget;
+        Customer.JosukeDebt = JosukeDebt;
     }
 
     public Customer() {
@@ -104,6 +113,7 @@ public class Customer implements Serializable {
                     Restaurant res = Restaurant.getRandomRestaurant();
                     Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                     setFood(res, customer, food);
+                    break;
             }
         }
     }
