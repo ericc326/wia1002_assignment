@@ -593,6 +593,9 @@ public class Residents {
             case 3:
                 r.clear();
                 break;
+            default:
+                System.out.println("Invalid input.");
+                return;
         }
     }
 

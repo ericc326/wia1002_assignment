@@ -1328,7 +1328,7 @@ public class Defaultmap implements Serializable {
     }
 
     private static void handleWaitingList() {
-
+        Customer.showRestaurantList(currentLocation.getName());
     }
 
     private static void handleViewMenu() {

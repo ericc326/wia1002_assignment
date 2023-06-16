@@ -213,7 +213,7 @@ public class Customer implements Serializable {
                         while (food.equals(customer.orderHistory.peek())) {
                             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                         }
-                    }else{
+                    } else {
                         res = Restaurant.getRandomRestaurant();
                         food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                     }
@@ -232,7 +232,7 @@ public class Customer implements Serializable {
                         while (food.equals(customer.orderHistory.peek())) {
                             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                         }
-                    }else{
+                    } else {
                         res = Restaurant.getRandomRestaurant();
                         food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                     }
@@ -307,6 +307,46 @@ public class Customer implements Serializable {
         return null;
     }
 
+    public static void showRestaurantList(String RestaurantName) {
+        List<Customer> temp;
+        switch (RestaurantName) {
+            case "Jade Garden":
+                temp = JadeList;
+                break;
+            case "Cafe Deux Magots":
+                temp = CafeList;
+                break;
+            case "Trattoria Trussardi":
+                temp = TTList;
+                break;
+            case "Libeccio":
+                temp = LibeccioList;
+                break;
+            case "SavageGarden":
+                temp = SavageList;
+                break;
+            default:
+                temp = waitingList;
+                break;
+        }
+        System.out.println("Waiting list for " + RestaurantName);
+        System.out.println(
+                "+-----+----------------------------------------------+----------------+---------------------------------+");
+        System.out.println(
+                "+ No |        Customer                                  |   Price        |      Food                 |");
+        System.out.println(
+                "+-----+----------------------------------------------+----------------+---------------------------------+");
+        if (!temp.isEmpty()) {
+            for (int i = 0; i < temp.size(); i++) {
+                System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", i + 1, temp.get(i).name,
+                temp.get(i).food.FoodPrice, temp.get(i).food.FoodName);
+            }
+        }
+
+        System.out.println(
+                "+-----+----------------------------------------------+----------------+---------------------------------+");
+    }
+
     public static DataCustomer CustomerDataSave() {
         DataCustomer data = new DataCustomer(waitingList, JotaroRestaurant, JolyneHistory, JosukeBudget, JosukeDebt);
         return data;
@@ -337,6 +377,3 @@ class DataCustomer {
         this.JosukeDebt = JosukeDebt;
     }
 }
-
-
-    
