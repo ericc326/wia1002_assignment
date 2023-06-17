@@ -1399,7 +1399,7 @@ public class Defaultmap implements Serializable {
         }
     }
 
-     private void handleVentoAureo(){
+    private static  void handleVentoAureo(){
         String map ="";
         if(gameMap.equals(defaultMap)){
             map = "DefaultMap";
