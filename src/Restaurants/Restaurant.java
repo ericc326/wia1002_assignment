@@ -249,6 +249,7 @@ public class Restaurant implements Serializable {
     // Jade Garden rule: Process customers in pairs (first and last, second and
     // second-last, etc.)
     public void processJadeGarden() {
+        List<Customer> processedList = new LinkedList<>();
         List<Customer> tempList = Customer.JadeList;
         int start = 0;
         int end = tempList.size() - 1;
@@ -258,8 +259,8 @@ public class Restaurant implements Serializable {
             Customer last = tempList.get(end);
 
             // Process first and last customers
-            serveCustomer(first);
-            serveCustomer(last);
+            processedList = serveCustomer(first, processedList);
+            processedList = serveCustomer(last, processedList);
 
             start++;
             end--;
@@ -268,13 +269,15 @@ public class Restaurant implements Serializable {
         if (start == end) {
             // Process the customer in the middle if there is one remaining
             Customer middle = tempList.get(start);
-            serveCustomer(middle);
+            processedList = serveCustomer(middle, processedList);
         }
+        Customer.JadeList = processedList;
     }
 
     // Cafe Deux Magots rule: Select oldest and youngest customers in turns until
     // everyone is served
     public void processCafeDeuxMagots() {
+        List<Customer> processedList = new LinkedList<>();
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<Customer>();
 
         for (int i = 0; i < Customer.CafeList.size(); i++) {
@@ -294,8 +297,8 @@ public class Restaurant implements Serializable {
             Customer oldest = tempList.get(end);
 
             // Process youngest and oldest customers
-            serveCustomer(youngest);
-            serveCustomer(oldest);
+            processedList = serveCustomer(youngest, processedList);
+            processedList = serveCustomer(oldest, processedList);
 
             start++;
             end--;
@@ -304,16 +307,18 @@ public class Restaurant implements Serializable {
         if (start == end) {
             // Process the customer in the middle if there is one remaining
             Customer middle = tempList.get(start);
-            serveCustomer(middle);
+            processedList = serveCustomer(middle, processedList);
         }
         for (int i = 0; i < tempList2.size(); i++) {
-            serveCustomer(tempList2.get(i));
+            processedList = serveCustomer(tempList2.get(i), processedList);
         }
+        Customer.CafeList = processedList;
     }
 
     // Trattoria Trussardi rule: Serve youngest man, oldest woman, oldest man,
     // youngest woman, alternating genders
     public void processTrattoriaTrussardi() {
+        List<Customer> processedList = new LinkedList<>();
         List<Customer> tempList = new ArrayList<Customer>(), tempList2 = new ArrayList<>();
 
         for (int i = 0; i < Customer.TTList.size(); i++) {
@@ -346,22 +351,22 @@ public class Restaurant implements Serializable {
             if (!males.isEmpty()) {
                 // System.out.println("Serve youngest man");
                 // System.out.println(males.get(0).name);
-                serveCustomer(males.get(0));
+                processedList = serveCustomer(males.get(0), processedList);
                 males.remove(0);
             }
             if (!females.isEmpty()) {
                 // System.out.println("Serve oldest woman");
-                serveCustomer(females.get(females.size() - 1));
+                processedList = serveCustomer(females.get(females.size() - 1), processedList);
                 females.remove(females.size() - 1);
             }
             if (!males.isEmpty()) {
                 // System.out.println("Serve oldest man");
-                serveCustomer(males.get(males.size() - 1));
+                processedList = serveCustomer(males.get(males.size() - 1), processedList);
                 males.remove(males.size() - 1);
             }
             if (!females.isEmpty()) {
                 // System.out.println("Serve youngest woman");
-                serveCustomer(females.get(0));
+                processedList = serveCustomer(females.get(0), processedList);
                 females.remove(0);
             }
         }
@@ -376,30 +381,32 @@ public class Restaurant implements Serializable {
         while (!males.isEmpty() || !females.isEmpty()) {
             if (!males.isEmpty()) {
                 // System.out.println("Serve youngest man");
-                serveCustomer(males.get(0));
+                processedList = serveCustomer(males.get(0), processedList);
                 males.remove(0);
             }
             if (!females.isEmpty()) {
                 // System.out.println("Serve oldest woman");
-                serveCustomer(females.get(females.size() - 1));
+                processedList = serveCustomer(females.get(females.size() - 1), processedList);
                 females.remove(females.size() - 1);
             }
             if (!males.isEmpty()) {
                 // System.out.println("Serve oldest man");
-                serveCustomer(males.get(males.size() - 1));
+                processedList = serveCustomer(males.get(males.size() - 1), processedList);
                 males.remove(males.size() - 1);
             }
             if (!females.isEmpty()) {
                 // System.out.println("Serve youngest woman");
-                serveCustomer(females.get(0));
+                processedList = serveCustomer(females.get(0), processedList);
                 females.remove(0);
             }
         }
+        Customer.TTList = processedList;
     }
 
     // Libeccio rule: Remove customers based on their numbers being multiples of the
     // current day number
     public void processLibeccio(int currentDayNumber) {
+        List<Customer> processedList = new LinkedList<>();
         this.currentDayNumber = currentDayNumber;
         List<Customer> tempList = Customer.LibeccioList;
 
@@ -409,17 +416,19 @@ public class Restaurant implements Serializable {
             if ((i + 1) % currentDayNumber == 0) {
                 tempStack.push(tempList.get(i));
             } else {
-                serveCustomer(tempList.get(i));
+                processedList = serveCustomer(tempList.get(i), processedList);
             }
         }
         while (!tempStack.isEmpty()) {
-            serveCustomer(tempStack.pop());
+            processedList = serveCustomer(tempStack.pop(), processedList);
         }
+        Customer.LibeccioList = processedList;
     }
 
     // Savage Garden rule: Serve customers based on their numbers matching the day
     // number
     public void processSavageGarden(int currentDayNumber) {
+        List<Customer> processedList = new LinkedList<>();
         this.currentDayNumber = currentDayNumber;
         List<Customer> tempList = Customer.SavageList;
 
@@ -427,7 +436,7 @@ public class Restaurant implements Serializable {
 
         for (int i = 0; i < tempList.size(); i++) {
             if ((i + 1) % currentDayNumber == 0) {
-                serveCustomer(tempList.get(i));
+                processedList = serveCustomer(tempList.get(i), processedList);
                 // tempQ.push(waitingList.get(i));
             } else {
                 tempQ.push(tempList.get(i));
@@ -435,16 +444,14 @@ public class Restaurant implements Serializable {
             }
         }
         while (!tempQ.isEmpty()) {
-            serveCustomer(tempQ.pop());
+            processedList = serveCustomer(tempQ.pop(), processedList);
         }
+        Customer.SavageList = processedList;
     }
 
-    private void serveCustomer(Customer customer) {
-        // System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
-        // Sale sale = new Sale(Defaultmap.currentDay,
-        // Defaultmap.currentLocation.getName(), 1, customer.food.getFoodPrice());
-        // Sale.SaleList.add(sale);
-        // Perform serving operations
+    private List<Customer> serveCustomer(Customer customer, List<Customer> processedList) {
+        processedList.add(customer);
+        return processedList;
     }
 
     public static List<Food> getAllFood() {

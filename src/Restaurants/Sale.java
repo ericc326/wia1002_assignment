@@ -24,16 +24,16 @@ public class Sale {
         if (saleList == null) {
             saleList = new LinkedList<>();
             saleList.add(new Sale(restaurantName, day, food, quantity, totalPrice));
-            //System.out.println(saleList);
+            // System.out.println(saleList);
         } else {
-            //System.out.println(saleList.size());
+            // System.out.println(saleList.size());
             int pos = -1;
             boolean listContains = false;
             for (int i = 0; i < saleList.size(); i++) {
                 // System.out.println(i);
                 if (saleList.get(i).getFood().equals(food)) {
-                    pos=i;
-                    listContains=true;
+                    pos = i;
+                    listContains = true;
                 }
             }
             if (listContains) {
@@ -86,15 +86,22 @@ public class Sale {
         HashMap<Integer, List<Sale>> newHash = new HashMap<>();
         List<Sale> temp = new LinkedList<>();
         for (int i = 0; i < Defaultmap.currentDay; i++) {
+            temp.clear();
             for (int j = 0; j < sales.size(); j++) {
                 if (sales.get(j).getDay() == (i + 1)) {
                     temp.add(sales.get(j));
                 }
             }
-            newHash.put(i, temp);
-            temp.clear();
+            newHash.put(i + 1, temp);
         }
-        System.out.println(newHash);
+        /*
+         * for (int i = 0; i < newHash.keySet().size(); i++) {
+         * System.out.println("check");
+         * for (int j = 0; j < newHash.get(i+1).size(); j++) {
+         * System.out.println(newHash.get(i+1).get(j).getFood().getFoodName());
+         * }
+         * }
+         */
         return newHash;
     }
 }

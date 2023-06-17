@@ -102,7 +102,7 @@ public class Defaultmap implements Serializable {
     private static void selectMap() {
         Restaurant.InitializeRestaurant();
         Customer.getAllResidentAsCustomer();
-        ProcessOrder.doProcess();
+        Customer.doProcess();
         System.out.println("Select a map:");
         System.out.println("[1] Default Map");
         System.out.println("[2] Parallel Map");
@@ -1245,7 +1245,7 @@ public class Defaultmap implements Serializable {
     public static void handleAdvanceToNextDay() {
         currentDay++;
         r.readForMenu(currentDay);
-        ProcessOrder.doProcess();
+        Customer.doProcess();
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {
             currentLocation = defaultMap.townHall;

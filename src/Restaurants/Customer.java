@@ -342,12 +342,32 @@ public class Customer implements Serializable {
         if (!temp.isEmpty()) {
             for (int i = 0; i < temp.size(); i++) {
                 System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", i + 1, temp.get(i).name,
-                temp.get(i).food.getFoodPrice(), temp.get(i).food.getFoodName());
+                        temp.get(i).food.getFoodPrice(), temp.get(i).food.getFoodName());
             }
         }
-
         System.out.println(
                 "+-----+----------------------------------------------+----------------+---------------------------------+");
+    }
+
+    public static void doProcess() {
+        Customer.assignRestaurantAndFood();
+        Restaurant restaurant = new Restaurant();
+        Restaurant.setWaitingList(Customer.waitingList);
+
+        // System.out.println("Processing Jade Garden rule:");
+        restaurant.processJadeGarden();
+
+        // System.out.println("\nProcessing Cafe Deux Magots rule:");
+        restaurant.processCafeDeuxMagots();
+
+        // System.out.println("\nProcessing Trattoria Trussardi rule:");
+        restaurant.processTrattoriaTrussardi();
+
+        // System.out.println("\nProcessing Libeccio rule:");
+        restaurant.processLibeccio(Defaultmap.currentDay);
+
+        // System.out.println("\nProcessing Savage Garden rule:");
+        restaurant.processSavageGarden(Defaultmap.currentDay);
     }
 
     public static DataCustomer CustomerDataSave() {
