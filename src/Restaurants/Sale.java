@@ -10,7 +10,7 @@ public class Sale {
     private Food food;
     private int quantity;
     private double totalPrice;
-    public static List<Sale> saleList = new LinkedList<>();
+    public static List<Sale> saleList;
 
     public Sale(String restaurantName, int day, Food food, int quantity, double totalPrice) {
         this.restaurantName = restaurantName;
@@ -21,16 +21,28 @@ public class Sale {
     }
 
     public static void addSale(String restaurantName, int day, Food food, int quantity, double totalPrice) {
-        if (!saleList.isEmpty()) {
+        if (saleList == null) {
+            saleList = new LinkedList<>();
+            saleList.add(new Sale(restaurantName, day, food, quantity, totalPrice));
+            //System.out.println(saleList);
+        } else {
+            //System.out.println(saleList.size());
+            int pos = -1;
+            boolean listContains = false;
             for (int i = 0; i < saleList.size(); i++) {
-                if (saleList.get(i).food.equals(food)) {
-                    saleList.get(i).quantity++;
-                    saleList.get(i).totalPrice += food.getFoodPrice();
-                    return;
+                // System.out.println(i);
+                if (saleList.get(i).getFood().equals(food)) {
+                    pos=i;
+                    listContains=true;
                 }
             }
-        } else {
-            saleList.add(new Sale(restaurantName, day, food, quantity, totalPrice));
+            if (listContains) {
+                saleList.get(pos).quantity++;
+                saleList.get(pos).totalPrice += food.getFoodPrice();
+            } else {
+                saleList.add(new Sale(restaurantName, day, food, quantity, totalPrice));
+            }
+
         }
     }
 
@@ -69,13 +81,13 @@ public class Sale {
         return temp;
     }
 
-    public static HashMap<Integer, List<Sale>> getSaleHash(String restaurantName){
+    public static HashMap<Integer, List<Sale>> getSaleHash(String restaurantName) {
         List<Sale> sales = getSaleListByRestaurantName(restaurantName);
         HashMap<Integer, List<Sale>> newHash = new HashMap<>();
         List<Sale> temp = new LinkedList<>();
         for (int i = 0; i < Defaultmap.currentDay; i++) {
             for (int j = 0; j < sales.size(); j++) {
-                if (sales.get(j).getDay()==(i+1)) {
+                if (sales.get(j).getDay() == (i + 1)) {
                     temp.add(sales.get(j));
                 }
             }

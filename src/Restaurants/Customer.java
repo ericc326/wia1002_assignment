@@ -36,15 +36,6 @@ public class Customer implements Serializable {
         this.restaurantFrequency = new HashMap<>();
     }
 
-    public Customer(List<Customer> waitingList, Restaurant JotaroRestaurant,
-            Stack<Restaurant> JolyneHistory, Double JosukeBudget, List<Double> JosukeDebt) {
-        Customer.waitingList = waitingList;
-        Customer.JotaroRestaurant = JotaroRestaurant;
-        Customer.JolyneHistory = JolyneHistory;
-        Customer.JosukeBudget = JosukeBudget;
-        Customer.JosukeDebt = JosukeDebt;
-    }
-
     public Customer() {
     }
 
@@ -110,9 +101,9 @@ public class Customer implements Serializable {
                     JolyneOrder(customer);
                     break;
                 default:
-                    Restaurant res = Restaurant.getRandomRestaurant();
-                    Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
-                    setFood(res, customer, food);
+                    Restaurant r = Restaurant.getRandomRestaurant();
+                    Food f = Restaurant.getRandomFoodByRestaurantName(r.getRestaurantName());
+                    setFoodSale(r, customer, f);
                     break;
             }
         }
@@ -157,7 +148,7 @@ public class Customer implements Serializable {
             }
         }
         customer.foodFrequency.put(food, check + 1);
-        setFood(res, customer, food);
+        setFoodSale(res, customer, food);
     }
 
     public static void JosephOrder(Customer customer) {
@@ -168,7 +159,7 @@ public class Customer implements Serializable {
             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
         }
 
-        setFood(res, customer, food);
+        setFoodSale(res, customer, food);
     }
 
     public static void JotaroOrder(Customer customer) {
@@ -184,7 +175,7 @@ public class Customer implements Serializable {
             }
         }
         JotaroRestaurant = res;
-        setFood(res, customer, food);
+        setFoodSale(res, customer, food);
     }
 
     public static void JosukeOrder(Customer customer) {
@@ -206,12 +197,12 @@ public class Customer implements Serializable {
         } else {
             JosukeBudget = JosukeBudget - price;
         }
-        setFood(res, customer, food);
+        setFoodSale(res, customer, food);
     }
 
     public static void GiornoOrder(Customer customer) {
         String day = Defaultmap.getDayOfWeek(Defaultmap.currentDay);
-        Restaurant res = new Restaurant().getResByName("Trattoria Trussardi");
+        Restaurant res = Restaurant.getResByName("Trattoria Trussardi");
         int temp;
         Food food = null;
         switch (day) {
@@ -264,7 +255,7 @@ public class Customer implements Serializable {
         } else {
             customer.restaurantFrequency.put(res, 1);
         }
-        setFood(res, customer, food);
+        setFoodSale(res, customer, food);
     }
 
     public static void JolyneOrder(Customer customer) {
@@ -292,10 +283,10 @@ public class Customer implements Serializable {
                 break;
         }
         Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
-        setFood(res, customer, food);
+        setFoodSale(res, customer, food);
     }
 
-    private static void setFood(Restaurant res, Customer customer, Food food) {
+    private static void setFoodSale(Restaurant res, Customer customer, Food food) {
         customer.setFood(food);
         if (customer.orderHistory.contains(food)) {
             Integer i = customer.foodFrequency.get(food) + 1;
@@ -306,7 +297,8 @@ public class Customer implements Serializable {
             customer.foodFrequency.put(food, 1);
         }
         addToRestaurantList(res.getRestaurantName(), customer);
-        Sale.addSale(Restaurant.getRestNameByFood(food),Defaultmap.currentDay, food, 1, food.getFoodPrice());
+        String temp = Restaurant.getRestNameByFood(food);
+        Sale.addSale(temp, Defaultmap.currentDay, food, 1, food.getFoodPrice());
     }
 
     public static Customer getCustomerbyName(String CusName) {

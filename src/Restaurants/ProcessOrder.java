@@ -10,19 +10,20 @@ public class ProcessOrder {
         Restaurant.setWaitingList(Customer.waitingList);
 
         //restaurant.showWaitingList();
-        System.out.println("Processing Jade Garden rule:");
+        
+        //System.out.println("Processing Jade Garden rule:");
         restaurant.processJadeGarden();
 
-        System.out.println("\nProcessing Cafe Deux Magots rule:");
+        //System.out.println("\nProcessing Cafe Deux Magots rule:");
         restaurant.processCafeDeuxMagots();
 
-        System.out.println("\nProcessing Trattoria Trussardi rule:");
+        //System.out.println("\nProcessing Trattoria Trussardi rule:");
         restaurant.processTrattoriaTrussardi();
 
-        System.out.println("\nProcessing Libeccio rule:");
+        //System.out.println("\nProcessing Libeccio rule:");
         restaurant.processLibeccio(Defaultmap.currentDay);
 
-        System.out.println("\nProcessing Savage Garden rule:");
+        //System.out.println("\nProcessing Savage Garden rule:");
         restaurant.processSavageGarden(Defaultmap.currentDay);
     }
 }

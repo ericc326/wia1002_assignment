@@ -160,7 +160,7 @@ public class Defaultmap implements Serializable {
         } else if (selectedMap == alternateMap) {
             currentLocation = alternateMap.townHall2;
         }
-        System.out.println("check");
+        //System.out.println("check");
     }
 
     public static void loadGame() {

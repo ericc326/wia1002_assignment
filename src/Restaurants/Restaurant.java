@@ -41,7 +41,8 @@ public class Restaurant implements Serializable {
     public void setMenu(List<Food> Menu) {
         this.Menu = Menu;
     }
-    public static void setWaitingList(List<Customer> waitingList){
+
+    public static void setWaitingList(List<Customer> waitingList) {
         Restaurant.waitingList = waitingList;
     }
 
@@ -66,7 +67,7 @@ public class Restaurant implements Serializable {
         Food BraisedGooseWebWithVermicelli = new Food("Braised Goose Web with Vermicelli", 21.00);
         Food DeepFriedHiroshimaOysters = new Food("Deep Fried Hiroshima Oysters", 17.00);
         Food PoachedTofuWithDriedShrimp = new Food("Poached Tofu with Dried Shrimp", 12.00);
-        Food ScrambledEggWhiteWithMilk = new Food("ScrambledEggWhiteWithMilk", 10.00);
+        Food ScrambledEggWhiteWithMilk = new Food("Scrambled Egg White With Milk", 10.00);
 
         foods1.add(BraisedChickenInBlackBeanSauce);
         foods1.add(BraisedGooseWebWithVermicelli);
@@ -185,11 +186,11 @@ public class Restaurant implements Serializable {
         resList.add(TrattoriaTrussardi);
         resList.add(Libeccio);
         resList.add(SavageGarden);
-        //System.out.println(resList.toString()); // <-check
+        // System.out.println(resList.toString()); // <-check
         System.out.println("\nLOADING...\n");
     }
 
-    public Restaurant getResByName(String RestaurantName) {
+    public static Restaurant getResByName(String RestaurantName) {
         for (int i = 0; i < Restaurant.resList.size(); i++) {
             if (Restaurant.resList.get(i).RestaurantName.equals(RestaurantName)) {
                 return resList.get(i);
@@ -208,8 +209,7 @@ public class Restaurant implements Serializable {
     }
 
     public static Food getRandomFoodByRestaurantName(String RestaurantName) {
-        Restaurant resTemp = new Restaurant();
-        resTemp = resTemp.getResByName(RestaurantName);
+        Restaurant resTemp = Restaurant.getResByName(RestaurantName);
         List<Food> foodList = resTemp.getMenu();
 
         Random rand = new Random();
@@ -220,7 +220,7 @@ public class Restaurant implements Serializable {
         return foodList.get(randomNum);
     }
 
-    public static Restaurant getRandomRestaurant(){
+    public static Restaurant getRandomRestaurant() {
         Random rand = new Random();
         int randomNum = rand.nextInt((resList.size() - 1) + 1);
         return resList.get(randomNum);
@@ -339,13 +339,13 @@ public class Restaurant implements Serializable {
             }
         }
 
-        //System.out.println(males.isEmpty());
-        //System.out.println(females.isEmpty());
+        // System.out.println(males.isEmpty());
+        // System.out.println(females.isEmpty());
 
         while (!males.isEmpty() || !females.isEmpty()) {
             if (!males.isEmpty()) {
-                //System.out.println("Serve youngest man");
-                //System.out.println(males.get(0).name);
+                // System.out.println("Serve youngest man");
+                // System.out.println(males.get(0).name);
                 serveCustomer(males.get(0));
                 males.remove(0);
             }
@@ -440,13 +440,14 @@ public class Restaurant implements Serializable {
     }
 
     private void serveCustomer(Customer customer) {
-        System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
-        //Sale sale = new Sale(Defaultmap.currentDay, Defaultmap.currentLocation.getName(), 1, customer.food.getFoodPrice());
-        //Sale.SaleList.add(sale);
+        // System.out.println("Serving customer: " + customer.name + "\nFood ordered: " + customer.food.getFoodName());
+        // Sale sale = new Sale(Defaultmap.currentDay,
+        // Defaultmap.currentLocation.getName(), 1, customer.food.getFoodPrice());
+        // Sale.SaleList.add(sale);
         // Perform serving operations
     }
 
-    public static List<Food> getAllFood(){
+    public static List<Food> getAllFood() {
         allFood.addAll(JadeGarden.getMenu());
         allFood.addAll(CafeDeuxMagots.getMenu());
         allFood.addAll(TrattoriaTrussardi.getMenu());
@@ -455,9 +456,9 @@ public class Restaurant implements Serializable {
         return allFood;
     }
 
-    public static String getRestNameByFood(Food food){
+    public static String getRestNameByFood(Food food) {
         for (int i = 0; i < resList.size(); i++) {
-            List<Food> menu = resList.get(i).Menu;
+            List<Food> menu = resList.get(i).getMenu();
             for (int j = 0; j < menu.size(); j++) {
                 if (menu.get(j).equals(food)) {
                     return resList.get(i).RestaurantName;
@@ -476,7 +477,7 @@ public class Restaurant implements Serializable {
         System.out.println("//---------------------------------------------//\n");
     }
 
-    //====================================================================//
+    // ====================================================================//
     public String[] InitializeRestaurantProcess(Void n) {
 
         // Create a HashMap to store the restaurant menu
