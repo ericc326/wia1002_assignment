@@ -718,8 +718,9 @@ public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
     }
      
     private static void displayVineyardOptions() {
-        int i = 3;
+        int i = 4;
         System.out.println("[2] View Resident Information");
+        System.out.println("[3] Vento Aureo");
         if(!locationHistory.empty()){
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
@@ -742,6 +743,8 @@ public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
+                handleVentoAureo();
+            case "4":
                 // r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
@@ -750,7 +753,7 @@ public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
                 else if(locationHistory.empty() && ForwardLocationHistory.empty())
                     handleDirectBackToTownHall();
                 break;
-            case "4":
+            case "5":
                 if(locationHistory.empty() && ForwardLocationHistory.empty()){
                     System.out.println("Invalid input. Please choose again\n");
                 }else if((!locationHistory.empty() && ForwardLocationHistory.empty()) || (locationHistory.empty() && !ForwardLocationHistory.empty())){
@@ -758,7 +761,7 @@ public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
                 }else if(!locationHistory.empty() && !ForwardLocationHistory.empty())
                     handleForwardToNewLocation();
                 break;
-            case "5":
+            case "6":
                 if(!locationHistory.empty() && !ForwardLocationHistory.empty())
                     handleDirectBackToTownHall();
                 else{
