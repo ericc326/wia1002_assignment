@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
-    public class map {
+public class map {
     // default map
     Location townHall;
     Location cafeDeuxMagots;
@@ -376,11 +375,21 @@ import java.util.List;
             public int getDistance() {
                 return distance;
             }
+
+            @Override
+            public String toString() {
+                return location.getName(); // Access the name field from the Location class
+            }
+        }
+
+        @Override
+        public String toString() {
+            return name;
         }
     }
 
     public List<Location> getDefaultMapLocations() {
-        
+
         LinkedList<Location> defaultMap = new LinkedList<>();
         defaultMap.add(townHall);
         defaultMap.add(cafeDeuxMagots);
@@ -396,12 +405,12 @@ import java.util.List;
         defaultMap.add(JoestarMansion);
         defaultMap.add(Vineyard);
         defaultMap.add(DIOsMansion);
-        
+
         return defaultMap;
     }
-    
+
     public List<Location> getParallelMapLocations() {
-        
+
         LinkedList<Location> parallelMap = new LinkedList<>();
         parallelMap.add(townHall1);
         parallelMap.add(cafeDeuxMagots1);
@@ -417,12 +426,12 @@ import java.util.List;
         parallelMap.add(JoestarMansion1);
         parallelMap.add(Vineyard1);
         parallelMap.add(DIOsMansion1);
-        
+
         return parallelMap;
     }
-    
+
     public List<Location> getAlternateMapLocations() {
-        
+
         LinkedList<Location> alternateMap = new LinkedList<>();
         alternateMap.add(townHall2);
         alternateMap.add(cafeDeuxMagots2);
@@ -439,16 +448,14 @@ import java.util.List;
         alternateMap.add(Vineyard2);
         alternateMap.add(DIOsMansion2);
         alternateMap.add(PassioneRestaurant2);
-        
+
         return alternateMap;
     }
-    
-    
 
-    public boolean hasLocation(String locationName,String mapType) {
-        
-        List<Location> allLocations=new LinkedList<>();
-        
+    public boolean hasLocation(String locationName, String mapType) {
+
+        List<Location> allLocations = new LinkedList<>();
+
         switch (mapType) {
             case "defaultMap":
                 allLocations = getDefaultMapLocations();
@@ -462,7 +469,7 @@ import java.util.List;
             default:
                 break;
         }
-        
+
         for (Location location : allLocations) {
             if (location.getName().equalsIgnoreCase(locationName)) {
                 return true;
@@ -472,10 +479,10 @@ import java.util.List;
         return false;
     }
 
-    public Location getLocationByName(String name,String mapType) {
-         List<Location> allLocations=new LinkedList<>();
-        
-           switch (mapType) {
+    public Location getLocationByName(String name, String mapType) {
+        List<Location> allLocations = new LinkedList<>();
+
+        switch (mapType) {
             case "defaultMap":
                 allLocations = getDefaultMapLocations();
                 break;
@@ -488,7 +495,7 @@ import java.util.List;
             default:
                 break;
         }
-        
+
         for (Location location : allLocations) {
             if (location.getName().equalsIgnoreCase(name)) {
                 return location;
