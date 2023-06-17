@@ -20,16 +20,15 @@ import org.json.simple.parser.*;
  * @author Asus
  */
 public class Defaultmap1 {
-    private static map.Location currentLocation;
+public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
+    public static map.Location currentLocation;
+    public static int currentDay;
+    public static map defaultMap, parallelMap, alternateMap, gameMap;
+    public static String saveID = "gamejojo";
     private static Stack<map.Location> locationHistory;
     private static Stack<map.Location> ForwardLocationHistory;
-    private static int currentDay;
-    private static map gameMap;
-    private static boolean hasMadeBackMove = false;
     private static Scanner scanner;
-    private static map defaultMap;
-    private static map parallelMap;
-    private static map alternateMap;
+    //private static Residents r = new Residents();
 
     public static void main(String[] args) throws IOException, ParseException {
         initializeGame();
@@ -70,7 +69,7 @@ public class Defaultmap1 {
                 selectMap();
                 break;
             case 2:
-                //loadGame();
+                //handleLoadGame();
                 // Continue the game from the loaded state
                 break;
             case 3:
@@ -86,6 +85,9 @@ public class Defaultmap1 {
     }
 
     private static void selectMap() {
+        //Restaurant.InitializeRestaurant();
+        //Customer.getAllResidentAsCustomer();
+        //ProcessOrder.doProcess();
         System.out.println("Select a map:");
         System.out.println("[1] Default Map");
         System.out.println("[2] Parallel Map");
@@ -126,9 +128,10 @@ public class Defaultmap1 {
     } else if (selectedMap == alternateMap) {
         currentLocation = alternateMap.townHall2;
     }
-    
+    currentDay = 1;
     playGame();
 }
+    
 
     private static void playGame() {
         boolean exitGame = false;
@@ -377,7 +380,7 @@ public class Defaultmap1 {
                     break;
             case "2":
                 //jump to Heaven's Door (basic feature 2)
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3": 
                 //jump to Super Fly (basic feature 7);
@@ -438,9 +441,10 @@ public class Defaultmap1 {
                 break;
             case "2":
                 //jump to Heaven's Door (basic feature 2)
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
+                //r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -493,13 +497,14 @@ public class Defaultmap1 {
                 break;
             case "2":
                 //jump to basic feature 4
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
                 //jump to extra feature 7
                 TheGoldenSpirit();
                 break;
             case "4":
+                //r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -554,7 +559,7 @@ public class Defaultmap1 {
                     handleMoveTo();
                     break;
                 case "2":
-                    handleViewResidentInformation();
+                    handleViewResidentInformation(currentLocation.getName());
                     break;
                 case "3":
                     handleRedHotChiliPepper();
@@ -563,6 +568,7 @@ public class Defaultmap1 {
                     AnotherOneBites();
                     break;
                 case "5":
+                   // r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -616,9 +622,10 @@ public class Defaultmap1 {
                 break;
             case "2":
                 //jump to Heaven's Door (basic feature 2)
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
+                //r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -673,13 +680,14 @@ public class Defaultmap1 {
                 break;
             case "2":
                 //jump to Heaven's Door (basic feature 2)
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
                 //jump to extra feature 4
-                DirtyDeedsDone();
+                handleDirtyDeedsDoneDirtCheap();
                 break;
             case "4":
+                // r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -731,9 +739,10 @@ public class Defaultmap1 {
                 break;
             case "2":
                 //jump to Heaven's Door (basic feature 2)
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
+                // r.r_clear();
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -785,7 +794,7 @@ public class Defaultmap1 {
                 break;
             case "2":
                 //jump to Heaven's Door (basic feature 2)
-                handleViewResidentInformation();
+                handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
                 if(!locationHistory.empty())
@@ -819,9 +828,13 @@ public class Defaultmap1 {
     
     //passione restaurant for alternate map
     private static void displayPROptions(){
-        int i = 2;
+        int i = 6;
+        System.out.println("[2] View Waiting List and Order Processing List");
+        System.out.println("[3] View Menu");
+        System.out.println("[4] View Sales Information");
+        System.out.println("[5] Milagro Man");
         if(!locationHistory.empty()){
-            System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
+            System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek()); 
             i++;
         }
         if(!ForwardLocationHistory.empty()){
@@ -831,14 +844,30 @@ public class Defaultmap1 {
         System.out.printf("[%d] Back to Town Hall\n\n", i);
         System.out.print("\nSelect:");
         
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
+         Scanner scanner = new Scanner(System.in);
+         String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
             case "1":
-                    handleMoveTo();
-                    break;
+                handleMoveTo();
+                break;
             case "2":
+                //jump to Pearl Jam (basic feature 3)              
+                handleWaitingList();
+                break;  
+            case "3": 
+                //jump to Pearl Jam (basic feature 3)
+                handleViewMenu();
+                break;
+            case "4":
+                //jump to Moody Blue (basic feature 5)
+                handleViewSales();
+                break;
+            case "5":
+                //jump to Milagro Man (basic feature 6)
+                handleMilagroMan();
+                break;
+            case "6":
                 if(!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if(locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -846,28 +875,25 @@ public class Defaultmap1 {
                 else if(locationHistory.empty() && ForwardLocationHistory.empty())
                     handleDirectBackToTownHall();
                 break;
-            case "3":
+            case "7":
                 if(locationHistory.empty() && ForwardLocationHistory.empty()){
                     System.out.println("Invalid input. Please choose again\n");
-
                 }else if((!locationHistory.empty() && ForwardLocationHistory.empty()) || (locationHistory.empty() && !ForwardLocationHistory.empty())){
                     handleDirectBackToTownHall();
                 }else if(!locationHistory.empty() && !ForwardLocationHistory.empty())
                     handleForwardToNewLocation();
                 break;
-            case "4":
-                if(!locationHistory.empty() && !ForwardLocationHistory.empty())
+            case "8":
+                if(!locationHistory.empty() && !ForwardLocationHistory.empty()){
                     handleDirectBackToTownHall();
-                else{
-                    System.out.println("Invalid input. Please choose again\n");
                 }
                 break;
             default:
                 System.out.println("Invalid input. Please choose again\n");
                 break;
-        }    
+        }
             System.out.println("======================================================================");
-        }   
+        }
             
     private static void handleMoveTo() {
         System.out.print("Enter the destination: ");
@@ -896,7 +922,6 @@ public class Defaultmap1 {
     ForwardLocationHistory.clear(); // Clear the ForwardLocationHistory stack before adding the new location
     currentLocation = nextLocation;
     System.out.println("Moving to " + currentLocation.getName() + ".");
-    hasMadeBackMove = false;
 }
 
     private static void handleAdvanceToNextDay() {
@@ -927,33 +952,28 @@ public class Defaultmap1 {
     }
 }
 
-    private static void handleSaveGame() {
-    String filePath = "savedGame.json";
-
-    try {
-        FileWriter fileWriter = new FileWriter(filePath);
-        JSONObject json = new JSONObject();
-        
-        // Set the game state variables
-        json.put("currentLocation", currentLocation.toString());
-        json.put("locationHistory",(locationHistory));
-        json.put("ForwardLocationHistoryLocationHistory",(ForwardLocationHistory));
-        json.put("currentDay", currentDay);
-        json.put("gameMap", gameMap.toString());
-        json.put("defaultMap", defaultMap.toString());
-        json.put("parallelMap", parallelMap.toString());
-        json.put("alternateMap", alternateMap.toString());
-        json.put("hasMadeBackMove", hasMadeBackMove);
-
-        fileWriter.write(json.toString());
-        fileWriter.close();
-
-
-        System.out.println("Game saved successfully.");
-    } catch (IOException e) {
-        System.out.println("Failed to save the game. Please try again.");
+     private static void handleSaveGame() {
+        // Define the file path where the console output will be saved
+        String filePath = "console_output.txt";
+        try {
+            handleSave();
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println("FAILED!");
+            return;
+        }
+        try (PrintWriter fileWriter = new PrintWriter(new FileWriter(filePath))) {
+            System.out.println("Game saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Failed to save the game. Please try again.");
+        }
     }
-}
+
+    public static void handleSave() {
+       // gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Restaurant.saleList, currentLocation,
+        //        currentDay, locationHistory, ForwardLocationHistory);
+       // gameSaveLoad.save(gsl, saveID);
+    }
     
         public static void loadGame() throws FileNotFoundException, ParseException, IOException{
         String savedPath = scanner.nextLine();
@@ -1000,7 +1020,6 @@ public static void handleReturnToPreviousLocation() {
     currentLocation = reverseLocation;
     
     System.out.println("Returning to " + currentLocation.getName() + ".");
-    hasMadeBackMove = true;
 }
     
     //method to move ForwardLocationHistory
@@ -1008,7 +1027,6 @@ public static void handleReturnToPreviousLocation() {
         locationHistory.push(currentLocation);
         currentLocation = ForwardLocationHistory.pop();
         System.out.println("Moving ForwardLocationHistory to " + currentLocation.getName() + ".");
-        hasMadeBackMove = false;
         if(!ForwardLocationHistory.empty()){
             ForwardLocationHistory.clear();
         }
@@ -1043,19 +1061,21 @@ public static void handleReturnToPreviousLocation() {
     }
 
     private static void handleViewMenu() {
-        
+        //Restaurant res = new Restaurant();
+       // res.viewMenubyResName(currentLocation.getName());
     }
 
     private static void handleViewSales() {
-        
+        //MoodyBlues.callMenu(currentLocation.getName());
     }
 
     private static void handleMilagroMan() {
-        
+       // MilagroMan.MenuHandler(currentLocation.getName());
     }
 
-    private static void handleViewResidentInformation() {
-       
+    private static void handleViewResidentInformation(String place) {
+        //r.readRes();
+        //r.printRes(place, currentDay);
     }
 
     private static void handleTheHand() {
@@ -1109,11 +1129,35 @@ public static void handleReturnToPreviousLocation() {
     }
 
     private static void TheGoldenSpirit() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
-    private static void DirtyDeedsDone() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private static void handleDirtyDeedsDoneDirtCheap() {
+        String map = "";
+        if (gameMap.equals(defaultMap)) {
+            map = "defaultMap";
+        } else if (gameMap.equals(alternateMap)) {
+            map = "alternateMap";
+        } else {
+            map = "parallelMap";
+        }
+        DirtyDeedsDoneDirtCheap prison = new DirtyDeedsDoneDirtCheap();
+        prison.initializeMap(map);
+        prison.prisonerTravel();
     }
     
+     private static void handleVentoAureo() {
+        String map = "";
+        if (gameMap.equals(defaultMap)) {
+            map = "defaultMap";
+        } else if (gameMap.equals(alternateMap)) {
+            map = "alternateMap";
+        } else {
+            map = "parallelMap";
+        }
+        VentoAureo ventoAureo = new VentoAureo();
+        ventoAureo.initializeMap(map);
+        ventoAureo.startVentoAureo();
+    }
 }
+    
