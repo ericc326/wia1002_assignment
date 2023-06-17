@@ -1393,6 +1393,29 @@ public class Defaultmap implements Serializable {
         }
     }
 
+    public static void AnotherOneBites() {
+        BiteTheDust bite = new BiteTheDust();
+        bite.run();
+    }
+
+    private static void TheGoldenSpirit() {
+        
+    }
+
+    private static void handleDirtyDeedsDoneDirtCheap() {
+        String map = "";
+        if (gameMap.equals(defaultMap)) {
+            map = "defaultMap";
+        } else if (gameMap.equals(alternateMap)) {
+            map = "alternateMap";
+        } else {
+            map = "parallelMap";
+        }
+        DirtyDeedsDoneDirtCheap prison = new DirtyDeedsDoneDirtCheap();
+        prison.initializeMap(map);
+        prison.prisonerTravel();
+    }
+
     private static void handleVentoAureo() {
         String map = "";
         if (gameMap.equals(defaultMap)) {
