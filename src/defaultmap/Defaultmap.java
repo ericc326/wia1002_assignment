@@ -25,6 +25,7 @@ import Restaurants.Sale;
 import extrafeatures.BiteTheDust;
 import extrafeatures.TheGoldenSpirit;
 import extrafeatures.VentoAureo;
+import extrafeatures.TheGoldenSpirit;
 
 /**
  *
@@ -572,7 +573,7 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 // jump to extra feature 7
-                TheGoldenSpirit();
+                handleTheGoldenSpirit();
                 break;
             case "4":
                 r.r.clear();

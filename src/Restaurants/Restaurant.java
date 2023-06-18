@@ -234,9 +234,9 @@ public class Restaurant implements Serializable {
         System.out.println("Menu for " + RestaurantName);
         ;
         System.out.println("//-------------------------------------//");
-        System.out.println("Price\tMenu");
+        System.out.println("Price\t\tMenu");
         for (int i = 0; i < getResByName(RestaurantName).Menu.size(); i++) {
-            System.out.println(String.format("RM %.2f", getResByName(RestaurantName).Menu.get(i).getFoodPrice()) +
+            System.out.println(String.format("RM %.2f\t", getResByName(RestaurantName).Menu.get(i).getFoodPrice()) +
                     "\t" + getResByName(RestaurantName).Menu.get(i).getFoodName());
         }
         System.out.println();

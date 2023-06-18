@@ -175,6 +175,9 @@ public class Residents {
 
             }
         }
+        System.out.println(
+                "+-----+-----------------------+-----+---------+------------------------------------+-----------------------+-------------------+-----------+-----------+-----------+-------------+--------------------------+");
+
         option2(place, Defaultmap.currentDay);
     }
 
@@ -552,6 +555,10 @@ public class Residents {
                 System.out.print("Enter the resident's name: ");
                 scan.nextLine();
                 String profile = scan.nextLine();
+                while(!Name.contains(profile)){
+                    System.out.print("Enter the resident's name: ");
+                    profile = scan.nextLine();
+                }
                 System.out.println(
                         "==============================================================================================================================================================");
                 resProfile(profile, place, currentDay);
