@@ -57,7 +57,7 @@ public class map implements Serializable {
     Location JoestarMansion2;
     Location Vineyard2;
     Location DIOsMansion2;
-    Location PassioneRestaurant2;
+    
 
     public map() {
         // Initialize the locations and their adjacent locations with distances(default
@@ -228,11 +228,10 @@ public class map implements Serializable {
         JoestarMansion2 = new Location("Joestar Mansion");
         Vineyard2 = new Location("Vineyard");
         DIOsMansion2 = new Location("DIO's Mansion");
-        PassioneRestaurant2 = new Location("Passione Restaurant");
 
         // Connect the locations by adding adjacent locations with distances
         townHall2.addAdjacentLocation(GreenDolphinStreetPrison2, 3);
-        townHall2.addAdjacentLocation(PassioneRestaurant2, 7);
+        townHall2.addAdjacentLocation(Libeccio2, 7);
         townHall2.addAdjacentLocation(moriohGrandHotel2, 2);
 
         moriohGrandHotel2.addAdjacentLocation(townHall2, 2);
@@ -242,7 +241,7 @@ public class map implements Serializable {
 
         TrattoriaTrussardi2.addAdjacentLocation(JoestarMansion2, 5);
         TrattoriaTrussardi2.addAdjacentLocation(GreenDolphinStreetPrison2, 4);
-        TrattoriaTrussardi2.addAdjacentLocation(PassioneRestaurant2, 1);
+        TrattoriaTrussardi2.addAdjacentLocation(Libeccio2, 1);
 
         GreenDolphinStreetPrison2.addAdjacentLocation(TrattoriaTrussardi2, 4);
         GreenDolphinStreetPrison2.addAdjacentLocation(townHall2, 3);
@@ -253,7 +252,7 @@ public class map implements Serializable {
         PolnareffLand2.addAdjacentLocation(DIOsMansion2, 2);
 
         cafeDeuxMagots2.addAdjacentLocation(DIOsMansion2, 1);
-        cafeDeuxMagots2.addAdjacentLocation(PassioneRestaurant2, 4);
+        cafeDeuxMagots2.addAdjacentLocation(Libeccio2, 4);
         cafeDeuxMagots2.addAdjacentLocation(Vineyard2, 4);
 
         jadeGarden2.addAdjacentLocation(AngeloRock2, 1);
@@ -264,9 +263,9 @@ public class map implements Serializable {
 
         AngeloRock2.addAdjacentLocation(jadeGarden2, 1);
         AngeloRock2.addAdjacentLocation(PolnareffLand2, 2);
-        AngeloRock2.addAdjacentLocation(PassioneRestaurant2, 6);
+        AngeloRock2.addAdjacentLocation(Libeccio2, 6);
 
-        DIOsMansion2.addAdjacentLocation(PassioneRestaurant2, 2);
+        DIOsMansion2.addAdjacentLocation(Libeccio2, 2);
         DIOsMansion2.addAdjacentLocation(PolnareffLand2, 2);
         DIOsMansion2.addAdjacentLocation(cafeDeuxMagots2, 1);
 
@@ -279,11 +278,11 @@ public class map implements Serializable {
         Vineyard2.addAdjacentLocation(SavageGarden2, 4);
         Vineyard2.addAdjacentLocation(cafeDeuxMagots2, 4);
 
-        PassioneRestaurant2.addAdjacentLocation(townHall2, 7);
-        PassioneRestaurant2.addAdjacentLocation(cafeDeuxMagots2, 4);
-        PassioneRestaurant2.addAdjacentLocation(TrattoriaTrussardi2, 1);
-        PassioneRestaurant2.addAdjacentLocation(AngeloRock2, 6);
-        PassioneRestaurant2.addAdjacentLocation(DIOsMansion2, 2);
+        Libeccio2.addAdjacentLocation(townHall2, 7);
+        Libeccio2.addAdjacentLocation(cafeDeuxMagots2, 4);
+        Libeccio2.addAdjacentLocation(TrattoriaTrussardi2, 1);
+        Libeccio2.addAdjacentLocation(AngeloRock2, 6);
+        Libeccio2.addAdjacentLocation(DIOsMansion2, 2);
 
         // Add the locations to the linked list representing the map
         LinkedList<Location> defaultMap = new LinkedList<>();
@@ -333,7 +332,6 @@ public class map implements Serializable {
         alternateMap.add(JoestarMansion2);
         alternateMap.add(Vineyard2);
         alternateMap.add(DIOsMansion2);
-        alternateMap.add(PassioneRestaurant2);
 
     }
 
@@ -359,7 +357,7 @@ public class map implements Serializable {
             return adjacentLocations;
         }
 
-        public class AdjacentLocation implements Serializable {
+    public class AdjacentLocation implements Serializable {
             private Location location;
             private int distance;
 
@@ -447,8 +445,7 @@ public class map implements Serializable {
         alternateMap.add(JoestarMansion2);
         alternateMap.add(Vineyard2);
         alternateMap.add(DIOsMansion2);
-        alternateMap.add(PassioneRestaurant2);
-
+        
         return alternateMap;
     }
 
