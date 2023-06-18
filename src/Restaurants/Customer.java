@@ -160,19 +160,31 @@ public class Customer implements Serializable {
     }
 
     public static void JosephOrder(Customer customer) {
-        Restaurant res = Restaurant.getRandomRestaurant();
+        Restaurant res = Restaurant.getRandomRestaurant(), res2 = null;
+        // System.out.println(res.getRestaurantName());
         Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        // System.out.println(food.getFoodName());
         while (customer.orderHistory.contains(food)) {
-            res = Restaurant.getRandomRestaurant();
-            food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+            res2 = Restaurant.getRandomRestaurant();
+            // System.out.println(res2.getRestaurantName());
+            food = Restaurant.getRandomFoodByRestaurantName(res2.getRestaurantName());
+            // System.out.println(food.getFoodName()+"
+            // "+customer.orderHistory.contains(food));
         }
 
-        setFoodSale(res, customer, food);
+        if (res2 == null) {
+            setFoodSale(res, customer, food);
+        } else {
+            setFoodSale(res2, customer, food);
+        }
     }
 
     public static void JotaroOrder(Customer customer) {
         Restaurant res = Restaurant.getRandomRestaurant();
         Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+        if (customer.restaurantHistory.containsAll(Restaurant.resList)) {
+            customer.restaurantHistory.clear();
+        }
         if (!customer.orderHistory.isEmpty()) {
             if (!customer.orderHistory.containsAll(JotaroRestaurant.getMenu())) {
                 res = JotaroRestaurant;
@@ -181,11 +193,9 @@ public class Customer implements Serializable {
                     food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                 }
             } else {
-                if (!customer.restaurantHistory.containsAll(Restaurant.resList)) {
-                    while (customer.orderHistory.containsAll(res.getMenu())) {
-                        res = Restaurant.getRandomRestaurant();
-                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
-                    }
+                while (customer.orderHistory.containsAll(res.getMenu())) {
+                    res = Restaurant.getRandomRestaurant();
+                    food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                 }
             }
         }
@@ -225,17 +235,23 @@ public class Customer implements Serializable {
         int temp;
         Food food = null;
         switch (day) {
+            case "Sunday":
+                customer.restaurantFrequency.clear();
+                res = Restaurant.getRandomRestaurant();
+                food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                break;
             case "Friday":
                 if (customer.restaurantFrequency.containsKey(res)) {
                     temp = customer.restaurantFrequency.get(res);
-                    if (temp < 2) {
+                    if (temp < 3) {
                         food = customer.orderHistory.peek();
                         while (food.equals(customer.orderHistory.peek())) {
                             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                         }
                     } else {
-                        res = Restaurant.getRandomRestaurant();
-                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                        Restaurant res2 = Restaurant.getRandomRestaurant();
+                        food = Restaurant.getRandomFoodByRestaurantName(res2.getRestaurantName());
+                        res = res2;
                     }
                 } else {
                     food = customer.orderHistory.peek();
@@ -247,14 +263,15 @@ public class Customer implements Serializable {
             case "Saturday":
                 if (customer.restaurantFrequency.containsKey(res)) {
                     temp = customer.restaurantFrequency.get(res);
-                    if (temp < 1) {
+                    if (temp < 2) {
                         food = customer.orderHistory.peek();
                         while (food.equals(customer.orderHistory.peek())) {
                             food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                         }
                     } else {
-                        res = Restaurant.getRandomRestaurant();
-                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                        Restaurant res2 = Restaurant.getRandomRestaurant();
+                        food = Restaurant.getRandomFoodByRestaurantName(res2.getRestaurantName());
+                        res = res2;
                     }
                 } else {
                     food = customer.orderHistory.peek();

@@ -220,7 +220,7 @@ connectLocations(joestarMansion, trattoriaTrussardi);
         Location trattoriaTrussardi = new Location("Trattoria Trussardi");
         Location sanGiorgioMaggiore = new Location("San Giorgio Maggiore");
         Location greenDolphinStreetPrison = new Location("Green Dolphin Street Prison");
-        Location passioneRestaurant = new Location("Passione Restaurant");
+        Location libeccio = new Location("Libeccio");
         Location angeloRock = new Location("Angelo Rock");
         Location vineyard = new Location("Vineyard");
         Location dIOsMansion = new Location("DIO's Mansion");
@@ -228,7 +228,7 @@ connectLocations(joestarMansion, trattoriaTrussardi);
         // Connect locations with roads
        connectLocations(townHall, moriohGrandHotel);
         connectLocations(townHall, greenDolphinStreetPrison);
-        connectLocations(townHall, passioneRestaurant);
+        connectLocations(townHall, libeccio);
 
 connectLocations(moriohGrandHotel, joestarMansion);
 connectLocations(moriohGrandHotel, greenDolphinStreetPrison);
@@ -237,19 +237,19 @@ connectLocations(moriohGrandHotel, townHall);
 
 connectLocations(trattoriaTrussardi, joestarMansion);
 connectLocations(trattoriaTrussardi, greenDolphinStreetPrison);
-connectLocations(trattoriaTrussardi, passioneRestaurant);
+connectLocations(trattoriaTrussardi, libeccio);
 
 connectLocations(greenDolphinStreetPrison, trattoriaTrussardi);
 connectLocations(greenDolphinStreetPrison, moriohGrandHotel);
 connectLocations(greenDolphinStreetPrison, townHall);
 
 connectLocations(angeloRock, jadeGarden);
-connectLocations(angeloRock, passioneRestaurant);
+connectLocations(angeloRock, libeccio);
 connectLocations(angeloRock, polnareffLand);
 
 connectLocations(dIOsMansion, polnareffLand);
 connectLocations(dIOsMansion, cafeDeuxMagots);
-connectLocations(dIOsMansion, passioneRestaurant);
+connectLocations(dIOsMansion, libeccio);
 
 connectLocations(vineyard, savageGarden);
 connectLocations(vineyard, cafeDeuxMagots);
@@ -262,7 +262,7 @@ connectLocations(polnareffLand, angeloRock);
 connectLocations(polnareffLand, dIOsMansion);
 
 connectLocations(cafeDeuxMagots, vineyard);
-connectLocations(cafeDeuxMagots, passioneRestaurant);
+connectLocations(cafeDeuxMagots, libeccio);
 connectLocations(cafeDeuxMagots, dIOsMansion);
 
 connectLocations(jadeGarden, angeloRock);
@@ -271,11 +271,11 @@ connectLocations(jadeGarden, polnareffLand);
 connectLocations(sanGiorgioMaggiore, moriohGrandHotel);
 connectLocations(sanGiorgioMaggiore, savageGarden);
 
-connectLocations(passioneRestaurant, townHall);
-connectLocations(passioneRestaurant, trattoriaTrussardi);
-connectLocations(passioneRestaurant, angeloRock);
-connectLocations(passioneRestaurant, dIOsMansion);
-connectLocations(passioneRestaurant, cafeDeuxMagots);
+connectLocations(libeccio, townHall);
+connectLocations(libeccio, trattoriaTrussardi);
+connectLocations(libeccio, angeloRock);
+connectLocations(libeccio, dIOsMansion);
+connectLocations(libeccio, cafeDeuxMagots);
 
 connectLocations(joestarMansion, moriohGrandHotel);
 connectLocations(joestarMansion, trattoriaTrussardi);
@@ -291,7 +291,7 @@ connectLocations(joestarMansion, trattoriaTrussardi);
         addLocation(trattoriaTrussardi);
         addLocation(sanGiorgioMaggiore);
         addLocation(greenDolphinStreetPrison);
-        addLocation(passioneRestaurant);
+        addLocation(libeccio);
         addLocation(angeloRock);
         addLocation(vineyard);
         addLocation(dIOsMansion);

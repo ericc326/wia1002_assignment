@@ -261,9 +261,6 @@ public class Defaultmap implements Serializable {
             case "SavageGarden":
                 displayCafeOptions();
                 break;
-            case "Passione Restaurant":
-                displayPROptions();
-                break;
             default:
                 System.out.println("No options available at this location.");
                 break;
@@ -893,76 +890,6 @@ public class Defaultmap implements Serializable {
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
-                }
-                break;
-            default:
-                System.out.println("Invalid input. Please choose again\n");
-                break;
-        }
-        System.out.println("======================================================================");
-    }
-
-    // passione restaurant for alternate map
-    private static void displayPROptions() {
-        int i = 6;
-        System.out.println("[2] View Waiting List and Order Processing List");
-        System.out.println("[3] View Menu");
-        System.out.println("[4] View Sales Information");
-        System.out.println("[5] Milagro Man");
-        if (!locationHistory.empty()) {
-            System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
-            i++;
-        }
-        if (!ForwardLocationHistory.empty()) {
-            System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
-            i++;
-        }
-        System.out.printf("[%d] Back to Town Hall\n\n", i);
-        System.out.print("\nSelect:");
-
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-
-        switch (input.toUpperCase()) {
-            case "1":
-                handleMoveTo();
-                break;
-            case "2":
-                // jump to Pearl Jam (basic feature 3)
-                handleWaitingList();
-                break;
-            case "3":
-                // jump to Pearl Jam (basic feature 3)
-                handleViewMenu();
-                break;
-            case "4":
-                // jump to Moody Blue (basic feature 5)
-                handleViewSales();
-                break;
-            case "5":
-                // jump to Milagro Man (basic feature 6)
-                handleMilagroMan();
-                break;
-            case "6":
-                if (!locationHistory.empty())
-                    handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
-                    handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
-                    handleDirectBackToTownHall();
-                break;
-            case "7":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
-                    System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
-                    handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
-                    handleForwardToNewLocation();
-                break;
-            case "8":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty()) {
-                    handleDirectBackToTownHall();
                 }
                 break;
             default:
