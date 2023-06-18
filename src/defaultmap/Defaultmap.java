@@ -34,11 +34,25 @@ public class Defaultmap {
     private static Stack<map.Location> locationHistory;
     private static Stack<map.Location> ForwardLocationHistory;
     private static Scanner scanner;
-    private static Residents r = new Residents();
+    // private static Residents r = new Residents();
 
     public static void main(String[] args) throws IOException, ParseException {
         initializeGame();
         playGame();
+    }
+
+    public static void start() throws IOException, ParseException {
+        initializeGame();
+        playGame();
+    }
+
+    public static void initializeGamePublic() {
+        gameMap = new map();
+        currentLocation = gameMap.townHall;
+        locationHistory = new Stack<>();
+        ForwardLocationHistory = new Stack<>();
+        currentDay = 1;
+        initializeMaps();
     }
 
     private static void initializeGame() throws IOException, ParseException {
@@ -986,7 +1000,7 @@ public class Defaultmap {
 
     public static void handleAdvanceToNextDay() {
         currentDay++;
-        r.readForMenu(currentDay);
+        // r.readForMenu(currentDay);
         Customer.doProcess();
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {
@@ -1033,7 +1047,8 @@ public class Defaultmap {
     }
 
     public static void handleSave() {
-        gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Sale.saleList, Customer.CustomerDataSave(), currentLocation,
+        gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Sale.saleList, Customer.CustomerDataSave(),
+                currentLocation,
                 currentDay, locationHistory, ForwardLocationHistory);
         gameSaveLoad.save(gsl, saveID);
     }

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Pembetulan;
+package PartSal2;
 
 /**
  *
@@ -21,8 +21,8 @@ import java.util.logging.Logger;
 
 public class Residents{
     
-    ArrayList<String> Name,Age,Gender,ResidentialArea,Parents,newName,newAge,newGender,newParent,newStand,newDes,newSpeed,newRange,newStamina,newPrecision,newDevPot;
-    HashMap<String,List<String>> list1;
+    public ArrayList<String> Name,Age,Gender,ResidentialArea,Parents,newName,newAge,newGender,newParent,newStand,newDes,newSpeed,newRange,newStamina,newPrecision,newDevPot;
+    public HashMap<String,List<String>> list1;
     HashMap<String,List<String>> r;
     int num;
     List<String> Infinity = new ArrayList<>();
