@@ -23,6 +23,7 @@ import Restaurants.Restaurant;
 import Restaurants.Sale;
 import extrafeatures.BiteTheDust;
 import extrafeatures.VentoAureo;
+import extrafeatures.TheGoldenSpirit;
 
 /**
  *
@@ -555,7 +556,7 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 // jump to extra feature 7
-                TheGoldenSpirit();
+                handleTheGoldenSpirit();
                 break;
             case "4":
                 r.r.clear();
@@ -1088,8 +1089,40 @@ public class Defaultmap implements Serializable {
         bite.run();
     }
 
-    private static void TheGoldenSpirit() {
+    private static void handleTheGoldenSpirit(){
+        
+        TheGoldenSpirit TGS = new TheGoldenSpirit();
+        
+        TGS.buildFamilyTree();
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Enter the name of the first Joestar: ");
+        String name1 = scanner.nextLine();
+        System.out.print("Enter the name of the second Joestar: ");
+        String name2 = scanner.nextLine();
+
+        String lowestCommonAncestor = TGS.findLowestCommonAncestor(name1, name2);
+
+        if (name1.equals("George Joestar II")||name2.equals("George Joestar II") && lowestCommonAncestor.equals("Jonathan Joestar")) {
+            lowestCommonAncestor += " and Erina Joestar";
+        }
+        else if(name1.equals("Jonathan Joestar")||name2.equals("Jonathan Joestar") && lowestCommonAncestor.equals("George Joestar I")) {
+            lowestCommonAncestor += " and Mary Joestar";
+        }
+        else if (name1.equals("Joseph Joestar")||name2.equals("Joseph Joestar") && lowestCommonAncestor.equals("George Joestar II")) {
+            lowestCommonAncestor += " and Lisa Lisa";
+        }
+        else if(name1.equals("Holy Kujo")||name2.equals("Holy Kujo") && lowestCommonAncestor.equals("Joseph Joestar")) {
+            lowestCommonAncestor += " and Suzi Q.";
+        }
+        else if(name1.equals("Jotaro Kujo")||name2.equals("Jotaro Kujo") && lowestCommonAncestor.equals("Holy Kujo")) {
+            lowestCommonAncestor += " and Sadao Kujo";
+        }
+
+        System.out.println("======================================================================");
+        System.out.println("Lowest Common Ancestor of " + name1 + " and " + name2 + ":");
+        System.out.println(lowestCommonAncestor);
+        System.out.println("======================================================================");
     }
 
     private static void handleDirtyDeedsDoneDirtCheap() {

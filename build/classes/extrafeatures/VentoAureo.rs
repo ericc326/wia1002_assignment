@@ -1,2 +1,0 @@
-extrafeatures.Location
-extrafeatures.VentoAureo
