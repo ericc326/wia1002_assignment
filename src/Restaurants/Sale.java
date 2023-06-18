@@ -2,7 +2,7 @@ package Restaurants;
 
 import java.util.*;
 
-import defaultmap.Defaultmap;
+import defaultmap.*;
 
 public class Sale {
     private String restaurantName;
