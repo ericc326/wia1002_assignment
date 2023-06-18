@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -22,6 +23,7 @@ import Restaurants.MoodyBlues;
 import Restaurants.Restaurant;
 import Restaurants.Sale;
 import extrafeatures.BiteTheDust;
+import extrafeatures.TheGoldenSpirit;
 import extrafeatures.VentoAureo;
 
 /**
@@ -169,7 +171,7 @@ public class Defaultmap implements Serializable {
 
     public static void handleLoad() {
         gameSaveLoad data = (gameSaveLoad) gameSaveLoad.load(saveID);
-        Defaultmap.gameMap = data.getGameMap();
+        String gameMapString = data.getGameMap();
         Restaurant.resList = data.getResList();
         Sale.saleList = data.getSaleList();
         Customer.CustomerDataLoad(data.getCustomerData());
@@ -177,6 +179,20 @@ public class Defaultmap implements Serializable {
         Defaultmap.currentDay = data.getCurrentDay();
         Defaultmap.locationHistory = data.getLocationHistory();
         Defaultmap.ForwardLocationHistory = data.getForwardLocationHistory();
+
+        switch (gameMapString) {
+            case "default":
+                Defaultmap.gameMap = defaultMap;
+                break;
+            case "parallel":
+                Defaultmap.gameMap = parallelMap;
+                break;
+            case "alternative":
+                Defaultmap.gameMap = alternateMap;
+                break;
+            default:
+                break;
+        }
     }
 
     public static void handleLoadGame() {
@@ -261,11 +277,11 @@ public class Defaultmap implements Serializable {
     // Display options for the Town Hall location
     private static void displayTownHallOptions() {
         int i = 2;
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back to (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -285,45 +301,45 @@ public class Defaultmap implements Serializable {
                 handleMoveTo();
                 break;
             case "2":
-                if (!locationHistory.empty()) {
-                    System.out.println(!locationHistory.empty());
+                if (!locationHistory.isEmpty()) {
+                    System.out.println(!locationHistory.isEmpty());
                     handleReturnToPreviousLocation();
-                } else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleAdvanceToNextDay();
                 break;
             case "3":
-                if (locationHistory.empty() && ForwardLocationHistory.empty())
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleSaveGame();
-                else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleAdvanceToNextDay();
-                else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "4":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Exiting the game......");
                     System.exit(0);
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (!locationHistory.empty() && ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())) {
                     handleSaveGame();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleAdvanceToNextDay();
                 break;
             case "5":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleSaveGame();
-                else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     System.out.println("Exiting the game......");
                     System.exit(0);
-                } else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                } else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     System.out.println("Invalid input. Please choose again\n");
                 break;
             case "6":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty()) {
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     System.out.println("Exiting the game......");
                     System.exit(0);
                 } else {
@@ -345,11 +361,11 @@ public class Defaultmap implements Serializable {
         System.out.println("[3] View Menu");
         System.out.println("[4] View Sales Information");
         System.out.println("[5] Milagro Man");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -380,24 +396,24 @@ public class Defaultmap implements Serializable {
                 handleMilagroMan();
                 break;
             case "6":
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "7":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "8":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty()) {
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     handleDirectBackToTownHall();
                 }
                 break;
@@ -413,11 +429,11 @@ public class Defaultmap implements Serializable {
         int i = 4;
         System.out.println("[2] View Resident Information");
         System.out.println("[3] The Hand");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -440,24 +456,24 @@ public class Defaultmap implements Serializable {
                 handleTheHand();
                 break;
             case "4":
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "5":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "6":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -475,11 +491,11 @@ public class Defaultmap implements Serializable {
     private static void displaPLOptions() {
         int i = 3;
         System.out.println("[2] View Resident Information");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -498,26 +514,27 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 r.r.clear();
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                } else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     handleDirectBackToTownHall();
+                }
                 break;
             case "4":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "5":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty()) {
                     handleDirectBackToTownHall();
-                else {
+                } else {
                     System.out.println("Invalid input. Please choose again\n");
                 }
                 break;
@@ -532,11 +549,11 @@ public class Defaultmap implements Serializable {
         int i = 4;
         System.out.println("[2] View Resident Information");
         System.out.println("[3] The Golden Spirit");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -559,24 +576,24 @@ public class Defaultmap implements Serializable {
                 break;
             case "4":
                 r.r.clear();
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "5":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "6":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -595,11 +612,11 @@ public class Defaultmap implements Serializable {
         System.out.println("[2] View Resident Information");
         System.out.println("[3] Red Hot Chili Pepper");
         System.out.println("[4] Another One Bites the Dust");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -625,25 +642,25 @@ public class Defaultmap implements Serializable {
                 break;
             case "5":
                 r.r.clear();
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "6":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
 
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "7":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -660,11 +677,11 @@ public class Defaultmap implements Serializable {
     private static void displaySGMOptions() {
         int i = 3;
         System.out.println("[2] View Resident Information");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -683,24 +700,24 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 r.r.clear();
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "4":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "5":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -718,11 +735,11 @@ public class Defaultmap implements Serializable {
         int i = 4;
         System.out.println("[2] View Resident Information");
         System.out.println("[3] Dirty Deeds Done Dirt Cheap");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -746,24 +763,24 @@ public class Defaultmap implements Serializable {
                 break;
             case "4":
                 r.r.clear();
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "5":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "6":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -780,11 +797,11 @@ public class Defaultmap implements Serializable {
         int i = 4;
         System.out.println("[2] View Resident Information");
         System.out.println("[3] Vento Aureo");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -805,24 +822,24 @@ public class Defaultmap implements Serializable {
                 handleVentoAureo();
             case "4":
                 r.r.clear();
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "5":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "6":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -838,11 +855,11 @@ public class Defaultmap implements Serializable {
     private static void displayDIOsMansionOptions() {
         int i = 3;
         System.out.println("[2] View Resident Information");
-        if (!locationHistory.empty()) {
+        if (!locationHistory.isEmpty()) {
             System.out.printf("[%d] Back (%s)\n", i, locationHistory.peek());
             i++;
         }
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             System.out.printf("[%d] Forward (%s)\n", i, ForwardLocationHistory.peek());
             i++;
         }
@@ -860,24 +877,24 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                if (!locationHistory.empty())
+                if (!locationHistory.isEmpty())
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
-                else if (locationHistory.empty() && ForwardLocationHistory.empty())
+                else if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 break;
             case "4":
-                if (locationHistory.empty() && ForwardLocationHistory.empty()) {
+                if (locationHistory.isEmpty() && ForwardLocationHistory.isEmpty()) {
                     System.out.println("Invalid input. Please choose again\n");
-                } else if ((!locationHistory.empty() && ForwardLocationHistory.empty())
-                        || (locationHistory.empty() && !ForwardLocationHistory.empty())) {
+                } else if ((!locationHistory.isEmpty() && ForwardLocationHistory.isEmpty())
+                        || (locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())) {
                     handleDirectBackToTownHall();
-                } else if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleForwardToNewLocation();
                 break;
             case "5":
-                if (!locationHistory.empty() && !ForwardLocationHistory.empty())
+                if (!locationHistory.isEmpty() && !ForwardLocationHistory.isEmpty())
                     handleDirectBackToTownHall();
                 else {
                     System.out.println("Invalid input. Please choose again\n");
@@ -956,13 +973,22 @@ public class Defaultmap implements Serializable {
             System.out.println("Game saved successfully.");
         } catch (Exception e) {
             // TODO: handle exception
-            System.out.println("FAILED!");
+            System.out.println("SAVE FAILED!");
             return;
         }
     }
 
     public static void handleSave() {
-        gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Sale.saleList, Customer.CustomerDataSave(),
+        String gameMapString = null;
+        if (gameMap.equals(defaultMap)) {
+            gameMapString = "default";
+        } else if (gameMap.equals(parallelMap)) {
+            gameMapString = "parallel";
+        } else if (gameMap.equals(alternateMap)) {
+            gameMapString = "alternative";
+        }
+        gameSaveLoad gsl = new gameSaveLoad(gameMapString, Restaurant.resList, Sale.saleList,
+                Customer.CustomerDataSave(),
                 currentLocation, currentDay, locationHistory, ForwardLocationHistory);
         System.out.println(locationHistory);
         System.out.println(ForwardLocationHistory);
@@ -971,9 +997,9 @@ public class Defaultmap implements Serializable {
 
     // method to move backward
     public static void handleReturnToPreviousLocation() {
-        // System.out.println(!locationHistory.empty());
+        // System.out.println(!locationHistory.isEmpty());
         /*
-         * if (!ForwardLocationHistory.empty()) {
+         * if (!ForwardLocationHistory.isEmpty()) {
          * ForwardLocationHistory.clear();
          * }
          */
@@ -991,22 +1017,22 @@ public class Defaultmap implements Serializable {
         locationHistory.push(currentLocation);
         currentLocation = ForwardLocationHistory.pop();
         System.out.println("Moving forward to " + currentLocation.getName() + ".");
-        if (!ForwardLocationHistory.empty()) {
+        if (!ForwardLocationHistory.isEmpty()) {
             ForwardLocationHistory.clear();
         }
     }
 
     private static void handleDirectBackToTownHall() {
         // check if Town Hall is the backward/ForwardLocationHistory adjacent location
-        if (!locationHistory.empty() && locationHistory.peek().equals("Town Hall")) {
+        if (!locationHistory.isEmpty() && locationHistory.peek().equals("Town Hall")) {
             locationHistory.pop();
             ForwardLocationHistory.push(currentLocation);
-        } else if (!ForwardLocationHistory.empty() && ForwardLocationHistory.peek().equals("Town Hall")) {
+        } else if (!ForwardLocationHistory.isEmpty() && ForwardLocationHistory.peek().equals("Town Hall")) {
             locationHistory.push(currentLocation);
             ForwardLocationHistory.clear();
         } else {
             locationHistory.push(currentLocation);
-            if (!ForwardLocationHistory.empty())
+            if (!ForwardLocationHistory.isEmpty())
                 ForwardLocationHistory.clear();
         }
         // Set the currentLocation based on the selected map
@@ -1089,7 +1115,37 @@ public class Defaultmap implements Serializable {
     }
 
     private static void TheGoldenSpirit() {
+        TheGoldenSpirit.buildFamilyTree();
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Enter the name of the first Joestar: ");
+        String name1 = scanner.nextLine();
+        System.out.print("Enter the name of the second Joestar: ");
+        String name2 = scanner.nextLine();
+
+        String lowestCommonAncestor = TheGoldenSpirit.findLowestCommonAncestor(name1, name2);
+
+        if (name1.equals("George Joestar II")
+                || name2.equals("George Joestar II") && lowestCommonAncestor.equals("Jonathan Joestar")) {
+            lowestCommonAncestor += " and Erina Joestar";
+        } else if (name1.equals("Jonathan Joestar")
+                || name2.equals("Jonathan Joestar") && lowestCommonAncestor.equals("George Joestar I")) {
+            lowestCommonAncestor += " and Mary Joestar";
+        } else if (name1.equals("Joseph Joestar")
+                || name2.equals("Joseph Joestar") && lowestCommonAncestor.equals("George Joestar II")) {
+            lowestCommonAncestor += " and Lisa Lisa";
+        } else if (name1.equals("Holy Kujo")
+                || name2.equals("Holy Kujo") && lowestCommonAncestor.equals("Joseph Joestar")) {
+            lowestCommonAncestor += " and Suzi Q.";
+        } else if (name1.equals("Jotaro Kujo")
+                || name2.equals("Jotaro Kujo") && lowestCommonAncestor.equals("Holy Kujo")) {
+            lowestCommonAncestor += " and Sadao Kujo";
+        }
+
+        System.out.println("======================================================================");
+        System.out.println("Lowest Common Ancestor of " + name1 + " and " + name2 + ":");
+        System.out.println(lowestCommonAncestor);
+        System.out.println("======================================================================");
     }
 
     private static void handleDirtyDeedsDoneDirtCheap() {

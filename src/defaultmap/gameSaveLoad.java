@@ -17,7 +17,7 @@ import defaultmap.map.Location;
 public class gameSaveLoad implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private map gameMap;
+    private String gameMap;
     private List<Restaurant> resList;
     private List<Sale> saleList;
     private Location currentLocation;
@@ -28,7 +28,7 @@ public class gameSaveLoad implements Serializable{
 
     public gameSaveLoad(){}
 
-    public gameSaveLoad(map gameMap,List<Restaurant> resList, List<Sale> saleList, DataCustomer customerData, Location currentLocation, int currentDay, Stack<map.Location> locationHistory, Stack<map.Location> ForwardLocationHistory){
+    public gameSaveLoad(String gameMap,List<Restaurant> resList, List<Sale> saleList, DataCustomer customerData, Location currentLocation, int currentDay, Stack<map.Location> locationHistory, Stack<map.Location> ForwardLocationHistory){
         this.gameMap=gameMap;
         this.resList=resList;
         this.saleList=saleList;
@@ -64,11 +64,11 @@ public class gameSaveLoad implements Serializable{
         return serialVersionUID;
     }
 
-    public map getGameMap() {
+    public String getGameMap() {
         return gameMap;
     }
 
-    public void setGameMap(map gameMap) {
+    public void setGameMap(String gameMap) {
         this.gameMap = gameMap;
     }
 

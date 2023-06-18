@@ -47,7 +47,7 @@ public class TheGoldenSpirit {
         System.out.println("======================================================================");
     }
 
-    private static void buildFamilyTree() {
+    public static void buildFamilyTree() {
         familyTree.put("Jonathan Joestar", Arrays.asList("George Joestar I", "Mary Joestar"));
         familyTree.put("George Joestar II", Arrays.asList("Jonathan Joestar", "Erina Joestar"));
         familyTree.put("Giorno Giovanna", Arrays.asList("Jonathan Joestar", "DIO"));
@@ -59,7 +59,7 @@ public class TheGoldenSpirit {
         // Add other individuals and their parents' information here...
     }
 
-    private static String findLowestCommonAncestor(String joestar1, String joestar2) {
+    public static String findLowestCommonAncestor(String joestar1, String joestar2) {
         List<String> ancestors1 = findAncestors(joestar1);
         List<String> ancestors2 = findAncestors(joestar2);
 
