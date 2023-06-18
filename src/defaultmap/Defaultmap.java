@@ -46,7 +46,6 @@ public class Defaultmap implements Serializable {
         locationHistory = new Stack<>();
         ForwardLocationHistory = new Stack<>();
         currentDay = 1;
-        r.readForMenu(currentDay);
         initializeMaps();
         showMainMenu();
     }
@@ -627,7 +626,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                //r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -685,7 +684,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                //r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -744,7 +743,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                //r.r_clear();
                 handleRedHotChiliPepper();
                 break;
             case "4":
@@ -805,7 +804,7 @@ public class Defaultmap implements Serializable {
                 handleAdvanceToNextDay();
                 break;
             case "3":
-                r.r_clear();
+                //r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -863,7 +862,7 @@ public class Defaultmap implements Serializable {
                 handleAdvanceToNextDay();
                 break;
             case "3":
-                r.r_clear();
+                //r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -990,7 +989,7 @@ public class Defaultmap implements Serializable {
             case "3":
                 handleVentoAureo();
             case "4":
-                r.r_clear();
+                //r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -1049,7 +1048,7 @@ public class Defaultmap implements Serializable {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                r.r_clear();
+                //r.r_clear();
                 if (!locationHistory.isEmpty()) {
                     handleReturnToPreviousLocation();
                 } else {
@@ -1245,7 +1244,7 @@ public class Defaultmap implements Serializable {
 
     public static void handleAdvanceToNextDay() {
         currentDay++;
-        r.readForMenu(currentDay);
+        //r.readForMenu(currentDay);
         Customer.doProcess();
         // Set the currentLocation based on the selected map
         if (gameMap == defaultMap) {
@@ -1351,7 +1350,7 @@ public class Defaultmap implements Serializable {
 
     private static void handleViewResidentInformation(String place) {
         r.readRes();
-        r.printRes(place, currentDay);
+        r.printRes(place);
     }
 
     private static void handleTheHand() {

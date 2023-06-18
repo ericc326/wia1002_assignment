@@ -2,6 +2,7 @@ package Restaurants;
 
 import java.io.*;
 import java.util.*;
+
 import PartSal2.Residents;
 import defaultmap.Defaultmap;
 
@@ -24,7 +25,10 @@ public class Customer implements Serializable {
     public static Stack<Restaurant> JolyneHistory = new Stack<>();
     private static Double JosukeBudget = 100.00;
     private static List<Double> JosukeDebt = new LinkedList<>();
-    public static Residents residents = new Residents();
+    public static Residents resident = new Residents();
+
+    private static int JolyneIndex, JotaroIndex;
+    private static boolean JotaroServed, JolyneServed;
 
     public Customer(String name, int age, String gender) {
         this.name = name;
@@ -57,18 +61,18 @@ public class Customer implements Serializable {
     }
 
     public static void getAllResidentAsCustomer() {
-        residents.readRes();
+        resident.readRes();
         // currentLocation = Defaultmap.currentLocation.getName();
         // currentLocation = restaurantName
-        for (int i = 0; i < residents.list1.size(); i++) {
+        for (int i = 0; i < Residents.list1.size(); i++) {
             // System.out.println(rP2.list1.get(rP2.Name.get(i)));
             // food = Restaurant.getRandomFoodByRestaurantName(restaurantName);
 
-            if (residents.Age.get(i).equals("N/A")) {
-                waitingList.add(new Customer(residents.Name.get(i), -1, residents.Gender.get(i)));
+            if (resident.getAge().get(i).equals("N/A")) {
+                waitingList.add(new Customer(resident.getName().get(i), -1, resident.getGender().get(i)));
             } else {
-                waitingList.add(new Customer(residents.Name.get(i), Integer.parseInt(residents.Age.get(i)),
-                        residents.Gender.get(i)));
+                waitingList.add(new Customer(resident.getName().get(i), Integer.parseInt(resident.getAge().get(i)),
+                        resident.getGender().get(i)));
             }
         }
     }
@@ -79,6 +83,8 @@ public class Customer implements Serializable {
         TTList.clear();
         LibeccioList.clear();
         SavageList.clear();
+        JotaroServed = false;
+        JolyneServed = false;
         for (int i = 0; i < waitingList.size(); i++) {
             Customer customer = waitingList.get(i);
             switch (customer.name) {
@@ -89,6 +95,7 @@ public class Customer implements Serializable {
                     JosephOrder(customer);
                     break;
                 case "Jotaro Kujo":
+                    JotaroIndex = i;
                     JotaroOrder(customer);
                     break;
                 case "Josuke Higashikata":
@@ -98,6 +105,7 @@ public class Customer implements Serializable {
                     GiornoOrder(customer);
                     break;
                 case "Jolyne Cujoh":
+                    JolyneIndex = i;
                     JolyneOrder(customer);
                     break;
                 default:
@@ -166,7 +174,7 @@ public class Customer implements Serializable {
         Restaurant res = Restaurant.getRandomRestaurant();
         Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
         if (!customer.orderHistory.isEmpty()) {
-            if (customer.orderHistory.containsAll(JotaroRestaurant.getMenu())) {
+            if (!customer.orderHistory.containsAll(JotaroRestaurant.getMenu())) {
                 res = JotaroRestaurant;
                 food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                 while (customer.orderHistory.contains(food)) {
@@ -176,6 +184,10 @@ public class Customer implements Serializable {
         }
         JotaroRestaurant = res;
         setFoodSale(res, customer, food);
+        JotaroServed = true;
+        if (!JolyneServed) {
+            JolyneOrder(waitingList.get(JolyneIndex));
+        }
     }
 
     public static void JosukeOrder(Customer customer) {
@@ -259,31 +271,34 @@ public class Customer implements Serializable {
     }
 
     public static void JolyneOrder(Customer customer) {
-        Restaurant res;
-        switch (Defaultmap.getDayOfWeek(Defaultmap.currentDay)) {
-            case "Saturday":
-                res = JotaroRestaurant;
-                customer.restaurantHistory.push(res);
-                break;
-            case "Friday":
-                res = Restaurant.getRandomRestaurant();
-                while (res.equals(JotaroRestaurant) || res.equals(customer.restaurantHistory.peek())) {
+        if (JotaroServed) {
+            Restaurant res;
+            switch (Defaultmap.getDayOfWeek(Defaultmap.currentDay)) {
+                case "Saturday":
+                    res = JotaroRestaurant;
+                    customer.restaurantHistory.push(res);
+                    break;
+                case "Friday":
                     res = Restaurant.getRandomRestaurant();
-                }
-                customer.restaurantHistory.push(res);
-                break;
-            default:
-                res = Restaurant.getRandomRestaurant();
-                if (!customer.restaurantHistory.empty()) {
-                    while (res.equals(customer.restaurantHistory.peek())) {
+                    while (res.equals(JotaroRestaurant) || res.equals(customer.restaurantHistory.peek())) {
                         res = Restaurant.getRandomRestaurant();
                     }
-                }
-                customer.restaurantHistory.push(res);
-                break;
+                    customer.restaurantHistory.push(res);
+                    break;
+                default:
+                    res = Restaurant.getRandomRestaurant();
+                    if (!customer.restaurantHistory.empty()) {
+                        while (res.equals(customer.restaurantHistory.peek())) {
+                            res = Restaurant.getRandomRestaurant();
+                        }
+                    }
+                    customer.restaurantHistory.push(res);
+                    break;
+            }
+            Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+            setFoodSale(res, customer, food);
+            JolyneServed =true;
         }
-        Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
-        setFoodSale(res, customer, food);
     }
 
     private static void setFoodSale(Restaurant res, Customer customer, Food food) {
