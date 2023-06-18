@@ -180,6 +180,13 @@ public class Customer implements Serializable {
                 while (customer.orderHistory.contains(food)) {
                     food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
                 }
+            } else {
+                if (!customer.restaurantHistory.containsAll(Restaurant.resList)) {
+                    while (customer.orderHistory.containsAll(res.getMenu())) {
+                        res = Restaurant.getRandomRestaurant();
+                        food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
+                    }
+                }
             }
         }
         JotaroRestaurant = res;
@@ -297,7 +304,7 @@ public class Customer implements Serializable {
             }
             Food food = Restaurant.getRandomFoodByRestaurantName(res.getRestaurantName());
             setFoodSale(res, customer, food);
-            JolyneServed =true;
+            JolyneServed = true;
         }
     }
 
