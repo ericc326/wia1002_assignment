@@ -27,7 +27,7 @@ public class Residents {
     ArrayList<String> Name, Age, Gender, ResidentialArea, Parents, newName, newAge, newGender, newParent, newStand,
             newDes, newSpeed, newRange, newStamina, newPrecision, newDevPot;
     public static HashMap<String, List<String>> list1;
-    HashMap<String, List<String>> r;
+    public HashMap<String, List<String>> r;
     int num;
     List<String> Infinity = new ArrayList<>();
     List<String> A = new ArrayList<>();

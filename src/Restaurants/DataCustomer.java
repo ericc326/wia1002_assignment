@@ -1,9 +1,10 @@
 package Restaurants;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Stack;
 
-public class DataCustomer {
+public class DataCustomer implements Serializable {
     List<Customer> waitingList;
     Restaurant JotaroRestaurant;
     Stack<Restaurant> JolyneHistory;

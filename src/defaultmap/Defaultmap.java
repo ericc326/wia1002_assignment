@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -27,7 +28,7 @@ import extrafeatures.VentoAureo;
  *
  * @author Asus
  */
-public class Defaultmap {
+public class Defaultmap implements Serializable {
     public static LinkedList<map.Location.AdjacentLocation> adjacentLocations;
     public static map.Location currentLocation;
     public static int currentDay;
@@ -37,7 +38,7 @@ public class Defaultmap {
     private static Stack<map.Location> ForwardLocationHistory;
     private static Scanner scanner;
     private static Residents residents = new Residents();
-    // private static Residents r = new Residents();
+    private static Residents r = new Residents();
 
     public static void main(String[] args) throws IOException, ParseException {
         initializeGame();
@@ -510,7 +511,7 @@ public class Defaultmap {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                // r.r_clear();
+                r.r.clear();
                 if (!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if (locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -571,7 +572,7 @@ public class Defaultmap {
                 TheGoldenSpirit();
                 break;
             case "4":
-                // r.r_clear();
+                r.r.clear();
                 if (!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if (locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -630,13 +631,14 @@ public class Defaultmap {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
+                r.r.clear();
                 handleRedHotChiliPepper();
                 break;
             case "4":
                 AnotherOneBites();
                 break;
             case "5":
-                // r.r_clear();
+                r.r.clear();
                 if (!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if (locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -694,7 +696,7 @@ public class Defaultmap {
                 handleViewResidentInformation(currentLocation.getName());
                 break;
             case "3":
-                // r.r_clear();
+                r.r.clear();
                 if (!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if (locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -757,7 +759,7 @@ public class Defaultmap {
                 handleDirtyDeedsDoneDirtCheap();
                 break;
             case "4":
-                // r.r_clear();
+                r.r.clear();
                 if (!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if (locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -816,7 +818,7 @@ public class Defaultmap {
             case "3":
                 handleVentoAureo();
             case "4":
-                // r.r_clear();
+                r.r.clear();
                 if (!locationHistory.empty())
                     handleReturnToPreviousLocation();
                 else if (locationHistory.empty() && !ForwardLocationHistory.empty())
@@ -1204,4 +1206,5 @@ public class Defaultmap {
         ventoAureo.initializeMap(map);
         ventoAureo.startVentoAureo();
     }
+
 }

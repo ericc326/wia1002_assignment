@@ -24,11 +24,10 @@ public class MoodyBlues {
 
     public static void callMenu(String RestaurantName) {
         MoodyBlues.RestaurantName = RestaurantName;
-        Restaurant restaurant = Restaurant.getResByName(RestaurantName);
-        
+        // Restaurant restaurant = Restaurant.getResByName(RestaurantName);
+        Map<Integer, List<Sale>> salesData = Sale.getSaleHash(RestaurantName);
 
         Scanner scanner = new Scanner(System.in);
-        Map<Integer, List<Sale>> salesData = Sale.getSaleHash(RestaurantName);
 
         int startDay = 0;
         int endDay = 0;
@@ -91,7 +90,7 @@ public class MoodyBlues {
         }
     }
 
-    private static void handleViewSales(List<Sale> sales) {
+    public static void handleViewSales(List<Sale> sales) {
         if (sales == null) {
             System.out.println("No sales data available for the specified day.");
             return;
@@ -103,7 +102,8 @@ public class MoodyBlues {
         System.out.println("+-------------------------------------+----------+-------------+");
 
         for (Sale sale : sales) {
-            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(), sale.getTotalPrice());
+            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(),
+                    sale.getTotalPrice());
         }
 
         System.out.println("+-------------------------------------+----------+-------------+");
@@ -113,11 +113,11 @@ public class MoodyBlues {
         System.out.println("+-------------------------------------+----------+-------------+");
     }
 
-    private static void displayAggregatedInformation(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
+    public static void displayAggregatedInformation(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
         // code for displaying aggregated information
     }
 
-    private static void displayTotalAndAverageSales(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
+    public static void displayTotalAndAverageSales(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
         List<Sale> aggregatedSales = new ArrayList<>();
 
         for (int day = startDay; day <= endDay; day++) {
@@ -138,7 +138,8 @@ public class MoodyBlues {
         System.out.println("+-------------------------------------+----------+-------------+");
 
         for (Sale sale : aggregatedSales) {
-            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(), sale.getTotalPrice());
+            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(),
+                    sale.getTotalPrice());
         }
 
         System.out.println("+-------------------------------------+----------+-------------+");
@@ -151,7 +152,7 @@ public class MoodyBlues {
         System.out.println("+-------------------------------------+----------+-------------+");
     }
 
-    private static void displayMinimumSales(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
+    public static void displayMinimumSales(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
         List<Sale> salesInRange = new ArrayList<>();
 
         for (int day = startDay; day <= endDay; day++) {
@@ -175,14 +176,15 @@ public class MoodyBlues {
             System.out.println("| Food                                | Quantity | Total Price |");
             System.out.println("+-------------------------------------+----------+-------------+");
             Sale sale = minSale.get();
-            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(), sale.getTotalPrice());
+            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(),
+                    sale.getTotalPrice());
             System.out.println("+-------------------------------------+----------+-------------+");
         } else {
             System.out.println("No sales data available for the specified range of days.");
         }
     }
 
-    private static void displayMaximumSales(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
+    public static void displayMaximumSales(Map<Integer, List<Sale>> salesData, int startDay, int endDay) {
         List<Sale> salesInRange = new ArrayList<>();
 
         for (int day = startDay; day <= endDay; day++) {
@@ -206,14 +208,15 @@ public class MoodyBlues {
             System.out.println("| Food                                | Quantity | Total Price |");
             System.out.println("+-------------------------------------+----------+-------------+");
             Sale sale = maxSale.get();
-            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(), sale.getTotalPrice());
+            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(),
+                    sale.getTotalPrice());
             System.out.println("+-------------------------------------+----------+-------------+");
         } else {
             System.out.println("No sales data available for the specified range of days.");
         }
     }
 
-    private static void displayTopKHighestSales(Map<Integer, List<Sale>> salesData, int k, int startDay, int endDay) {
+    public static void displayTopKHighestSales(Map<Integer, List<Sale>> salesData, int k, int startDay, int endDay) {
         List<Sale> salesInRange = new ArrayList<>();
 
         for (int day = startDay; day <= endDay; day++) {
@@ -242,7 +245,8 @@ public class MoodyBlues {
 
         for (int i = 0; i < k; i++) {
             Sale sale = salesInRange.get(i);
-            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(), sale.getTotalPrice());
+            System.out.printf("| %-35s | %8d | $%9.2f |\n", sale.getFood().getFoodName(), sale.getQuantity(),
+                    sale.getTotalPrice());
         }
 
         System.out.println("+-------------------------------------+----------+-------------+");

@@ -29,7 +29,7 @@ public class Sale {
             // System.out.println(saleList.size());
             boolean exist = false;
             for (int i = 0; i < saleList.size(); i++) {
-                //System.out.println(saleList.get(i).getDay() + "\t" + day);
+                // System.out.println(saleList.get(i).getDay() + "\t" + day);
                 if (saleList.get(i).getFood().equals(food) && saleList.get(i).getDay() == day) {
                     saleList.get(i).quantity++;
                     saleList.get(i).totalPrice += food.getFoodPrice();
@@ -85,20 +85,43 @@ public class Sale {
             List<Sale> temp = new LinkedList<>();
             for (int j = 0; j < sales.size(); j++) {
                 if (sales.get(j).getDay() == (i + 1)) {
-                    System.out.println(sales.get(j).getFood().getFoodName()+" "+sales.get(j).getDay());
                     temp.add(sales.get(j));
                 }
             }
             newHash.put(i + 1, temp);
         }
-
-        for (int i = 0; i < newHash.keySet().size(); i++) {
-            System.out.println("check");
-            for (int j = 0; j < newHash.get(i + 1).size(); j++) {
-                System.out.println(newHash.get(i + 1).get(j).getFood().getFoodName()+" "+newHash.get(i+1).get(j).getDay());
-            }
-        }
-
         return newHash;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public static List<Sale> getSaleList() {
+        return saleList;
+    }
+
+    public static void setSaleList(List<Sale> saleList) {
+        Sale.saleList = saleList;
     }
 }
