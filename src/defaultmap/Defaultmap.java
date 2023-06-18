@@ -573,7 +573,7 @@ public class Defaultmap implements Serializable {
                 break;
             case "3":
                 // jump to extra feature 7
-                handleTheGoldenSpirit();
+                TheGoldenSpirit();
                 break;
             case "4":
                 r.r.clear();

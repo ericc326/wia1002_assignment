@@ -14,6 +14,7 @@ public class MilagroMan {
     static int startDay, endDay;
     private String restaurantName;
     private Restaurant restaurant;
+    private Food remove;
 
     public MilagroMan(String restaurantName) {
         this.restaurantName = restaurantName;
@@ -49,9 +50,10 @@ public class MilagroMan {
             System.out.println("\nRestaurant: " + this.restaurantName);
             System.out.println("[1] Add A New Food");
             System.out.println("[2] Modify Existing Food");
-            System.out.println("[3] Experiment With Past Sales");
-            System.out.println("[4] View Sales Information");
-            System.out.println("[5] Exit Milagro Man");
+            System.out.println("[3] Delete Food");
+            System.out.println("[4] Experiment With Past Sales");
+            System.out.println("[5] View Sales Information");
+            System.out.println("[6] Exit Milagro Man");
             System.out.print("Select:");
             MilagroMan.choice = scanner.nextInt();
             scanner.nextLine();
@@ -102,13 +104,33 @@ public class MilagroMan {
                     }
                     break;
                 case 3:
-                    experimentalMode(this.restaurantName);
+                    System.out.println("\n[" + choice + "] Modify Existing Food");
+                    System.out.println("Food List:");
+                    for (int i = 0; i < this.restaurant.getMenu().size(); i++) {
+                        System.out.println("[" + (i + 1) + "] " + this.restaurant.getMenu().get(i).getFoodName());
+                    }
+                    System.out.println("Enter the number for the food you want to modify:");
+                    int choice3 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Removing " + this.restaurant.getMenu().get(choice3 - 1).getFoodName()
+                            + " at $"
+                            + String.format("%.2f", this.restaurant.getMenu().get(choice3 - 1).getFoodPrice()));
+                    try {
+                        this.restaurant.getMenu().remove(choice3 - 1);
+                        System.out.println("Successfully deleted.");
+                    } catch (Exception e) {
+                        System.out.println("Failed to delete.");
+                        // TODO: handle exception
+                    }
                     break;
                 case 4:
+                    experimentalMode(this.restaurantName);
+                    break;
+                case 5:
                     System.out.println("\n[" + choice + "] Moody blues");
                     MoodyBlues.callMenu(this.restaurantName);
                     break;
-                case 5:
+                case 6:
                     System.out.println();
                     exit = true;
                     break;
