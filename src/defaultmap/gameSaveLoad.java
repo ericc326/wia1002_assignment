@@ -28,7 +28,7 @@ public class gameSaveLoad implements Serializable{
 
     public gameSaveLoad(){}
 
-    public gameSaveLoad(map gameMap,List<Restaurant> resList, List<Sale> saleList, DataCustomer customerData, Location currentLocation, int currentDay, Stack<Location> locationHistory, Stack<Location> ForwardLocationHistory){
+    public gameSaveLoad(map gameMap,List<Restaurant> resList, List<Sale> saleList, DataCustomer customerData, Location currentLocation, int currentDay, Stack<map.Location> locationHistory, Stack<map.Location> ForwardLocationHistory){
         this.gameMap=gameMap;
         this.resList=resList;
         this.saleList=saleList;
@@ -36,7 +36,7 @@ public class gameSaveLoad implements Serializable{
         this.currentLocation=currentLocation;
         this.currentDay=currentDay;
         this.locationHistory=locationHistory;
-        this.ForwardLocationHistory=locationHistory;
+        this.ForwardLocationHistory=ForwardLocationHistory;
     }
 
     public static void save(gameSaveLoad data, String ID){

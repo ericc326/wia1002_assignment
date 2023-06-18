@@ -50,7 +50,7 @@ public class Defaultmap implements Serializable {
         playGame();
     }
 
-    //for ui(canceled)
+    // for ui(canceled)
     public static void initializeGamePublic() {
         gameMap = new map();
         currentLocation = gameMap.townHall;
@@ -60,6 +60,7 @@ public class Defaultmap implements Serializable {
     }
 
     private static void initializeGame() throws IOException, ParseException {
+        currentDay = 1;
         gameMap = new map();
         currentLocation = gameMap.townHall;
         locationHistory = new Stack<>();
@@ -108,7 +109,6 @@ public class Defaultmap implements Serializable {
     }
 
     private static void selectMap() {
-        currentDay = 1;
         Restaurant.InitializeRestaurant();
         Customer.getAllResidentAsCustomer();
         Customer.doProcess();
@@ -183,7 +183,6 @@ public class Defaultmap implements Serializable {
         Sale.saleList = data.getSaleList();
         Customer.CustomerDataLoad(data.getCustomerData());
         Defaultmap.currentLocation = data.getCurrentLocation();
-        //System.out.println("DAY"+data.getCurrentDay());
         Defaultmap.currentDay = data.getCurrentDay();
         Defaultmap.locationHistory = data.getLocationHistory();
         Defaultmap.ForwardLocationHistory = data.getForwardLocationHistory();
@@ -298,9 +297,10 @@ public class Defaultmap implements Serializable {
                 handleMoveTo();
                 break;
             case "2":
-                if (!locationHistory.empty())
+                if (!locationHistory.empty()) {
+                    System.out.println(!locationHistory.empty());
                     handleReturnToPreviousLocation();
-                else if (locationHistory.empty() && !ForwardLocationHistory.empty())
+                } else if (locationHistory.empty() && !ForwardLocationHistory.empty())
                     handleForwardToNewLocation();
                 else if (locationHistory.empty() && ForwardLocationHistory.empty())
                     handleAdvanceToNextDay();
@@ -1033,35 +1033,32 @@ public class Defaultmap implements Serializable {
     }
 
     private static void handleSaveGame() {
-        // Define the file path where the console output will be saved
-        String filePath = "console_output.txt";
         try {
             handleSave();
+            System.out.println("Game saved successfully.");
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("FAILED!");
             return;
-        }
-        try (PrintWriter fileWriter = new PrintWriter(new FileWriter(filePath))) {
-            System.out.println("Game saved successfully.");
-        } catch (IOException e) {
-            System.out.println("Failed to save the game. Please try again.");
         }
     }
 
     public static void handleSave() {
         gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Sale.saleList, Customer.CustomerDataSave(),
                 currentLocation, currentDay, locationHistory, ForwardLocationHistory);
-        System.out.println("day"+currentDay);
+        System.out.println(locationHistory);
+        System.out.println(ForwardLocationHistory);
         gameSaveLoad.save(gsl, saveID);
     }
 
     // method to move backward
     public static void handleReturnToPreviousLocation() {
-        if (!ForwardLocationHistory.empty()) {
-            ForwardLocationHistory.clear();
-        }
-
+        // System.out.println(!locationHistory.empty());
+        /*
+         * if (!ForwardLocationHistory.empty()) {
+         * ForwardLocationHistory.clear();
+         * }
+         */
         map.Location reverseLocation = locationHistory.pop();
         if (!reverseLocation.equals(currentLocation)) {
             ForwardLocationHistory.push(currentLocation);
@@ -1075,7 +1072,7 @@ public class Defaultmap implements Serializable {
     public static void handleForwardToNewLocation() {
         locationHistory.push(currentLocation);
         currentLocation = ForwardLocationHistory.pop();
-        System.out.println("Moving ForwardLocationHistory to " + currentLocation.getName() + ".");
+        System.out.println("Moving forward to " + currentLocation.getName() + ".");
         if (!ForwardLocationHistory.empty()) {
             ForwardLocationHistory.clear();
         }
