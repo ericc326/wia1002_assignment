@@ -169,7 +169,6 @@ public class LATESTMAP{
     private void displayLocationOptions(){
     
            // Check the current location and display options accordingly
-           String place = currentLocation.getName();
             switch (currentLocation.getName()) {
                 case "Town Hall":
                     displayTownHallOptions();

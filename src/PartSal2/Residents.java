@@ -9,21 +9,20 @@ package PartSal2;
  *
  * @author USER
  */
-import java.io.*;
-import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 
 public class Residents{
     
     public ArrayList<String> Name,Age,Gender,ResidentialArea,Parents,newName,newAge,newGender,newParent,newStand,newDes,newSpeed,newRange,newStamina,newPrecision,newDevPot;
     public HashMap<String,List<String>> list1;
-    HashMap<String,List<String>> r;
+    public HashMap<String,List<String>> r;
     int num;
     List<String> Infinity = new ArrayList<>();
     List<String> A = new ArrayList<>();

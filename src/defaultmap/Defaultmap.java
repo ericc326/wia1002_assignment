@@ -16,6 +16,8 @@ import java.util.Stack;
 
 import PartSal2.Residents;
 import Restaurants.Customer;
+import Restaurants.MilagroMan;
+import Restaurants.MoodyBlues;
 import Restaurants.Restaurant;
 import Restaurants.Sale;
 import extrafeatures.BiteTheDust;
@@ -34,6 +36,7 @@ public class Defaultmap {
     private static Stack<map.Location> locationHistory;
     private static Stack<map.Location> ForwardLocationHistory;
     private static Scanner scanner;
+    private static Residents residents = new Residents();
     // private static Residents r = new Residents();
 
     public static void main(String[] args) throws IOException, ParseException {
@@ -1111,16 +1114,17 @@ public class Defaultmap {
     }
 
     private static void handleViewSales() {
-        // MoodyBlues.callMenu(currentLocation.getName());
+        MoodyBlues.callMenu(currentLocation.getName());
     }
 
     private static void handleMilagroMan() {
-        // MilagroMan.MenuHandler(currentLocation.getName());
+        MilagroMan.MenuHandler(currentLocation.getName());
     }
 
     private static void handleViewResidentInformation(String place) {
-        // r.readRes();
-        // r.printRes(place, currentDay);
+        residents.readRes();
+        residents.printRes(place);
+        residents.r.clear();
     }
 
     private static void handleTheHand() {
