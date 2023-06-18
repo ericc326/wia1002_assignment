@@ -10,7 +10,6 @@ public class Restaurant implements Serializable {
     static Restaurant JadeGarden, CafeDeuxMagots, TrattoriaTrussardi, Libeccio, SavageGarden;
     public static List<Restaurant> resList;
     public static List<Food> allFood;
-    public static List<Sale> saleList;
     public static List<Customer> waitingList;
     int currentDayNumber;
 
