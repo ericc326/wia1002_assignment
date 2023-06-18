@@ -1,10 +1,11 @@
 package Restaurants;
 
+import java.io.Serializable;
 import java.util.*;
 
 import defaultmap.*;
 
-public class Sale {
+public class Sale implements Serializable{
     private String restaurantName;
     private int day;
     private Food food;

@@ -181,10 +181,31 @@ public class Residents {
     public void sort(String place) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the sorting order (i.e Stamina) :");
-        String order = sc.nextLine();
-        System.out.print("ASC OR DESC :");
-        String sortorder = sc.nextLine();
+        String order = "";
+        String[] basedOrder = {"Destructive Power","Speed","Range","Stamina","Precision","Development Potential"};
+        boolean check=false;
+        while(check==false){
+            System.out.print("Enter the sorting order (i.e Stamina) :");
+            order = sc.nextLine();
+            for(int index=0; index<basedOrder.length; index++){
+                if(order.equals(basedOrder[index])){
+                    check = true;
+                }
+            }
+        }
+        
+        String sortorder = "";
+        String[] basedSortOrder = {"ASC","DESC"};
+        boolean check2=false;
+        while(check2==false){
+            System.out.print("ASC OR DESC :");
+            sortorder = sc.nextLine();
+            for(int index=0; index<basedSortOrder.length; index++){
+                if(sortorder.equals(basedSortOrder[index])){
+                    check2 = true;
+                }
+            }
+        }
         int index = 0;
 
         switch (order) {
@@ -495,11 +516,6 @@ public class Residents {
                 }
                 break;
 
-            default:
-                System.out.println("Your enter the wrong format");
-                System.out.println("Please re-enter the feature ");
-                sort(place);
-                break;
         }
         System.out.println(
                 "+----+------------------------+-----+--------+--------------------------------------------+----------------------+-------------------+-----------+----------+-----------+-------------+-------------------------+");
@@ -511,7 +527,6 @@ public class Residents {
         E.clear();
         q.clear();
         nul.clear();
-        r.clear();
         list1.clear();
         option2(place, Defaultmap.currentDay);
     }

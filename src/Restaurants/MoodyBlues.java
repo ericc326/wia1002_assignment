@@ -50,25 +50,25 @@ public class MoodyBlues {
                 System.out.print("Enter Day: ");
                 int day = Integer.parseInt(scanner.nextLine());
                 handleViewSales(salesData.get(day));
-            } else if (choice.equals("2")) {
+            } else if (choice.equalsIgnoreCase("2")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 displayAggregatedInformation(salesData, startDay, endDay);
-            } else if (choice.equals("2A")) {
+            } else if (choice.equalsIgnoreCase("2A")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 displayMinimumSales(salesData, startDay, endDay);
-            } else if (choice.equals("2B")) {
+            } else if (choice.equalsIgnoreCase("2B")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 displayMaximumSales(salesData, startDay, endDay);
-            } else if (choice.equals("2C")) {
+            } else if (choice.equalsIgnoreCase("2C")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
@@ -76,7 +76,7 @@ public class MoodyBlues {
                 System.out.print("Enter value of k: ");
                 int k = Integer.parseInt(scanner.nextLine());
                 displayTopKHighestSales(salesData, k, startDay, endDay);
-            } else if (choice.equals("2D")) {
+            } else if (choice.equalsIgnoreCase("2D")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");

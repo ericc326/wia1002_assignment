@@ -50,12 +50,12 @@ public class Defaultmap implements Serializable {
         playGame();
     }
 
+    //for ui(canceled)
     public static void initializeGamePublic() {
         gameMap = new map();
         currentLocation = gameMap.townHall;
         locationHistory = new Stack<>();
         ForwardLocationHistory = new Stack<>();
-        currentDay = 1;
         initializeMaps();
     }
 
@@ -64,7 +64,6 @@ public class Defaultmap implements Serializable {
         currentLocation = gameMap.townHall;
         locationHistory = new Stack<>();
         ForwardLocationHistory = new Stack<>();
-        currentDay = 1;
         initializeMaps();
         showMainMenu();
     }
@@ -93,7 +92,7 @@ public class Defaultmap implements Serializable {
                 selectMap();
                 break;
             case 2:
-                // handleLoadGame();
+                handleLoadGame();
                 // Continue the game from the loaded state
                 break;
             case 3:
@@ -109,6 +108,7 @@ public class Defaultmap implements Serializable {
     }
 
     private static void selectMap() {
+        currentDay = 1;
         Restaurant.InitializeRestaurant();
         Customer.getAllResidentAsCustomer();
         Customer.doProcess();
@@ -153,8 +153,6 @@ public class Defaultmap implements Serializable {
             currentLocation = alternateMap.townHall2;
         }
 
-        currentDay = 1;
-
         playGame();
     }
 
@@ -185,6 +183,7 @@ public class Defaultmap implements Serializable {
         Sale.saleList = data.getSaleList();
         Customer.CustomerDataLoad(data.getCustomerData());
         Defaultmap.currentLocation = data.getCurrentLocation();
+        //System.out.println("DAY"+data.getCurrentDay());
         Defaultmap.currentDay = data.getCurrentDay();
         Defaultmap.locationHistory = data.getLocationHistory();
         Defaultmap.ForwardLocationHistory = data.getForwardLocationHistory();
@@ -197,7 +196,6 @@ public class Defaultmap implements Serializable {
 
     private static void playGame() {
         boolean exitGame = false;
-        currentDay = 1;
         while (!exitGame) {
             System.out.println(
                     "It's Day " + currentDay + " (" + getDayOfWeek(currentDay) + ") of our journey in JOJOLands!");
@@ -1053,8 +1051,8 @@ public class Defaultmap implements Serializable {
 
     public static void handleSave() {
         gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Sale.saleList, Customer.CustomerDataSave(),
-                currentLocation,
-                currentDay, locationHistory, ForwardLocationHistory);
+                currentLocation, currentDay, locationHistory, ForwardLocationHistory);
+        System.out.println("day"+currentDay);
         gameSaveLoad.save(gsl, saveID);
     }
 

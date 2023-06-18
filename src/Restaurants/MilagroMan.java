@@ -176,10 +176,10 @@ public class MilagroMan {
         List<Sale> sales = new LinkedList<>();
         for (int i = 0; i < Sale.getSaleListByRestaurantName(restaurantName).size(); i++) {
             sales.add(new Sale(restaurantName,
-            Sale.getSaleListByRestaurantName(restaurantName).get(i).getDay(),
-            Sale.getSaleListByRestaurantName(restaurantName).get(i).getFood(),
-            Sale.getSaleListByRestaurantName(restaurantName).get(i).getQuantity(),
-            Sale.getSaleListByRestaurantName(restaurantName).get(i).getTotalPrice()));
+                    Sale.getSaleListByRestaurantName(restaurantName).get(i).getDay(),
+                    Sale.getSaleListByRestaurantName(restaurantName).get(i).getFood(),
+                    Sale.getSaleListByRestaurantName(restaurantName).get(i).getQuantity(),
+                    Sale.getSaleListByRestaurantName(restaurantName).get(i).getTotalPrice()));
         }
         for (int i = 0; i < sales.size(); i++) {
             if (sales.get(i).getFood().equals(food)) {
@@ -187,7 +187,7 @@ public class MilagroMan {
                     int temp = sales.get(i).getQuantity();
                     sales.get(i).setTotalPrice(0.0);
                     for (int j = 0; j < temp; j++) {
-                        sales.get(i).setTotalPrice(sales.get(i).getTotalPrice()+price);
+                        sales.get(i).setTotalPrice(sales.get(i).getTotalPrice() + price);
                     }
                 }
             }
@@ -197,7 +197,8 @@ public class MilagroMan {
             List<Sale> temp = new LinkedList<>();
             for (int j = 0; j < sales.size(); j++) {
                 if (sales.get(j).getDay() == (i + 1)) {
-                    //System.out.println(sales.get(j).getFood().getFoodName() + " " + sales.get(j).getDay());
+                    // System.out.println(sales.get(j).getFood().getFoodName() + " " +
+                    // sales.get(j).getDay());
                     temp.add(sales.get(j));
                 }
             }
@@ -221,11 +222,12 @@ public class MilagroMan {
 
     public static void callMenuMilagroMan(String RestaurantName, Map<Integer, List<Sale>> salesData) {
         Scanner scanner = new Scanner(System.in);
-        MoodyBlues mb= new MoodyBlues();
+        MoodyBlues mb = new MoodyBlues();
         int startDay = 0;
         int endDay = 0;
 
-        while (true) {
+        boolean quit = false;
+        while (!quit) {
             System.out.println("Restaurant: " + RestaurantName);
             System.out.println("Sales Information");
             System.out.println("[1] View Sales");
@@ -249,19 +251,19 @@ public class MilagroMan {
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 MoodyBlues.displayAggregatedInformation(salesData, startDay, endDay);
-            } else if (choice.equals("2A")) {
+            } else if (choice.equalsIgnoreCase("2A")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 MoodyBlues.displayMinimumSales(salesData, startDay, endDay);
-            } else if (choice.equals("2B")) {
+            } else if (choice.equalsIgnoreCase("2B")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 MoodyBlues.displayMaximumSales(salesData, startDay, endDay);
-            } else if (choice.equals("2C")) {
+            } else if (choice.equalsIgnoreCase("2C")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
@@ -269,13 +271,14 @@ public class MilagroMan {
                 System.out.print("Enter value of k: ");
                 int k = Integer.parseInt(scanner.nextLine());
                 MoodyBlues.displayTopKHighestSales(salesData, k, startDay, endDay);
-            } else if (choice.equals("2D")) {
+            } else if (choice.equalsIgnoreCase("2D")) {
                 System.out.print("Enter Start Day: ");
                 startDay = Integer.parseInt(scanner.nextLine());
                 System.out.print("Enter End Day: ");
                 endDay = Integer.parseInt(scanner.nextLine());
                 MoodyBlues.displayTotalAndAverageSales(salesData, startDay, endDay);
             } else if (choice.equals("3")) {
+                quit = true;
                 break;
             }
 

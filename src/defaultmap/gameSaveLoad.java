@@ -55,7 +55,6 @@ public class gameSaveLoad implements Serializable{
             ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(ID)));
             return ois.readObject();
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
             return null;
         }
