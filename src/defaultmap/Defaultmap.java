@@ -50,15 +50,6 @@ public class Defaultmap implements Serializable {
         playGame();
     }
 
-    // for ui(canceled)
-    public static void initializeGamePublic() {
-        gameMap = new map();
-        currentLocation = gameMap.townHall;
-        locationHistory = new Stack<>();
-        ForwardLocationHistory = new Stack<>();
-        initializeMaps();
-    }
-
     private static void initializeGame() throws IOException, ParseException {
         currentDay = 1;
         gameMap = new map();
