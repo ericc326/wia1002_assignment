@@ -1105,12 +1105,12 @@ public class Defaultmap {
     }
 
     private static void handleWaitingList() {
-
+        Customer.showRestaurantList(currentLocation.getName());
     }
 
     private static void handleViewMenu() {
-        // Restaurant res = new Restaurant();
-        // res.viewMenubyResName(currentLocation.getName());
+        Restaurant res = new Restaurant();
+        res.viewMenubyResName(currentLocation.getName());
     }
 
     private static void handleViewSales() {
