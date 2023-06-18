@@ -373,19 +373,19 @@ public class Customer implements Serializable {
         }
         System.out.println("Waiting list for " + RestaurantName);
         System.out.println(
-                "+-----+----------------------------------------------+----------------+---------------------------------+");
-        System.out.println(
-                "+ No |        Customer                                  |   Price        |      Food                 |");
-        System.out.println(
-                "+-----+----------------------------------------------+----------------+---------------------------------+");
+                "+-----+-----------------------------------------------+----------------+----------------------------------------+");
+System.out.printf("| %-4s| %-45s| %-15s| %-40s| \n", "No", "Customer",
+                        "Price", "Food");
+     System.out.println(
+                "+-----+-----------------------------------------------+----------------+----------------------------------------+");
         if (!temp.isEmpty()) {
             for (int i = 0; i < temp.size(); i++) {
-                System.out.printf("| %-4s| %-45s| %-15s| %-32s| \n", i + 1, temp.get(i).name,
+                System.out.printf("| %-4s| %-45s| %-15s| %-40s| \n", i + 1, temp.get(i).name,
                         temp.get(i).food.getFoodPrice(), temp.get(i).food.getFoodName());
             }
         }
         System.out.println(
-                "+-----+----------------------------------------------+----------------+---------------------------------+");
+                "+-----+-----------------------------------------------+----------------+----------------------------------------+");
     }
 
     public static void doProcess() {
