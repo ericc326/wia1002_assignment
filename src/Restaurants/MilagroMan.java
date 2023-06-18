@@ -104,12 +104,12 @@ public class MilagroMan {
                     }
                     break;
                 case 3:
-                    System.out.println("\n[" + choice + "] Modify Existing Food");
+                    System.out.println("\n[" + choice + "] Delete Food");
                     System.out.println("Food List:");
                     for (int i = 0; i < this.restaurant.getMenu().size(); i++) {
                         System.out.println("[" + (i + 1) + "] " + this.restaurant.getMenu().get(i).getFoodName());
                     }
-                    System.out.println("Enter the number for the food you want to modify:");
+                    System.out.println("Enter the number for the food you want to delete:");
                     int choice3 = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Removing " + this.restaurant.getMenu().get(choice3 - 1).getFoodName()
