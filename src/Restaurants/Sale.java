@@ -27,23 +27,20 @@ public class Sale {
             // System.out.println(saleList);
         } else {
             // System.out.println(saleList.size());
-            int pos = -1;
-            boolean listContains = false;
+            boolean exist = false;
             for (int i = 0; i < saleList.size(); i++) {
-                // System.out.println(i);
-                if (saleList.get(i).getFood().equals(food)) {
-                    pos = i;
-                    listContains = true;
+                //System.out.println(saleList.get(i).getDay() + "\t" + day);
+                if (saleList.get(i).getFood().equals(food) && saleList.get(i).getDay() == day) {
+                    saleList.get(i).quantity++;
+                    saleList.get(i).totalPrice += food.getFoodPrice();
+                    exist = true;
                 }
             }
-            if (listContains) {
-                saleList.get(pos).quantity++;
-                saleList.get(pos).totalPrice += food.getFoodPrice();
-            } else {
+            if (!exist) {
                 saleList.add(new Sale(restaurantName, day, food, quantity, totalPrice));
             }
-
         }
+
     }
 
     public int getDay() {
@@ -84,24 +81,24 @@ public class Sale {
     public static HashMap<Integer, List<Sale>> getSaleHash(String restaurantName) {
         List<Sale> sales = getSaleListByRestaurantName(restaurantName);
         HashMap<Integer, List<Sale>> newHash = new HashMap<>();
-        List<Sale> temp = new LinkedList<>();
         for (int i = 0; i < Defaultmap.currentDay; i++) {
-            temp.clear();
+            List<Sale> temp = new LinkedList<>();
             for (int j = 0; j < sales.size(); j++) {
                 if (sales.get(j).getDay() == (i + 1)) {
+                    System.out.println(sales.get(j).getFood().getFoodName()+" "+sales.get(j).getDay());
                     temp.add(sales.get(j));
                 }
             }
             newHash.put(i + 1, temp);
         }
-        /*
-         * for (int i = 0; i < newHash.keySet().size(); i++) {
-         * System.out.println("check");
-         * for (int j = 0; j < newHash.get(i+1).size(); j++) {
-         * System.out.println(newHash.get(i+1).get(j).getFood().getFoodName());
-         * }
-         * }
-         */
+
+        for (int i = 0; i < newHash.keySet().size(); i++) {
+            System.out.println("check");
+            for (int j = 0; j < newHash.get(i + 1).size(); j++) {
+                System.out.println(newHash.get(i + 1).get(j).getFood().getFoodName()+" "+newHash.get(i+1).get(j).getDay());
+            }
+        }
+
         return newHash;
     }
 }

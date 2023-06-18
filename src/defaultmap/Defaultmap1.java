@@ -9,6 +9,10 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 import com.google.gson.Gson;
+
+import extrafeatures.BiteTheDust;
+import extrafeatures.VentoAureo;
+
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
