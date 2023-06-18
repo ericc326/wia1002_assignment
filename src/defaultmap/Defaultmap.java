@@ -14,8 +14,10 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 
+import PartSal2.Residents;
 import Restaurants.Customer;
 import Restaurants.Restaurant;
+import Restaurants.Sale;
 import extrafeatures.BiteTheDust;
 import extrafeatures.VentoAureo;
 
@@ -160,13 +162,14 @@ public class Defaultmap {
 
     public static void handleLoad() {
         gameSaveLoad data = (gameSaveLoad) gameSaveLoad.load(saveID);
-        Defaultmap.gameMap = data.gameMap;
-        Restaurant.resList = data.resList;
-        Restaurant.saleList = data.saleList;
-        Defaultmap.currentLocation = data.currentLocation;
-        Defaultmap.currentDay = data.currentDay;
-        Defaultmap.locationHistory = data.locationHistory;
-        Defaultmap.ForwardLocationHistory = data.ForwardLocationHistory;
+        Defaultmap.gameMap = data.getGameMap();
+        Restaurant.resList = data.getResList();
+        Sale.saleList = data.getSaleList();
+        Customer.CustomerDataLoad(data.getCustomerData());
+        Defaultmap.currentLocation = data.getCurrentLocation();
+        Defaultmap.currentDay = data.getCurrentDay();
+        Defaultmap.locationHistory = data.getLocationHistory();
+        Defaultmap.ForwardLocationHistory = data.getForwardLocationHistory();
     }
 
     public static void handleLoadGame() {
@@ -1030,10 +1033,9 @@ public class Defaultmap {
     }
 
     public static void handleSave() {
-        // gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList,
-        // Restaurant.saleList, currentLocation,
-        // currentDay, locationHistory, ForwardLocationHistory);
-        // gameSaveLoad.save(gsl, saveID);
+        gameSaveLoad gsl = new gameSaveLoad(gameMap, Restaurant.resList, Sale.saleList, Customer.CustomerDataSave(), currentLocation,
+                currentDay, locationHistory, ForwardLocationHistory);
+        gameSaveLoad.save(gsl, saveID);
     }
 
     // method to move backward

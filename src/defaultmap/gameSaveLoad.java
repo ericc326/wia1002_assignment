@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Stack;
 
+import Restaurants.DataCustomer;
 import Restaurants.Restaurant;
 import Restaurants.Sale;
 import defaultmap.map.Location;
@@ -16,20 +17,22 @@ import defaultmap.map.Location;
 public class gameSaveLoad implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    public map gameMap;
-    public List<Restaurant> resList;
-    public List<Sale> saleList;
-    public Location currentLocation;
-    public int currentDay;
-    public Stack<map.Location> locationHistory;
-    public Stack<map.Location> ForwardLocationHistory;
+    private map gameMap;
+    private List<Restaurant> resList;
+    private List<Sale> saleList;
+    private Location currentLocation;
+    private int currentDay;
+    private Stack<map.Location> locationHistory;
+    private Stack<map.Location> ForwardLocationHistory;
+    private DataCustomer customerData;
 
     public gameSaveLoad(){}
 
-    public gameSaveLoad(map gameMap,List<Restaurant> resList, List<Sale> saleList, Location currentLocation, int currentDay, Stack<Location> locationHistory, Stack<Location> ForwardLocationHistory){
+    public gameSaveLoad(map gameMap,List<Restaurant> resList, List<Sale> saleList, DataCustomer customerData, Location currentLocation, int currentDay, Stack<Location> locationHistory, Stack<Location> ForwardLocationHistory){
         this.gameMap=gameMap;
         this.resList=resList;
         this.saleList=saleList;
+        this.customerData=customerData;
         this.currentLocation=currentLocation;
         this.currentDay=currentDay;
         this.locationHistory=locationHistory;
@@ -56,5 +59,73 @@ public class gameSaveLoad implements Serializable{
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public map getGameMap() {
+        return gameMap;
+    }
+
+    public void setGameMap(map gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    public List<Restaurant> getResList() {
+        return resList;
+    }
+
+    public void setResList(List<Restaurant> resList) {
+        this.resList = resList;
+    }
+
+    public List<Sale> getSaleList() {
+        return saleList;
+    }
+
+    public void setSaleList(List<Sale> saleList) {
+        this.saleList = saleList;
+    }
+
+    public Location getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
+    }
+
+    public void setCurrentDay(int currentDay) {
+        this.currentDay = currentDay;
+    }
+
+    public Stack<map.Location> getLocationHistory() {
+        return locationHistory;
+    }
+
+    public void setLocationHistory(Stack<map.Location> locationHistory) {
+        this.locationHistory = locationHistory;
+    }
+
+    public Stack<map.Location> getForwardLocationHistory() {
+        return ForwardLocationHistory;
+    }
+
+    public void setForwardLocationHistory(Stack<map.Location> forwardLocationHistory) {
+        ForwardLocationHistory = forwardLocationHistory;
+    }
+
+    public DataCustomer getCustomerData() {
+        return customerData;
+    }
+
+    public void setCustomerData(DataCustomer customerData) {
+        this.customerData = customerData;
     }
 }
