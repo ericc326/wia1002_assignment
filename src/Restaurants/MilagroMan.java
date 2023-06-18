@@ -52,6 +52,7 @@ public class MilagroMan {
             System.out.println("[3] Experiment With Past Sales");
             System.out.println("[4] View Sales Information");
             System.out.println("[5] Exit Milagro Man");
+            System.out.print("Select:");
             MilagroMan.choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
