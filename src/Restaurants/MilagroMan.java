@@ -12,7 +12,7 @@ public class MilagroMan {
 
     public MilagroMan(String restaurantName) {
         this.restaurantName = restaurantName;
-        this.restaurant = new Restaurant().getResByName(restaurantName);
+        this.restaurant = Restaurant.getResByName(restaurantName);
         // System.out.println(restaurant); <- checking
     }
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class map {
+public class map implements Serializable {
     // default map
     Location townHall;
     Location cafeDeuxMagots;

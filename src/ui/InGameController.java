@@ -197,7 +197,7 @@ public class InGameController extends Application {
     }
 
     public void openMenu(ActionEvent e) {
-        Restaurant resTemp = new Restaurant().getResByName(Defaultmap.currentLocation.getName());
+        Restaurant resTemp = Restaurant.getResByName(Defaultmap.currentLocation.getName());
         resTemp.viewMenubyResName(resTemp.getRestaurantName());
     }
 

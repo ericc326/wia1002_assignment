@@ -24,6 +24,7 @@ public class MoodyBlues {
 
     public static void callMenu(String RestaurantName) {
         MoodyBlues.RestaurantName = RestaurantName;
+        Restaurant restaurant = Restaurant.getResByName(RestaurantName);
         
 
         Scanner scanner = new Scanner(System.in);
